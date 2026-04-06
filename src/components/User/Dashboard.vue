@@ -1,0 +1,119 @@
+<script setup>
+import { ref, onMounted, onUnmounted } from "vue"
+import BaseSidebar from "../UserComponents/SidebarUser.vue";
+
+const dateTime = ref("")
+
+let timer = null
+
+const updateTime = () => {
+  const now = new Date()
+
+  const date = now.toLocaleDateString("jp-JP", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+  })
+
+  const time = now.toLocaleTimeString("jp-JP")
+
+  dateTime.value = `${date} - ${time}`
+}
+
+onMounted(() => {
+  updateTime()
+  timer = setInterval(updateTime, 1000)
+})
+
+onUnmounted(() => {
+  clearInterval(timer)
+})
+</script>
+
+<template>
+  <div class="flex h-full">
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+      <div class="mb-8 flex justify-between items-center">
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900">こんにちはファドラン</h1>
+          <p class="text-gray-500 mt-1">本日のプロジェクト活動の概要は以下のとおりです</p>
+        </div>
+        <div class="hidden sm:block px-4 py-2 bg-white rounded-lg shadow-sm text-sm font-medium text-gray-600 border border-gray-200">
+          {{dateTime}}
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-8 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-2 h-full bg-blue-600"></div>
+
+        <div class="flex justify-between items-start mb-6">
+          <h2 class="text-xl font-bold text-gray-800 flex items-center">
+            <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+            案内板と重要事項
+          </h2>
+          <span class="bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded border border-blue-100">最新のアップデート</span>
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition">
+            <span class="flex-shrink-0 w-2 h-2 mt-2 bg-red-500 rounded-full mr-4"></span>
+            <div>
+              <p class="text-sm font-semibold text-gray-900">毎週の会議</p>
+              <p class="text-sm text-gray-600 mt-1">会議はメイン会議室にて14:00に再予定されています。各現場監督は事故報告書を持参のうえ、必ずご出席ください</p>
+            </div>
+          </div>
+          <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition">
+            <span class="flex-shrink-0 w-2 h-2 mt-2 bg-yellow-500 rounded-full mr-4"></span>
+            <div>
+              <p class="text-sm font-semibold text-gray-900">鋼材物流の遅延</p>
+              <p class="text-sm text-gray-600 mt-1">ゾーンB向けの鋼材の搬入が港で滞っています。到着は明日の朝を予定しています。
+                本日はチームをゾーンAのコンクリート打設作業へ振り替えてください</p>
+            </div>
+          </div>
+          <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition">
+            <span class="flex-shrink-0 w-2 h-2 mt-2 bg-green-500 rounded-full mr-4"></span>
+            <div>
+              <p class="text-sm font-semibold text-gray-900">重機メンテナンス完了</p>
+              <p class="text-sm text-gray-600 mt-1">クレーン02号機の整備が完了し、本日より通常稼働可能となりました</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative w-full h-80 lg:h-96 rounded-2xl overflow-hidden shadow-md group">
+
+        <a id="slider-link" href="#" class="block w-full h-full relative cursor-pointer">
+          <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition duration-300 z-10 flex items-end p-8">
+            <div>
+              <span class="bg-blue-600 text-white px-3 py-1 rounded text-xs font-bold uppercase tracking-wide mb-2 inline-block">注目プロジェクト</span>
+              <h3 id="slider-title" class="text-2xl font-bold text-white drop-shadow-md">作業ホワイトボード</h3>
+              <p class="text-white text-sm mt-1 opacity-90 flex items-center">
+                詳しくクリックしてください
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+              </p>
+            </div>
+          </div>
+
+          <iframe loading="lazy"
+                  style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+                  src="https://www.canva.com/design/DAG0nukdNuc/JXjc5a4vdGCHn7Cc0Fcr1A/view?embed"
+                  allow="fullscreen">
+          </iframe>
+        </a>
+
+        <div class="absolute bottom-4 right-4 z-20 flex space-x-2">
+          <button onclick="currentSlide(0)" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 transition"></button>
+          <button onclick="currentSlide(1)" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 transition"></button>
+          <button onclick="currentSlide(2)" class="w-3 h-3 rounded-full bg-white opacity-50 hover:opacity-100 transition"></button>
+        </div>
+      </div>
+    </main>
+    <BaseSidebar/>
+  </div>
+</template>
+
+<style scoped>
+
+</style>

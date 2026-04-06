@@ -1,0 +1,255 @@
+<script setup>
+import { ref, computed, shallowRef } from "vue"
+import BaseNavbarHome from "../HomeComponents/NavbarHome.vue"
+import BaseFooterHome from "../HomeComponents/FooterHome.vue"
+import BaseButtonBack from "../Utilities/UtilitiesHome/ButtonBack.vue"
+import BaseProgressBar from "../HomeComponents/ProgressBar.vue"
+import { useProgressColor } from "./composables/useProgressColor.js"
+import { useLocalStorage } from "./composables/useLocalStorage.js"
+import { useRouter } from "vue-router"
+
+const router = useRouter()
+const { saveOne, getOne } = useLocalStorage()
+const { progressColor, statusLabel, badgeColor } = useProgressColor()
+
+const projectsRaw = [
+  { id: 1, name: '美保(5)格納庫等新設舗装工事',     code: '20250009', defaultProgress: 75,  completionDate: '2026年12月', type: '法面', img: '/construction_img/',     badgeLabel: null, badgeClass: null, completed: false },
+  { id: 2, name: '鍵掛峠道路日南地区改良工事',     code: '20260002', defaultProgress: 15,  completionDate: '2026年6月',  type: '橋梁', img: '/construction_img/',     badgeLabel: null, badgeClass: null, completed: false },
+  { id: 3, name: '奥陰田3地区急傾斜地崩壊 対策工事その2',     code: '20250008', defaultProgress: 30,  completionDate: '2027年3月',  type: '港',   img: '/construction_img/',     badgeLabel: null, badgeClass: null, completed: false },
+  { id: 4, name: '中山3期営農飲雑用水 (高田工区)工事',  code: '20250006', defaultProgress: 100, completionDate: '2023年10月', type: '砂防', img: '/construction_img/',  badgeLabel: null, badgeClass: null, completed: true  },
+  { id: 5, name: '車尾五丁目ほか枝線工事',code: '20260006', defaultProgress: 100, completionDate: '2023年10月', type: '砂防', img: '/construction_img/', badgeLabel: null, badgeClass: null, completed: true  },
+  { id: 6, name: '県道西伯伯太線(宮ノ前歩道橋) 橋梁塗装工事(2工区)(補助)',  code: '20240009', defaultProgress: 100, completionDate: '2023年10月', type: '道路', img: '/construction_img/',  badgeLabel: null, badgeClass: null, completed: true  },
+  { id: 7, name: '外港中野地区承水路護岸補修工事 (老朽化対策) (3工区)',   code: '20240006', defaultProgress: 100, completionDate: '2023年10月', type: '道路', img: '/construction_img/',   badgeLabel: null, badgeClass: null, completed: true  },
+  { id: 8, name: '船越地区急傾斜地崩壊対策工事 (2工区)(交付金)(国補正)',  code: '20250005', defaultProgress: 100, completionDate: '2023年10月', type: '法面', img: '/construction_img/',  badgeLabel: null, badgeClass: null, completed: true  },
+  { id: 9, name: '県道大山寺岸本線(小林工区) 電線共同溝設置工事(2工区)(補助)',  code: '20250005', defaultProgress: 100, completionDate: '2023年10月', type: '法面', img: '/construction_img/',  badgeLabel: null, badgeClass: null, completed: true  },
+  { id: 10, name: '佐陀川砂防堰堤(K1)工事(9工区) (補助)(国補正)',  code: '20250005', defaultProgress: 100, completionDate: '2023年10月', type: '法面', img: '/construction_img/',  badgeLabel: null, badgeClass: null, completed: true  },
+  { id: 11, name: '奥山川砂防堰堤工事(4工区) (交付金)(国補正)',  code: '20250005', defaultProgress: 100, completionDate: '2023年10月', type: '法面', img: '/construction_img/',  badgeLabel: null, badgeClass: null, completed: true  },
+  { id: 12, name: '鍵掛峠道路新屋地区 第13改良工事',  code: '20250005', defaultProgress: 100, completionDate: '2023年10月', type: '法面', img: '/construction_img/',  badgeLabel: null, badgeClass: null, completed: true  },
+]
+
+const drafts = ref(Object.fromEntries(projectsRaw.map(p => [p.id, getOne(p.id, p.defaultProgress)])))
+const saved  = shallowRef(Object.fromEntries(projectsRaw.map(p => [p.id, getOne(p.id, p.defaultProgress)])))
+
+const projectsDisplay = computed(() =>
+    projectsRaw.map(p => {
+      const draft = drafts.value[p.id]
+      return {
+        ...p,
+        draft,
+        dirty:  draft !== saved.value[p.id],
+        label:  statusLabel(draft),
+        color:  progressColor(draft),
+        bgColor: p.badgeLabel ? null : badgeColor(draft),
+      }
+    })
+)
+
+const filters = ['全計画', '計画', '開始', '序盤', '進行中', '完了']
+const activeFilter = ref(localStorage.getItem('construction_filter') || '全計画')
+
+const filteredProjects = computed(() => {
+  if (activeFilter.value === '全計画') return projectsDisplay.value
+  return projectsDisplay.value.filter(p => p.label === activeFilter.value)
+})
+
+function applyFilter(label) {
+  activeFilter.value = label
+  localStorage.setItem('construction_filter', label)
+}
+
+function saveProject(id) {
+  const val = drafts.value[id]
+  saveOne(id, val)
+  saved.value = { ...saved.value, [id]: val }
+}
+
+function discardProject(id) {
+  drafts.value = { ...drafts.value, [id]: saved.value[id] }
+}
+
+function updateDraft(id, val) {
+  drafts.value = { ...drafts.value, [id]: val }
+}
+
+function goToDetail(id) {
+  router.push(`/home/construction/${id}`)
+}
+</script>
+
+<template>
+  <BaseNavbarHome/>
+
+  <div class="bg-white border-gray-200 py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <BaseButtonBack/>
+      <div class="text-center max-w-2xl mx-auto mb-8">
+        <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">建設と計画</h1>
+        <p class="mt-3 text-lg text-gray-500">インフラ整備の進捗管理と将来計画の可視化</p>
+      </div>
+      <div class="flex justify-center flex-wrap gap-2">
+        <span
+            v-for="f in filters" :key="f"
+            @click="applyFilter(f)"
+            class="px-4 py-2 rounded-full text-sm font-semibold cursor-pointer border transition-colors duration-150"
+            :class="activeFilter === f
+            ? 'bg-blue-100 text-blue-800 border-blue-200'
+            : 'bg-white text-gray-600 hover:bg-gray-50 border-gray-200'"
+        >{{ f }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex-grow px-4 sm:px-6 lg:px-8 pb-12">
+    <div class="max-w-7xl mx-auto">
+
+      <div v-if="filteredProjects.length === 0" class="text-center py-20 text-gray-400">
+        <p class="text-lg">該当するプロジェクトがありません</p>
+      </div>
+
+      <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <article
+            v-for="p in filteredProjects"
+            :key="p.id"
+            v-memo="[p.draft, p.dirty, p.label]"
+            class="card-item flex flex-col bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden"
+            :class="{ 'opacity-90': p.completed }"
+        >
+          <!-- Thumbnail -->
+          <div class="img-wrap relative h-56 w-full cursor-pointer overflow-hidden" @click="goToDetail(p.id)">
+            <img
+                class="img-el h-full w-full object-cover"
+                :src="p.img"
+                :alt="p.name"
+                loading="lazy"
+                decoding="async"
+                @error="e => e.target.style.display='none'"
+            />
+
+            <!--
+              ✅ Overlay opacity 0→1, BUKAN grayscale filter.
+              opacity transition = GPU-composited, tidak ada repaint sama sekali.
+            -->
+            <div class="img-overlay absolute inset-0 bg-black flex items-center justify-center">
+
+            </div>
+
+            <div class="absolute top-4 right-4">
+              <span v-if="p.badgeLabel" class="px-3 py-1 rounded-full text-xs font-bold shadow-sm tracking-wide uppercase" :class="p.badgeClass">{{ p.badgeLabel }}</span>
+              <span v-else class="px-3 py-1 rounded-full text-xs font-bold text-white shadow-sm tracking-wide uppercase" :style="{ backgroundColor: p.bgColor }">{{ p.label }}</span>
+            </div>
+          </div>
+
+          <!-- Card body -->
+          <div class="p-6 flex-1 flex flex-col">
+            <div class="flex items-start mb-2 cursor-pointer hover:text-blue-600 transition-colors duration-150" @click="goToDetail(p.id)">
+              <svg class="w-4 h-7 mr-1 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <h3 class="text-xl font-bold text-gray-900 leading-tight">{{ p.name }}</h3>
+            </div>
+            <p class="text-sm text-gray-500 mb-4">{{ p.code }}</p>
+
+            <div class="mt-auto">
+              <div class="flex justify-between text-sm font-medium text-gray-600 mb-1">
+                <span class="flex items-center gap-1.5">
+                  {{ p.label }}
+                  <span v-if="p.dirty" class="text-xs font-semibold px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 border border-amber-300">未保存</span>
+                </span>
+                <span :style="{ color: p.color }">{{ p.draft }}%</span>
+              </div>
+
+              <BaseProgressBar
+                  :model-value="p.draft"
+                  @update:model-value="val => updateDraft(p.id, val)"
+                  class="mb-3"
+              />
+
+              <div v-if="p.dirty" class="flex gap-2 mb-4">
+                <button @click="saveProject(p.id)" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-150">保存する</button>
+                <button @click="discardProject(p.id)" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors duration-150">元に戻す</button>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4 border-t border-gray-100 pt-4">
+                <div>
+                  <p class="text-xs text-gray-400 uppercase font-semibold">{{ p.completed ? '終了' : '完成予定日' }}</p>
+                  <p class="text-sm font-medium text-gray-800">{{ p.completionDate }}</p>
+                </div>
+                <div>
+                  <p class="text-xs text-gray-400 uppercase font-semibold">工事種別</p>
+                  <p class="text-sm font-medium text-gray-800">{{ p.type }}</p>
+                </div>
+              </div>
+
+              <button @click="goToDetail(p.id)" class="mt-4 w-full py-2 rounded-lg text-sm font-semibold text-blue-600 border border-blue-200 hover:bg-blue-50 transition-colors duration-150">詳細を見る →</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <BaseFooterHome/>
+</template>
+
+<style scoped>
+/*
+  ✅ will-change: transform → browser alokasikan GPU layer dari awal
+  Semua card sudah siap di GPU sebelum hover terjadi, tidak ada jeda
+*/
+.card-item {
+  will-change: transform;
+  transform: translateZ(0);           /* paksa composite layer sejak awal */
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+/*
+  ✅ Ganti hover:shadow-xl (repaint) dengan translateY (GPU transform)
+  transform tidak memicu layout/paint sama sekali
+*/
+.card-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.15);
+}
+
+/*
+  ✅ Gambar: will-change transform untuk zoom halus
+*/
+.img-wrap {
+  overflow: hidden;
+}
+.img-el {
+  will-change: transform;
+  transform: scale(1) translateZ(0);
+  transition: transform 400ms ease;
+}
+.card-item:hover .img-el {
+  transform: scale(1.04) translateZ(0);
+}
+
+/*
+  ✅ GANTI grayscale CSS filter → opacity overlay
+  grayscale transition = repaint setiap frame (sangat berat)
+  opacity transition   = GPU-composited (0 repaint, selalu 60fps)
+
+  Cara kerja: overlay hitam opacity 0.55 menutupi gambar (kesan grayscale),
+  saat hover overlay menghilang → gambar berwarna terlihat kembali
+*/
+.img-overlay {
+  will-change: opacity;
+  background-color: rgba(0, 0, 0, 0.55); /* kesan "grayscale" */
+  opacity: 1;
+  transition: opacity 350ms ease;
+}
+.card-item:hover .img-overlay {
+  opacity: 0; /* hilang saat hover → gambar berwarna */
+}
+
+
+/*
+  ✅ Kurangi durasi transition global Tailwind yang tidak perlu
+  'transition' default Tailwind = 150ms untuk semua property termasuk box-shadow
+  Kita override hanya ke 'colors' agar tidak ada transisi yang tidak sengaja
+*/
+</style>
