@@ -13,7 +13,7 @@ import UserFooter from "./components/UserComponents/UserFooter.vue";
 import UserProfile from "./components/User/UserProfile.vue";
 import SidebarUser from "./components/UserComponents/SidebarUser.vue";
 import UserLogout from "./components/User/UserLogout.vue";
-import EmployeeList from "./components/ContentHome/EmployeeList.vue";
+import InspectionList from "./components/ContentHome/InspectionList.vue";
 import ButtonBack from "./components/Utilities/UtilitiesHome/ButtonBack.vue";
 import SlideImage from "./components/ContentHome/SlideImage.vue";
 import Example from "./components/Example.vue";
@@ -29,6 +29,8 @@ import ProgressBar from "./components/HomeComponents/ProgressBar.vue";
 import ConstructionDetail from "./components/ContentHome/ConstructionDetail.vue";
 import ButtonBackConstruction from "./components/Utilities/UtilitiesHome/ButtonBackConstruction.vue";
 import ProgressBarDetail from "./components/HomeComponents/ProgressBarDetail.vue";
+import InspectionDetail from "./components/ContentHome/InspectionDetail.vue";
+import ButtonBackInspection from "./components/Utilities/UtilitiesHome/ButtonBackInspection.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -40,6 +42,10 @@ const router = createRouter({
         return { top: 0, left: 0 }
     },
     routes: [
+        {
+            path: "/",
+            redirect: "/home",
+        },
         {
             component: Example,
             path: "/example",
@@ -96,8 +102,12 @@ const router = createRouter({
                     path: "/home/construction/:id",
                 },
                 {
-                    component: EmployeeList,
-                    path: "/home/employee",
+                    component: InspectionList,
+                    path: "/home/inspection",
+                },
+                {
+                    component: InspectionDetail,
+                    path: "/home/inspection/:id",
                 },
                 {
                     component: EquipmentList,
@@ -147,7 +157,7 @@ app.component('BaseSidebar', SidebarUser)
 //Utilities
 app.component('BaseButtonBack', ButtonBack)
 app.component('BaseButtonBackConstruction', ButtonBackConstruction)
+app.component('BaseButtonBackInspection', ButtonBackInspection)
 
 app.use(router).mount('#app')
-
 

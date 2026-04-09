@@ -10,10 +10,10 @@ export function useProgressColor() {
      * 51–100  → blue
      */
     function progressColor(value) {
-        if (value <= 10) return '#f87171'  // red-400
-        if (value <= 25) return '#fb923c'  // orange-400
-        if (value <= 50) return '#facc15'  // yellow-400
-        return '#3b82f6'                   // blue-500
+        if (value <= 10) return '#f87171'
+        if (value <= 25) return '#fb923c'
+        if (value <= 50) return '#facc15'
+        return '#3b82f6'
     }
 
     /**
@@ -22,8 +22,8 @@ export function useProgressColor() {
     function statusLabel(value) {
         if (value >= 100) return '完了'
         if (value > 50)   return '進行中'
-        if (value > 25)   return '序盤'
-        if (value > 10)   return '開始'
+        if (value > 25)   return '進行中'
+        if (value > 0)   return '計画'
         return '計画'
     }
 
@@ -31,11 +31,11 @@ export function useProgressColor() {
      * Returns a badge background color based on progress value.
      */
     function badgeColor(value) {
-        if (value >= 100) return '#22c55e'  // green-500
-        if (value > 50)   return '#22c55e'  // green-500
-        if (value > 25)   return '#eab308'  // yellow-500
-        if (value > 10)   return '#f97316'  // orange-500
-        return '#ef4444'                    // red-500
+        if (value >= 100) return '#22c55e'
+        if (value > 50)   return '#22c55e'
+        if (value > 25)   return '#eab308'
+        if (value > 10)   return '#f97316'
+        return '#ef4444'
     }
 
     return { progressColor, statusLabel, badgeColor }

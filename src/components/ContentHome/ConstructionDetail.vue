@@ -1,18 +1,18 @@
 <script setup>
-import { ref, computed }          from "vue"
-import { useRoute }               from "vue-router"
-import BaseNavbarHome             from "../HomeComponents/NavbarHome.vue"
-import BaseFooterHome             from "../HomeComponents/FooterHome.vue"
-import BaseButtonBack             from "../Utilities/UtilitiesHome/ButtonBack.vue"
-import { useProgressColor }       from "./composables/useProgressColor.js"
-import { useLocalStorage }        from "./composables/useLocalStorage.js"
+import {ref, computed} from "vue"
+import {useRoute} from "vue-router"
+import BaseNavbarHome from "../HomeComponents/NavbarHome.vue"
+import BaseFooterHome from "../HomeComponents/FooterHome.vue"
+import BaseButtonBack from "../Utilities/UtilitiesHome/ButtonBack.vue"
+import {useProgressColor} from "./composables/useProgressColor.js"
+import {useLocalStorage} from "./composables/useLocalStorage.js"
 import BaseButtonBackConstruction from "../Utilities/UtilitiesHome/ButtonBackConstruction.vue"
-import BaseProgressBarDetail      from "../HomeComponents/ProgressBarDetail.vue"
-import                                 "./ConstructionDetail.css"
+import BaseProgressBarDetail from "../HomeComponents/ProgressBarDetail.vue"
+import "./ConstructionDetail.css"
 
-const route                                      = useRoute()
-const { saveOne, getOne }                        = useLocalStorage()
-const { progressColor, statusLabel, badgeColor } = useProgressColor()
+const route = useRoute()
+const {saveOne, getOne} = useLocalStorage()
+const {progressColor, statusLabel, badgeColor} = useProgressColor()
 
 // ── Password yang benar (ganti sesuai kebutuhan) ──────────────────────────
 const CORRECT_PASSWORD = '191101'
@@ -22,14 +22,7 @@ const projectsRaw = [
   {
     id: 1, name: '美保(5)格納庫等新設舗装工事', code: '20250009',
     defaultProgress: 75, completionDate: '2023年11月8日 ー 2026年3月31日', type: '法面',
-    img: '/construction_img/奥陰田法面.webp',
-    images: [
-      '/construction_img/奥陰田法面.webp',
-      '/construction_img/宮ノ前歩道.webp',
-      '/construction_img/米子港造成.webp',
-      '/construction_img/米子港造成.webp',
-      '/construction_img/米子港造成.webp'
-    ],
+    images: [],
     badgeLabel: null, badgeClass: null, completed: false,
     description: '-',
     location: '-', contractor: '小島',
@@ -37,43 +30,71 @@ const projectsRaw = [
   {
     id: 2, name: '鍵掛峠道路日南地区改良工事', code: '20260002',
     defaultProgress: 15, completionDate: '2024年5月21日 ー 2026年3月31日', type: '橋梁',
-    img: '/construction_img/宮ノ前歩道.webp',
     images: [
-      '/construction_img/宮ノ前歩道.webp',
-      '/construction_img/鍵掛道路日南.webp',
-      '/construction_img/大坂改良7工区.webp',
+      {src: '/construction_img/日南/2024-08-28.webp', takenAt: '2024年8月28日'},
+      {src: '/construction_img/日南/2024-09-26.webp', takenAt: '2024年9月26日'},
+      {src: '/construction_img/日南/2024-10-23.webp', takenAt: '2024年10月23日'},
+      {src: '/construction_img/日南/2024-11-20.webp', takenAt: '2024年11月20日'},
+      {src: '/construction_img/日南/2024-12-17.webp', takenAt: '2024年12月17日'},
+      {src: '/construction_img/日南/2025-03-26.webp', takenAt: '2025年3月26日'},
+      {src: '/construction_img/日南/2025-04-25.webp', takenAt: '2025年4月25日'},
+      {src: '/construction_img/日南/2025-05-23.webp', takenAt: '2025年5月23日'},
+      {src: '/construction_img/日南/2025-06-30.webp', takenAt: '2025年6月30日'},
+      {src: '/construction_img/日南/2025-07-17.webp', takenAt: '2025年7月17日'},
+      {src: '/construction_img/日南/2025-08-19.webp', takenAt: '2025年8月19日'},
+      {src: '/construction_img/日南/2025-09-19.webp', takenAt: '2025年9月19日'},
+      {src: '/construction_img/日南/2025-10-17.webp', takenAt: '2025年10月17日'},
+      {src: '/construction_img/日南/2025-11-20.webp', takenAt: '2025年11月20日'},
+      {src: '/construction_img/日南/2025-12-23.webp', takenAt: '2025年12月23日'},
+      {src: '/construction_img/日南/2026-03-23.webp', takenAt: '2025年3月23日'},
     ],
     badgeLabel: null, badgeClass: null, completed: false,
-    description: '-',
+    description: `工事延長 L = 1,240m
+    道路土工1式(掘削V=15,410m3、盛土 V = 15,190m3)
+    法面工1式(植生工 A = 1 1,620m2、法枠工 A = 1,673m2)
+    擁壁工1式重力式擁壁1式
+    補強盛土工ジオテキスタイル補強土壁1式
+    コンクリートブロック積工A=92m2
+    排水構造物工1式
+    舗装工1式下層路盤(C-40 t = 1 ) A = 3 3,800m2
+    仮設工1式`,
     location: '-', contractor: '池岡、内田',
   },
   {
     id: 3, name: '奥陰田3地区急傾斜地崩壊 対策工事その2', code: '20250008',
     defaultProgress: 30, completionDate: '2025年7月25日 ー 2026年3月31日', type: '港',
-    img: '/construction_img/米子港造成.webp',
     images: [
-      '/construction_img/米子港造成.webp',
-      '/construction_img/奥陰田法面.webp',
-      '/construction_img/佐陀川砂防9工区.webp',
+      {src: '/construction_img/奥陰/2025-09-09.webp', takenAt: '2025年9月9日'},
+      {src: '/construction_img/奥陰/2025-09-22.webp', takenAt: '2025年9月22日'},
+      {src: '/construction_img/奥陰/2025-10-22.webp', takenAt: '2025年10月22日'},
+      {src: '/construction_img/奥陰/2025-11-20.webp', takenAt: '2025年11月20日'},
+      {src: '/construction_img/奥陰/2025-12-18.webp', takenAt: '2025年12月18日'},
+      {src: '/construction_img/奥陰/2026-01-19.webp', takenAt: '2026年1月19日'},
+      {src: '/construction_img/奥陰/2026-02-26.webp', takenAt: '2026年2月26日'},
+      {src: '/construction_img/奥陰/2026-03-26.webp', takenAt: '2026年3月26日'},
     ],
     badgeLabel: null, badgeClass: null, completed: false,
-    description: '-',
+    description: `施工延長L=43.7m
+    砂防土工一式
+    法面工一式
+    仮設工一式`,
     location: '-', contractor: '長谷川、岩田ひ',
   },
   {
     id: 4, name: '中山3期営農飲雑用水 (高田工区)工事', code: '20250006',
     defaultProgress: 100, completionDate: '2025年9月1日 ー 2026年5月29日', type: '砂防',
-    img: '/construction_img/奥山砂防3工区.webp',
-    images: ['/construction_img/奥山砂防3工区.webp'],
+    images: [],
     badgeLabel: null, badgeClass: null, completed: true,
-    description: '-',
+    description: `管路工
+    本線L=975.4m→962.7m
+    A路線L=579.0m→578.7m
+    B路線L=118.1m`,
     location: '-', contractor: '岩田こ',
   },
   {
     id: 5, name: '車尾五丁目ほか枝線工事', code: '20260006',
     defaultProgress: 100, completionDate: '2025年9月4日 ー 2026年9月30日', type: '砂防',
-    img: '/construction_img/佐陀川砂防9工区.webp',
-    images: ['/construction_img/佐陀川砂防9工区.webp'],
+    images: [],
     badgeLabel: null, badgeClass: null, completed: true,
     description: '-',
     location: '-', contractor: '西中',
@@ -82,61 +103,113 @@ const projectsRaw = [
     id: 6, name: '県道西伯伯太線(宮ノ前歩道橋) 橋梁塗装工事(2工区)(補助)', code: '20240009',
     defaultProgress: 100, completionDate: '2025年10月2日 ー 2026年3月16日', type: '道路',
     img: '/construction_img/大坂改良7工区.webp',
-    images: ['/construction_img/大坂改良7工区.webp'],
+    images: [
+      {src: '/construction_img/宮ノ前/2025-11-21.webp', takenAt: '2025年11月21日'},
+      {src: '/construction_img/宮ノ前/2025-12-15.webp', takenAt: '2025年12月15日'},
+      {src: '/construction_img/宮ノ前/2026-03-11(2).webp', takenAt: '2026年3月11日'},
+      {src: '/construction_img/宮ノ前/2026-03-11(1).webp', takenAt: '2026年3月11日'},
+    ],
     badgeLabel: null, badgeClass: null, completed: true,
-    description: '-',
+    description: `宮ノ前歩道橋(2工区)
+    橋長L=48.5m幅員W=2.9m
+    施工延長L=16.2m
+    橋梁塗替塗装工A=136m2
+    孔食補修工一式
+    仮設工一式`,
     location: '-', contractor: '今中',
   },
   {
     id: 7, name: '外港中野地区承水路護岸補修工事 (老朽化対策) (3工区)', code: '20240006',
     defaultProgress: 100, completionDate: '2026年2月4日 ー 2026年9月18日', type: '道路',
     img: '/construction_img/鍵掛道路日南.webp',
-    images: ['/construction_img/鍵掛道路日南.webp'],
+    images: [
+      {src: '/construction_img/鍵掛道路日南.webp', takenAt: '2026年2月20日'},
+    ],
     badgeLabel: null, badgeClass: null, completed: true,
-    description: '-',
+    description: `河川土工
+    掘削工V=60m3
+    法覆護岸工
+    マットレス工L=157m
+    大型ブロック積A=264m2
+    張りコンクリートA=468m2
+    排水構造物工
+    プレキャストL型水路L=103m
+    構造物撤去工
+    コンクリート構造物取壊しV=108m3
+    殼運搬V=108m3`,
     location: '-', contractor: '篠原',
   },
   {
     id: 8, name: '船越地区急傾斜地崩壊対策工事 (2工区)(交付金)(国補正)', code: '20250005',
     defaultProgress: 100, completionDate: '2026年2月17日 ー 2026年10月21日', type: '法面',
     img: '/construction_img/三部法面7工区.webp',
-    images: ['/construction_img/三部法面7工区.webp'],
+    images: [
+      {src: '/construction_img/三部法面7工区.webp', takenAt: '2026年3月1日'},
+    ],
     badgeLabel: null, badgeClass: null, completed: true,
-    description: '-',
+    description: `法面工
+    簡易吹付法枠工(M-1500) A=508m2
+    吹付法枠工(300×300) A = 4 471m2
+    ノンフレーム工法 A = 3 318m2
+    擁壁補強工
+    鉄筋挿入工 ( L = 5 5.0m) N = 34本
+    鉄筋挿入工 L = 4 ) N = 27本
+    仮設工
+    撤去 N = 1 式`,
     location: '-', contractor: '坪倉',
   },
   {
     id: 9, name: '県道大山寺岸本線(小林工区) 電線共同溝設置工事(2工区)(補助)', code: '20250005',
     defaultProgress: 100, completionDate: '2026年3月6日 ー 2026年10月30日', type: '法面',
     img: '/construction_img/三部法面7工区.webp',
-    images: ['/construction_img/三部法面7工区.webp'],
+    images: [
+      {src: '/construction_img/三部法面7工区.webp', takenAt: '2026年3月10日'},
+    ],
     badgeLabel: null, badgeClass: null, completed: true,
-    description: '-',
+    description: `施工延長L=181.3m
+    仮設工
+    仮設舗装A=364m2
+    舗装版撤去工一式
+    開削土工一式
+    電線共同溝
+    管路L=176.8m
+    S型マンホールN=1基
+    通信接続桝N=1基`,
     location: '-', contractor: '西本',
   },
   {
     id: 10, name: '佐陀川砂防堰堤(K1)工事(9工区) (補助)(国補正) (2工区)(交付金)(国補正)', code: '20250005',
     defaultProgress: 100, completionDate: '2026年3月5日 ー 2026年12月25日', type: '法面',
     img: '/construction_img/三部法面7工区.webp',
-    images: ['/construction_img/三部法面7工区.webp'],
+    images: [
+      {src: '/construction_img/佐陀/2026-03-11.webp', takenAt: '2026年3月11日'},
+    ],
     badgeLabel: null, badgeClass: null, completed: true,
-    description: '-',
+    description: `銅製砂防堰堤(K1)N=1基(H=12.0m、L=142m)
+    砂防土工一式
+    鋼製スリットW=55.2t
+    垂直壁工V=113m3
+    水叩工V=353m3
+    護床工N=72個
+    仮設工N=一式`,
     location: '-', contractor: '菊川',
   },
   {
     id: 11, name: '奥山川砂防堰堤工事(4工区) (交付金)(国補正)', code: '20250005',
     defaultProgress: 100, completionDate: '2026年3月9日 ー 2026年11月9日', type: '法面',
-    img: '/construction_img/三部法面7工区.webp',
-    images: ['/construction_img/三部法面7工区.webp'],
+    images: [
+      {src: '/construction_img/奥山/2026-03-16.webp', takenAt: '2026年3月16日'},
+    ],
     badgeLabel: null, badgeClass: null, completed: true,
-    description: '-',
+    description: `砂防土工
+    埋戻し工V=1,790m3
+    コンクリート堰堤工V=989m3`,
     location: '-', contractor: '内田',
   },
   {
     id: 12, name: '鍵掛峠道路新屋地区 第13改良工事', code: '20250005',
     defaultProgress: 100, completionDate: '2027年5月1日 ー 2026年2月26日', type: '法面',
-    img: '/construction_img/三部法面7工区.webp',
-    images: ['/construction_img/三部法面7工区.webp'],
+    images: [],
     badgeLabel: null, badgeClass: null, completed: true,
     description: '-',
     location: '-', contractor: '池岡',
@@ -145,31 +218,19 @@ const projectsRaw = [
 
 // ── Ambil proyek berdasarkan ID dari URL ──────────────────────────────────
 const projectId = Number(route.params.id)
-const raw       = projectsRaw.find(p => p.id === projectId)
+const raw = projectsRaw.find(p => p.id === projectId)
 const persisted = raw ? getOne(raw.id, raw.defaultProgress) : 0
-const project   = ref(raw ? { ...raw, draft: persisted, saved: persisted } : null)
+const project = ref(raw ? {...raw, draft: persisted, saved: persisted} : null)
 
-const projectPdfMap = {
-  1: '/令和8年3月分.pdf',
-  2: '/pdf/construction/project-2.pdf',
-  3: '/pdf/construction/project-3.pdf',
-  4: '/pdf/construction/project-4.pdf',
-  5: '/pdf/construction/project-5.pdf',
-  6: '/pdf/construction/project-6.pdf',
-  7: '/pdf/construction/project-7.pdf',
-  8: '/pdf/construction/project-8.pdf',
-  9: '/pdf/construction/project-9.pdf',
-  10: '/pdf/construction/project-10.pdf',
-  11: '/pdf/construction/project-11.pdf',
-  12: '/pdf/construction/project-12.pdf',
-}
 
-const isDirty       = computed(() => project.value && project.value.draft !== project.value.saved)
-const projectImages = computed(() => project.value?.images?.length ? project.value.images : [project.value?.img])
-const projectPdfUrl = computed(() => {
-  if (!project.value) return ''
-  return projectPdfMap[project.value.id] || ''
-})
+const isDirty = computed(() => project.value && project.value.draft !== project.value.saved)
+const projectImages = computed(() =>
+    project.value?.images?.length
+        ? project.value.images.map(img =>
+            typeof img === 'string' ? {src: img, takenAt: null} : img
+        )
+        : [{src: project.value?.img, takenAt: null}]
+)
 
 // ── Helper: parse "2023年11月8日" → "2023-11-08" ──────────────────────────
 function parseJpDate(str) {
@@ -189,20 +250,20 @@ function formatJpDate(val) {
 // ── Parse completionDate "A ー B" → { start, end } ────────────────────────
 function splitCompletionDate(str) {
   const parts = (str || '').split(/\s*[ーー\-–—]\s*/)
-  return { start: parts[0]?.trim() ?? '', end: parts[1]?.trim() ?? '' }
+  return {start: parts[0]?.trim() ?? '', end: parts[1]?.trim() ?? ''}
 }
 
 // ── Date modal state ──────────────────────────────────────────────────────
-const showDateModal   = ref(false)
-const draftStartDate  = ref('')   // format yyyy-mm-dd
-const draftEndDate    = ref('')   // format yyyy-mm-dd
+const showDateModal = ref(false)
+const draftStartDate = ref('')   // format yyyy-mm-dd
+const draftEndDate = ref('')   // format yyyy-mm-dd
 const pendingSaveType = ref('')   // 'progress' | 'date' | 'both'
 
 function openDateModal() {
-  const { start, end }  = splitCompletionDate(project.value.completionDate)
-  draftStartDate.value  = parseJpDate(start)
-  draftEndDate.value    = parseJpDate(end)
-  showDateModal.value   = true
+  const {start, end} = splitCompletionDate(project.value.completionDate)
+  draftStartDate.value = parseJpDate(start)
+  draftEndDate.value = parseJpDate(end)
+  showDateModal.value = true
 }
 
 function closeDateModal() {
@@ -211,24 +272,24 @@ function closeDateModal() {
 
 function confirmDateModal() {
   // Tutup date modal, lanjut ke password modal
-  showDateModal.value   = false
+  showDateModal.value = false
   pendingSaveType.value = isDirty.value ? 'both' : 'date'
   openPasswordModal()
 }
 
 // ── State modal password ──────────────────────────────────────────────────
-const showModal      = ref(false)
-const passwordInput  = ref('')
-const passwordError  = ref('')
-const showPassword   = ref(false)
-const isShaking      = ref(false)
-const saveSuccess    = ref(false)
+const showModal = ref(false)
+const passwordInput = ref('')
+const passwordError = ref('')
+const showPassword = ref(false)
+const isShaking = ref(false)
+const saveSuccess = ref(false)
 
 function openPasswordModal() {
   passwordInput.value = ''
   passwordError.value = ''
-  showPassword.value  = false
-  showModal.value     = true
+  showPassword.value = false
+  showModal.value = true
   // Fokus ke input setelah modal muncul
   setTimeout(() => {
     document.getElementById('pw-input')?.focus()
@@ -236,7 +297,7 @@ function openPasswordModal() {
 }
 
 function closeModal() {
-  showModal.value     = false
+  showModal.value = false
   passwordInput.value = ''
   passwordError.value = ''
 }
@@ -251,19 +312,23 @@ function confirmSave() {
     // Simpan tanggal jika perlu
     if (pendingSaveType.value === 'date' || pendingSaveType.value === 'both') {
       const start = formatJpDate(draftStartDate.value)
-      const end   = formatJpDate(draftEndDate.value)
+      const end = formatJpDate(draftEndDate.value)
       project.value.completionDate = `${start} ー ${end}`
     }
     pendingSaveType.value = ''
-    showModal.value       = false
-    passwordInput.value   = ''
-    passwordError.value   = ''
-    saveSuccess.value     = true
-    setTimeout(() => { saveSuccess.value = false }, 2500)
+    showModal.value = false
+    passwordInput.value = ''
+    passwordError.value = ''
+    saveSuccess.value = true
+    setTimeout(() => {
+      saveSuccess.value = false
+    }, 2500)
   } else {
     passwordError.value = 'パスワードが正しくありません。もう一度お試しください。'
-    isShaking.value     = true
-    setTimeout(() => { isShaking.value = false }, 500)
+    isShaking.value = true
+    setTimeout(() => {
+      isShaking.value = false
+    }, 500)
     passwordInput.value = ''
     document.getElementById('pw-input')?.focus()
   }
@@ -302,17 +367,35 @@ function onModalKeydown(e) {
       <!-- ── Image Carousel ────────────────────────────────────────────── -->
       <div class="flex snap-x snap-mandatory overflow-x-auto gap-4 px-8 mt-4 pb-2">
         <div
-            v-for="(imgSrc, idx) in projectImages"
+            v-for="(img, idx) in projectImages"
             :key="idx"
-            class="snap-center shrink-0 w-72 sm:w-80"
+            class="snap-center shrink-0 w-72 sm:w-80 relative"
         >
           <img
-              :src="imgSrc"
+              :src="img.src"
               :alt="`${project.name} - ${idx + 1}`"
               class="w-full h-48 object-cover rounded-xl"
               @error="e => e.target.style.display='none'"
               loading="lazy"
           />
+          <!-- Badge nomor + tanggal diambil -->
+          <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between gap-2">
+            <!-- Nomor foto -->
+            <span class="text-xs font-bold text-white bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded-full">
+              {{ idx + 1 }} / {{ projectImages.length }}
+            </span>
+            <!-- Tanggal diambil -->
+            <span
+                v-if="img.takenAt"
+                class="flex items-center gap-1 text-xs font-semibold text-white bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded-full"
+            >
+              <svg class="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              {{ img.takenAt }}
+            </span>
+          </div>
         </div>
       </div>
 
@@ -322,16 +405,7 @@ function onModalKeydown(e) {
         <div class="lg:col-span-2 space-y-6">
           <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
             <h2 class="text-lg font-bold text-gray-800 mb-3">工事概要</h2>
-            <p class="text-gray-600 leading-relaxed">{{ project.description }}</p>
-            <a
-                v-if="projectPdfUrl"
-                :href="projectPdfUrl"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="construction-pdf-link"
-            >
-              工事概要PDFを見る
-            </a>
+            <p class="text-gray-600 leading-relaxed whitespace-pre-line">{{ project.description }}</p>
           </div>
           <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
             <h2 class="text-lg font-bold text-gray-800 mb-4">基本情報</h2>
@@ -341,11 +415,14 @@ function onModalKeydown(e) {
                 <p class="text-sm font-medium text-gray-800">{{ project.type }}</p>
               </div>
               <div>
-                <p class="text-xs text-gray-400 uppercase font-semibold mb-1">{{ project.completed ? '終了日' : '完成予定日' }}</p>
+                <p class="text-xs text-gray-400 uppercase font-semibold mb-1">{{
+                    project.completed ? '終了日' : '完成予定日'
+                  }}</p>
                 <button
                     class="text-sm font-medium text-blue-600 hover:text-blue-800 underline underline-offset-2 transition-colors text-left"
                     @click="openDateModal"
-                >{{ project.completionDate }}</button>
+                >{{ project.completionDate }}
+                </button>
               </div>
               <div>
                 <p class="text-xs text-gray-400 uppercase font-semibold mb-1">施工場所</p>
@@ -396,7 +473,8 @@ function onModalKeydown(e) {
               <button
                   @click="discard"
                   class="flex-1 py-2 px-3 rounded-lg text-sm font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors duration-150"
-              >元に戻す</button>
+              >元に戻す
+              </button>
             </div>
 
             <!-- ✅ Notifikasi sukses -->
@@ -421,11 +499,15 @@ function onModalKeydown(e) {
           <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
             <h3 class="text-sm font-bold text-gray-700 mb-3">ステータス凡例</h3>
             <div class="space-y-2 text-xs">
-              <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-red-400 inline-block"></span><span class="text-gray-600">計画 (0–10%)</span></div>
-              <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-orange-400 inline-block"></span><span class="text-gray-600">開始 (11–25%)</span></div>
-              <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-yellow-400 inline-block"></span><span class="text-gray-600">序盤 (26–50%)</span></div>
-              <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-blue-500 inline-block"></span><span class="text-gray-600">進行中 (51–99%)</span></div>
-              <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span><span class="text-gray-600">完了 (100%)</span></div>
+              <div class="flex items-center gap-2"><span
+                  class="w-3 h-3 rounded-full bg-red-400 inline-block"></span><span
+                  class="text-gray-600">計画 (0–24%)</span></div>
+              <div class="flex items-center gap-2"><span
+                  class="w-3 h-3 rounded-full bg-blue-500 inline-block"></span><span class="text-gray-600">進行中 (25–99%)</span>
+              </div>
+              <div class="flex items-center gap-2"><span
+                  class="w-3 h-3 rounded-full bg-green-500 inline-block"></span><span
+                  class="text-gray-600">完了 (100%)</span></div>
             </div>
           </div>
         </div>
@@ -502,7 +584,8 @@ function onModalKeydown(e) {
           </div>
 
           <!-- Preview hasil -->
-          <div v-if="draftStartDate && draftEndDate" class="mt-4 bg-indigo-50 border border-indigo-100 rounded-xl px-4 py-2.5 text-xs text-indigo-700 font-medium">
+          <div v-if="draftStartDate && draftEndDate"
+               class="mt-4 bg-indigo-50 border border-indigo-100 rounded-xl px-4 py-2.5 text-xs text-indigo-700 font-medium">
             {{ formatJpDate(draftStartDate) }} ー {{ formatJpDate(draftEndDate) }}
           </div>
 
@@ -511,7 +594,8 @@ function onModalKeydown(e) {
             <button
                 @click="closeDateModal"
                 class="flex-1 py-2.5 rounded-xl text-sm font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors duration-150"
-            >キャンセル</button>
+            >キャンセル
+            </button>
             <button
                 @click="confirmDateModal"
                 :disabled="!draftStartDate || !draftEndDate"
@@ -564,10 +648,15 @@ function onModalKeydown(e) {
             <p class="text-gray-500 text-xs mb-1">保存内容</p>
             <p class="font-semibold text-gray-800">{{ project?.name }}</p>
             <p v-if="pendingSaveType === 'date' || pendingSaveType === 'both'" class="text-gray-500 text-xs mt-0.5">
-              期間: <span class="font-semibold text-gray-700">{{ formatJpDate(draftStartDate) }} ー {{ formatJpDate(draftEndDate) }}</span>
+              期間: <span class="font-semibold text-gray-700">{{
+                formatJpDate(draftStartDate)
+              }} ー {{ formatJpDate(draftEndDate) }}</span>
             </p>
-            <p v-if="pendingSaveType === 'progress' || pendingSaveType === 'both' || (!pendingSaveType && isDirty)" class="text-gray-500 text-xs mt-0.5">
-              進捗: <span class="font-semibold" :style="{ color: progressColor(project?.draft) }">{{ project?.draft }}%</span>
+            <p v-if="pendingSaveType === 'progress' || pendingSaveType === 'both' || (!pendingSaveType && isDirty)"
+               class="text-gray-500 text-xs mt-0.5">
+              進捗: <span class="font-semibold" :style="{ color: progressColor(project?.draft) }">{{
+                project?.draft
+              }}%</span>
               ({{ statusLabel(project?.draft) }})
             </p>
           </div>
@@ -595,12 +684,15 @@ function onModalKeydown(e) {
             >
               <!-- Mata buka -->
               <svg v-if="!showPassword" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
               </svg>
               <!-- Mata tutup -->
               <svg v-else class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
               </svg>
             </button>
           </div>
@@ -609,7 +701,9 @@ function onModalKeydown(e) {
           <Transition name="fade">
             <p v-if="passwordError" class="mt-2 text-xs text-red-600 flex items-center gap-1">
               <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                      clip-rule="evenodd"/>
               </svg>
               {{ passwordError }}
             </p>
@@ -620,11 +714,13 @@ function onModalKeydown(e) {
             <button
                 @click="closeModal"
                 class="flex-1 py-2.5 rounded-xl text-sm font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors duration-150"
-            >キャンセル</button>
+            >キャンセル
+            </button>
             <button
                 @click="confirmSave"
                 class="flex-1 py-2.5 rounded-xl text-sm font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-150"
-            >確認して保存</button>
+            >確認して保存
+            </button>
           </div>
         </div>
       </div>

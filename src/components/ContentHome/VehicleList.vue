@@ -8,7 +8,23 @@ import BaseButtonBack from "../Utilities/UtilitiesHome/ButtonBack.vue";
 <template>
   <BaseNavbarHome/>
 
+  <div class="bg-slate-50">
+    <section class="mx-auto min-h-screen max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
+      <BaseButtonBack />
 
+      <div class="mt-8 rounded-3xl border border-slate-200 bg-white px-6 py-20 text-center shadow-sm sm:px-10">
+        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">
+          キャンバ
+        </p>
+        <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+          近日公開
+        </h1>
+        <p class="mt-4 text-base text-slate-600 sm:text-lg">
+          このページは現在準備中です
+        </p>
+      </div>
+    </section>
+  </div>
 
 
   <div class="bg-white border-gray-200 py-10">
