@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { ref, computed } from "vue"
 import { useRouter }     from "vue-router"
 import BaseNavbarHome             from "../HomeComponents/NavbarHome.vue"
@@ -7,32 +7,28 @@ import BaseButtonBack             from "../Utilities/UtilitiesHome/ButtonBack.vu
 
 const router = useRouter()
 
-// ── Data konstruksi ───────────────────────────────────────────────────────
 const constructions = [
-  { id: 1,  code: '20250009', name: '美保(5)格納庫等新設舗装工事',                           type: '法面', contractor: '小島' },
-  { id: 2,  code: '20260002', name: '鍵掛峠道路日南地区改良工事',                             type: '橋梁', contractor: '池岡、内田' },
-  { id: 3,  code: '20250008', name: '奥陰田3地区急傾斜地崩壊対策工事その2',                   type: '港',   contractor: '長谷川、岩田ひ' },
-  { id: 4,  code: '20250006', name: '中山3期営農飲雑用水(高田工区)工事',                      type: '砂防', contractor: '岩田こ' },
-  { id: 5,  code: '20260006', name: '車尾五丁目ほか枝線工事',                                 type: '砂防', contractor: '西中' },
-  { id: 6,  code: '20240009', name: '県道西伯伯太線(宮ノ前歩道橋)橋梁塗装工事(2工区)(補助)', type: '道路', contractor: '今中' },
-  { id: 7,  code: '20240006', name: '外港中野地区承水路護岸補修工事(老朽化対策)(3工区)',      type: '道路', contractor: '篠原' },
-  { id: 8,  code: '20250005', name: '船越地区急傾斜地崩壊対策工事(2工区)(交付金)(国補正)',    type: '法面', contractor: '坪倉' },
-  { id: 9,  code: '20250005', name: '県道大山寺岸本線(小林工区)電線共同溝設置工事(2工区)',    type: '法面', contractor: '西本' },
-  { id: 10, code: '20250005', name: '佐陀川砂防堰堤(K1)工事(9工区)',                          type: '砂防', contractor: '菊川' },
-  { id: 11, code: '20250005', name: '奥山川砂防堰堤工事(4工区)(交付金)(国補正)',               type: '砂防', contractor: '内田' },
-  { id: 12, code: '20250005', name: '鍵掛峠道路新屋地区第13改良工事',                          type: '道路', contractor: '池岡' },
+  { id: 1, code: '20250009', name: '美保(5)格納庫等新設舗装工事', type: 'Civil', contractor: '小島' },
+  { id: 2, code: '20260002', name: '美保(5)格納庫等新設舗装工事', type: 'Road', contractor: '池岡、内田' },
+  { id: 3, code: '20250008', name: '奥陰田3地区急傾斜地崩壊 対策工事その2', type: 'Slope', contractor: '長谷川、岩田ひ' },
+  { id: 4, code: '20250006', name: '中山3期営農飲雑用水 (高田工区)工事', type: 'River', contractor: '岩田こ' },
+  { id: 5, code: '20260006', name: '車尾五丁目ほか枝線工事', type: 'River', contractor: '西中' },
+  { id: 6, code: '20240009', name: '県道西伯伯太線(宮ノ前歩道橋) 橋梁塗装工事(2工区)(補助)', type: 'Road', contractor: '今中' },
+  { id: 7, code: '20240006', name: '外港中野地区承水路護岸補修工事 (老朽化対策) (3工区)', type: 'Road', contractor: '篠原' },
+  { id: 8, code: '20250005', name: '船越地区急傾斜地崩壊対策工事 (2工区)(交付金)(国補正)', type: 'Civil', contractor: '坪倉' },
+  { id: 9, code: '20250005', name: '県道大山寺岸本線(小林工区) 電線共同溝設置工事(2工区)(補助)', type: 'Civil', contractor: '西本' },
+  { id: 10, code: '20250005', name: '佐陀川砂防堰堤(K1)工事(9工区) (補助)(国補正)', type: 'River', contractor: '菊川' },
+  { id: 11, code: '20250005', name: '奥山川砂防堰堤工事(4工区) (交付金)(国補正)', type: 'River', contractor: '内田' },
+  { id: 12, code: '20250005', name: '鍵掛峠道路新屋地区 第13改良工事', type: 'Road', contractor: '池岡' },
 ]
 
-// ── Badge color per type ──────────────────────────────────────────────────
 const typeBadge = {
-  '法面': 'bg-green-100 text-green-700',
-  '橋梁': 'bg-blue-100 text-blue-700',
-  '港':   'bg-cyan-100 text-cyan-700',
-  '砂防': 'bg-amber-100 text-amber-700',
-  '道路': 'bg-purple-100 text-purple-700',
+  Civil: 'bg-green-100 text-green-700',
+  Road: 'bg-blue-100 text-blue-700',
+  Slope: 'bg-cyan-100 text-cyan-700',
+  River: 'bg-amber-100 text-amber-700',
 }
 
-// ── Filter / search ───────────────────────────────────────────────────────
 const query = ref('')
 const filtered = computed(() => {
   const q = query.value.trim().toLowerCase()
@@ -46,7 +42,7 @@ const filtered = computed(() => {
 })
 
 function goToDetail(id) {
-  router.push(`/inspection/${id}`)
+  router.push(`/home/inspection/${id}`)
 }
 </script>
 
@@ -79,7 +75,7 @@ function goToDetail(id) {
         <input
             v-model="query"
             type="text"
-            placeholder="工事名・コード・担当者で検索..."
+            placeholder="工事名・コード・担当者で検査"
             class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all"
         />
       </div>
@@ -107,7 +103,7 @@ function goToDetail(id) {
               </span>
             </div>
             <p class="text-sm font-semibold text-gray-800 leading-snug truncate">{{ c.name }}</p>
-            <p class="text-xs text-gray-500 mt-1">担当者: {{ c.contractor }}</p>
+            <p class="text-xs text-gray-500 mt-1">担当者{{ c.contractor }}</p>
           </div>
 
           <!-- Arrow -->
@@ -121,7 +117,7 @@ function goToDetail(id) {
           <svg class="w-12 h-12 mx-auto mb-3 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
           </svg>
-          <p class="text-sm">該当する工事が見つかりません</p>
+          <p class="text-sm">Empty</p>
         </div>
       </div>
 
@@ -130,3 +126,7 @@ function goToDetail(id) {
 
   <BaseFooterHome/>
 </template>
+
+
+
+

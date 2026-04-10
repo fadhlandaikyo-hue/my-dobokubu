@@ -1,17 +1,32 @@
-import Swal from "sweetalert2";
+﻿import Swal from "sweetalert2";
 
 export const alertSuccess = async (message) => {
     return Swal.fire({
         icon: 'success',
-        title: "成功",
+        title: "success",
         text: message,
     })
 }
 
-export const alertError = async () => {
+export const alertError = async (message) => {
     return Swal.fire({
         icon: 'error',
-        title: "一回を確認してください",
-        text: "ユーザー名もしくはパスワードが正しくありません",
+        title: "ups",
+        text: message,
     })
+}
+
+export const alertConfirm = async (message) => {
+    const result = await Swal.fire({
+        icon: 'question',
+        title: "Confirm",
+        text: message,
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+    })
+
+    return result.isConfirmed;
 }

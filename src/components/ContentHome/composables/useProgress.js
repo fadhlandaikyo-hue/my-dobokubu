@@ -1,4 +1,4 @@
-// src/composables/useProgress.js
+﻿// src/composables/useProgress.js
 // Handles drag interaction for the progress bar
 
 export function useProgressDrag() {
@@ -6,7 +6,7 @@ export function useProgressDrag() {
     let trackElement = null
 
     /**
-     * Calculate progress (0–100) from a clientX position
+     * Calculate progress (0窶・00) from a clientX position
      * relative to the track element's bounding rect.
      */
     function calcProgress(clientX) {
@@ -55,3 +55,4 @@ export function useProgressDrag() {
 
     return { startDrag }
 }
+

@@ -32,13 +32,13 @@ import BaseButtonBack from "../Utilities/UtilitiesHome/ButtonBack.vue";
           <BaseButtonBack/>
           <div class="text-center max-w-2xl mx-auto mb-8">
             <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">讖滓｢ｰ蜷阪→邂｡逅・分蜿ｷ</h1>
-            <p class="mt-3 text-lg text-gray-500">螟ｧ蜊皮ｵ・・讖滓攝邂｡逅・♀繧医・讖滓攝逡ｪ蜿ｷ邂｡逅・/p>
+            <p class="mt-3 text-lg text-gray-500">螟ｧ蜊皮ｵ・・讖滓攝邂｡逅・♀繧医・讖滓攝逡ｪ蜿ｷ邂｡逅・</p>
           </div>
 
           <div class="flex justify-center space-x-2">
             <span class="px-4 py-2 rounded-full bg-blue-100 text-blue-800 text-sm font-semibold cursor-pointer border border-blue-200">騾ｲ陦御ｸｭ</span>
-            <span class="px-4 py-2 rounded-full bg-white text-gray-600 text-sm font-medium hover:bg-gray-50 cursor-pointer border border-gray-200 transition">轤ｹ讀・/span>
-            <span class="px-4 py-2 rounded-full bg-white text-gray-600 text-sm font-medium hover:bg-gray-50 cursor-pointer border border-gray-200 transition">菫ｮ逅・/span>
+            <span class="px-4 py-2 rounded-full bg-white text-gray-600 text-sm font-medium hover:bg-gray-50 cursor-pointer border border-gray-200 transition">轤ｹ讀・</span>
+            <span class="px-4 py-2 rounded-full bg-white text-gray-600 text-sm font-medium hover:bg-gray-50 cursor-pointer border border-gray-200 transition">菫ｮ逅・</span>
           </div>
         </div>
       </div>
@@ -59,18 +59,18 @@ import BaseButtonBack from "../Utilities/UtilitiesHome/ButtonBack.vue";
               <div class="p-5">
                 <div class="flex justify-between items-start mb-2">
                   <div>
-                    <h3 class="text-lg font-bold text-gray-900">驟ｸ邏豼・ｺｦ險・/h3>
-                    <p class="text-xs text-gray-500 font-mono">逡ｪ蜿ｷ: 驟ｸ邏豼・ｺｦ險・/p>
+                    <h3 class="text-lg font-bold text-gray-900">驟ｸ邏豼・ｺｦ險・</h3>
+                    <p class="text-xs text-gray-500 font-mono">逡ｪ蜿ｷ: 驟ｸ邏豼・ｺｦ險・</p>
                   </div>
                 </div>
 
                 <div class="mt-4 space-y-2">
                   <div class="flex justify-between text-sm border-b border-gray-100 pb-2">
                     <span class="text-gray-500">迴ｾ蝨ｨ蝨ｰ</span>
-                    <span class="font-medium text-gray-900">霆雁ｰｾ譫晉ｷ・/span>
+                    <span class="font-medium text-gray-900">霆雁ｰｾ譫晉ｷ・</span>
                   </div>
                   <div class="flex justify-between text-sm border-b border-gray-100 pb-2">
-                    <span class="text-gray-500">邂｡逅・・/span>
+                    <span class="text-gray-500">邂｡逅・・</span>
                     <span class="font-medium text-gray-900">繝輔ぃ繝峨Λ繝ｳ</span>
                   </div>
                   <div class="flex justify-between text-sm pt-1">
@@ -105,7 +105,7 @@ import BaseButtonBack from "../Utilities/UtilitiesHome/ButtonBack.vue";
                     <span class="font-medium text-gray-900">荳蛾Κ豕暮擇蟾･蛹ｺ</span>
                   </div>
                   <div class="flex justify-between text-sm border-b border-gray-100 pb-2">
-                    <span class="text-gray-500">邂｡逅・・/span>
+                    <span class="text-gray-500">邂｡逅・・</span>
                     <span class="font-medium text-gray-900">繝輔ぃ繝峨Λ繝ｳ</span>
                   </div>
                   <div class="flex justify-between text-sm pt-1">
@@ -138,10 +138,10 @@ import BaseButtonBack from "../Utilities/UtilitiesHome/ButtonBack.vue";
                 <div class="mt-4 space-y-2">
                   <div class="flex justify-between text-sm border-b border-gray-100 pb-2">
                     <span class="text-gray-500">迴ｾ蝨ｨ蝨ｰ</span>
-                    <span class="font-medium text-gray-900">骰ｵ謗幃％霍ｯ譌･蜊・/span>
+                    <span class="font-medium text-gray-900">骰ｵ謗幃％霍ｯ譌･蜊・</span>
                   </div>
                   <div class="flex justify-between text-sm border-b border-gray-100 pb-2">
-                    <span class="text-gray-500">邂｡逅・・/span>
+                    <span class="text-gray-500">邂｡逅・・</span>
                     <span class="font-medium text-red-600">繝輔ぃ繝峨Λ繝ｳ</span>
                   </div>
                   <div class="flex justify-between text-sm pt-1">
@@ -173,10 +173,10 @@ import BaseButtonBack from "../Utilities/UtilitiesHome/ButtonBack.vue";
                 <div class="mt-4 space-y-2">
                   <div class="flex justify-between text-sm border-b border-gray-100 pb-2">
                     <span class="text-gray-500">迴ｾ蝨ｨ蝨ｰ</span>
-                    <span class="font-medium text-gray-900">邀ｳ蟄先ｸｯ騾謌・/span>
+                    <span class="font-medium text-gray-900">邀ｳ蟄先ｸｯ騾謌・</span>
                   </div>
                   <div class="flex justify-between text-sm border-b border-gray-100 pb-2">
-                    <span class="text-gray-500">邂｡逅・・/span>
+                    <span class="text-gray-500">邂｡逅・・</span>
                     <span class="font-medium text-gray-900">繝輔ぃ繝峨Λ繝ｳ</span>
                   </div>
                   <div class="flex justify-between text-sm pt-1">
@@ -210,7 +210,7 @@ import BaseButtonBack from "../Utilities/UtilitiesHome/ButtonBack.vue";
                     <span class="font-medium text-gray-900">螂･螻ｱ遐る亟3蟾･蛹ｺ</span>
                   </div>
                   <div class="flex justify-between text-sm border-b border-gray-100 pb-2">
-                    <span class="text-gray-500">邂｡逅・・/span>
+                    <span class="text-gray-500">邂｡逅・・</span>
                     <span class="font-medium text-gray-900">繝輔ぃ繝峨Λ繝ｳ</span>
                   </div>
                   <div class="flex justify-between text-sm pt-1">
@@ -245,7 +245,7 @@ import BaseButtonBack from "../Utilities/UtilitiesHome/ButtonBack.vue";
                     <span class="font-medium text-gray-900">螂･髯ｰ逕ｰ豕暮擇</span>
                   </div>
                   <div class="flex justify-between text-sm border-b border-gray-100 pb-2">
-                    <span class="text-gray-500">邂｡逅・・/span>
+                    <span class="text-gray-500">邂｡逅・・</span>
                     <span class="font-medium text-gray-900">繝輔ぃ繝峨Λ繝ｳ</span>
                   </div>
                   <div class="flex justify-between text-sm pt-1">
@@ -268,3 +268,7 @@ import BaseButtonBack from "../Utilities/UtilitiesHome/ButtonBack.vue";
 <style scoped>
 
 </style>
+
+
+
+

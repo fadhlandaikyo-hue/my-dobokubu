@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { ref, onMounted, onUnmounted } from "vue"
 import BaseSidebar from "../UserComponents/SidebarUser.vue";
 
@@ -9,13 +9,13 @@ let timer = null
 const updateTime = () => {
   const now = new Date()
 
-  const date = now.toLocaleDateString("jp-JP", {
+  const date = now.toLocaleDateString("en-US", {
     day: "2-digit",
     month: "long",
     year: "numeric"
   })
 
-  const time = now.toLocaleTimeString("jp-JP")
+  const time = now.toLocaleTimeString("en-US")
 
   dateTime.value = `${date} - ${time}`
 }
@@ -37,8 +37,8 @@ onUnmounted(() => {
 
       <div class="mb-8 flex justify-between items-center">
         <div>
-          <h1 class="text-3xl font-bold text-gray-900">こんにちはファドラン</h1>
-          <p class="text-gray-500 mt-1">本日のプロジェクト活動の概要は以下のとおりです</p>
+          <h1 class="text-3xl font-bold text-gray-900">Welcome to the Civil Engineering Dashboard</h1>
+          <p class="text-gray-500 mt-1">Track daily site activities, inspections, and construction progress in one place.</p>
         </div>
         <div class="hidden sm:block px-4 py-2 bg-white rounded-lg shadow-sm text-sm font-medium text-gray-600 border border-gray-200">
           {{dateTime}}
@@ -51,32 +51,31 @@ onUnmounted(() => {
         <div class="flex justify-between items-start mb-6">
           <h2 class="text-xl font-bold text-gray-800 flex items-center">
             <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-            案内板と重要事項
+            Field Notes and Engineering Updates
           </h2>
-          <span class="bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded border border-blue-100">最新のアップデート</span>
+          <span class="bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded border border-blue-100">Latest Briefing</span>
         </div>
 
         <div class="space-y-4">
           <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition">
             <span class="flex-shrink-0 w-2 h-2 mt-2 bg-red-500 rounded-full mr-4"></span>
             <div>
-              <p class="text-sm font-semibold text-gray-900">毎週の会議</p>
-              <p class="text-sm text-gray-600 mt-1">会議はメイン会議室にて14:00に再予定されています。各現場監督は事故報告書を持参のうえ、必ずご出席ください</p>
+              <p class="text-sm font-semibold text-gray-900">Safety Coordination Meeting</p>
+              <p class="text-sm text-gray-600 mt-1">Daily toolbox talk starts at 14:00 with all site teams. Focus areas are heavy equipment movement, pedestrian routing, and weather-related risk controls.</p>
             </div>
           </div>
           <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition">
             <span class="flex-shrink-0 w-2 h-2 mt-2 bg-yellow-500 rounded-full mr-4"></span>
             <div>
-              <p class="text-sm font-semibold text-gray-900">鋼材物流の遅延</p>
-              <p class="text-sm text-gray-600 mt-1">ゾーンB向けの鋼材の搬入が港で滞っています。到着は明日の朝を予定しています。
-                本日はチームをゾーンAのコンクリート打設作業へ振り替えてください</p>
+              <p class="text-sm font-semibold text-gray-900">Bridge Deck Concrete Placement</p>
+              <p class="text-sm text-gray-600 mt-1">Zone B casting reached target volume and passed slump checks. Zone A rebar alignment correction is scheduled before the next pour cycle.</p>
             </div>
           </div>
           <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition">
             <span class="flex-shrink-0 w-2 h-2 mt-2 bg-green-500 rounded-full mr-4"></span>
             <div>
-              <p class="text-sm font-semibold text-gray-900">重機メンテナンス完了</p>
-              <p class="text-sm text-gray-600 mt-1">クレーン02号機の整備が完了し、本日より通常稼働可能となりました</p>
+              <p class="text-sm font-semibold text-gray-900">Equipment Maintenance Completed</p>
+              <p class="text-sm text-gray-600 mt-1">Crane 02 routine maintenance is complete and operational checks are approved. The unit is now cleared for normal lifting operations.</p>
             </div>
           </div>
         </div>
@@ -87,10 +86,10 @@ onUnmounted(() => {
         <a id="slider-link" href="#" class="block w-full h-full relative cursor-pointer">
           <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition duration-300 z-10 flex items-end p-8">
             <div>
-              <span class="bg-blue-600 text-white px-3 py-1 rounded text-xs font-bold uppercase tracking-wide mb-2 inline-block">注目プロジェクト</span>
-              <h3 id="slider-title" class="text-2xl font-bold text-white drop-shadow-md">作業ホワイトボード</h3>
+              <span class="bg-blue-600 text-white px-3 py-1 rounded text-xs font-bold uppercase tracking-wide mb-2 inline-block">Featured Project Update</span>
+              <h3 id="slider-title" class="text-2xl font-bold text-white drop-shadow-md">Takata Zone Earthwork Progress</h3>
               <p class="text-white text-sm mt-1 opacity-90 flex items-center">
-                詳しくクリックしてください
+                Open full report and current site visuals
                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
               </p>
             </div>
@@ -117,3 +116,4 @@ onUnmounted(() => {
 <style scoped>
 
 </style>
+

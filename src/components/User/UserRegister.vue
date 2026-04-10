@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import {useRouter} from "vue-router";
 import {reactive} from "vue";
 import {alertError, alertSuccess} from "../../lib/alert.js";
@@ -10,26 +10,30 @@ const user = reactive({
   password: "",
   confirm_password: "",
   name: "",
-  role: "",
+  role: "Manager",
 })
 
 async function handleSubmit() {
   if (user.password !== user.confirm_password) {
-    await alertError("パスワード間違えて")
+    await alertError("Passwords do not match.")
     return;
   }
 
-  const response = await userRegister(user)
-  const responseBody = await response.json()
-  console.log(responseBody)
+  try {
+    const response = await userRegister(user)
+    const responseBody = await response.json().catch(() => ({}))
+    console.log(responseBody)
 
-  if (response.status === 200) {
-    await alertSuccess("ユーザー作成できた")
-    await router.push({
-      path: "/login"
-    })
-  } else {
-    await alertError(responseBody.errors)
+    if (response.status === 200) {
+      await alertSuccess("User registered successfully.")
+      await router.push({
+        path: "/login"
+      })
+    } else {
+      await alertError(responseBody.errors || "登録に失敗しました。")
+    }
+  } catch (e) {
+    await alertError("APIに接続できません。バックエンドを確認してください。")
   }
 }
 
@@ -98,10 +102,10 @@ async function handleSubmit() {
         </label>
         <select id="work-position" name="work-position" required v-model="user.role"
                 class="block w-full bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2.5">
-          <option value="管理">管理</option>
-          <option value="事務員">事務員</option>
-          <option value="部長">部長</option>
-          <option value="課長">課長</option>
+          <option value="Manager">管理</option>
+          <option value="Foreman">事務員</option>
+          <option value="Supervisor">部長</option>
+          <option value="Inspector">課長</option>
         </select>
       </div>
 
@@ -117,7 +121,7 @@ async function handleSubmit() {
           アカウントをお持ちの場合
           <RouterLink to="/login"
                       class="font-medium text-blue-600 hover:text-blue-500 hover:underline transition duration-150">
-            こちにログイン
+            こちらログイン
           </RouterLink>
         </p>
       </div>

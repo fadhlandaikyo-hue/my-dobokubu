@@ -1,9 +1,9 @@
-/* ─────────────────────────────────────────────────────────────
+﻿/* 笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏
    constructiondetail.css
    Styles untuk halaman detail konstruksi & image carousel
-   ───────────────────────────────────────────────────────────── */
+   笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏 */
 
-/* ── Carousel wrapper ───────────────────────────────────────── */
+/* 笏笏 Carousel wrapper 笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏 */
 .carousel-wrapper {
     position: relative;
     width: 100%;
@@ -11,7 +11,7 @@
     overflow: hidden;
 }
 
-/* ── Scroll track ───────────────────────────────────────────── */
+/* 笏笏 Scroll track 笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏 */
 .carousel-track {
     display: flex;
     overflow-x: auto;
@@ -24,7 +24,7 @@
     display: none;                  /* Chrome / Safari */
 }
 
-/* ── Setiap slide ───────────────────────────────────────────── */
+/* 笏笏 Setiap slide 笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏 */
 .carousel-slide {
     flex-shrink: 0;
     width: 100%;
@@ -32,7 +32,7 @@
     position: relative;
 }
 
-/* ── Gambar: tampil penuh tanpa crop ────────────────────────── */
+/* 笏笏 Gambar: tampil penuh tanpa crop 笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏 */
 .carousel-img {
     display: block;
     width: 100%;
@@ -40,7 +40,7 @@
     object-fit: contain;
 }
 
-/* ── Gradient overlay bawah (baca teks) ─────────────────────── */
+/* 笏笏 Gradient overlay bawah (baca teks) 笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏 */
 .carousel-overlay {
     position: absolute;
     inset: 0;
@@ -52,7 +52,7 @@
     pointer-events: none;
 }
 
-/* ── Title bar (absolut di atas semua slide) ─────────────────── */
+/* 笏笏 Title bar (absolut di atas semua slide) 笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏 */
 .carousel-title-bar {
     position: absolute;
     bottom: 0;
@@ -66,7 +66,7 @@
     margin-right: auto;
 }
 
-/* ── Arrow buttons ───────────────────────────────────────────── */
+/* 笏笏 Arrow buttons 笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏 */
 .carousel-arrow {
     position: absolute;
     top: 50%;
@@ -98,7 +98,7 @@
 .carousel-arrow--prev { left: 0.75rem; }
 .carousel-arrow--next { right: 0.75rem; }
 
-/* ── Dots & counter bar ──────────────────────────────────────── */
+/* 笏笏 Dots & counter bar 笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏 */
 .carousel-bottom-bar {
     position: absolute;
     bottom: 0.75rem;
@@ -163,7 +163,7 @@
     color: #1d4ed8;
 }
 
-/* ── Modal transitions ───────────────────────────────────────── */
+/* 笏笏 Modal transitions 笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏 */
 .modal-enter-active,
 .modal-leave-active {
     transition: opacity 200ms ease;
@@ -188,7 +188,7 @@
     opacity: 0;
 }
 
-/* ── Fade (notifikasi sukses & error) ────────────────────────── */
+/* 笏笏 Fade (notifikasi sukses & error) 笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏 */
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 250ms ease, transform 250ms ease;
@@ -200,7 +200,7 @@
     transform: translateY(-4px);
 }
 
-/* ── Shake (password salah) ──────────────────────────────────── */
+/* 笏笏 Shake (password salah) 笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏 */
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
     20%       { transform: translateX(-8px); }
@@ -212,3 +212,4 @@
 .shake {
     animation: shake 0.45s ease;
 }
+

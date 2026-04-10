@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import {useRouter} from "vue-router";
 import {useLocalStorage} from "@vueuse/core";
 import {reactive} from "vue";
@@ -13,17 +13,21 @@ const user = reactive({
 })
 
 async function handleSubmit() {
-  const response = await userLogin(user);
-  const responseBody = await response.json();
-  console.log(responseBody);
+  try {
+    const response = await userLogin(user);
+    const responseBody = await response.json().catch(() => ({}));
+    console.log(responseBody);
 
-  if (response.status === 200) {
-    token.value = responseBody.data.token;
-    await router.push({
-      path: "/dashboard"
-    })
-  } else {
-    await alertError(responseBody.errors)
+    if (response.status === 200 && responseBody?.data?.token) {
+      token.value = responseBody.data.token;
+      await router.push({
+        path: "/dashboard"
+      })
+    } else {
+      await alertError(responseBody.errors || "ログインに失敗しました")
+    }
+  } catch (e) {
+    await alertError("APIに接続できません。バックエンドを確認してください。")
   }
 }
 </script>
@@ -88,7 +92,7 @@ async function handleSubmit() {
         <div>
           <button type="submit"
                   class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out shadow-md hover:shadow-lg">
-            ログイン
+           ログイン
           </button>
         </div>
       </form>

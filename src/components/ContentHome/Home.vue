@@ -40,7 +40,7 @@ import BaseSlideImage from "./SlideImage.vue";
       </div>
       <div class="-mt-12 p-12 lg:col-start-2 lg:row-start-1">
         <div class="grid grid-flow-col grid-rows-2 gap-4 lg:grid-cols-3">
-          <RouterLink to="/construction">
+          <RouterLink to="/home/construction">
             <div class="p-8 bg-transparent border border-gray-300 hover:shadow-xl transition-all duration-300 h-full flex flex-col">
               <div class="p-2 w-12 h-10">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
@@ -55,7 +55,7 @@ import BaseSlideImage from "./SlideImage.vue";
             </div>
           </RouterLink>
 
-          <RouterLink to="/inspection">
+          <RouterLink to="/home/inspection">
             <div class="p-8 bg-transparent border border-gray-300 hover:shadow-xl transition-all duration-300 h-full flex flex-col">
               <div class="p-2 w-12 h-10">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
@@ -70,7 +70,7 @@ import BaseSlideImage from "./SlideImage.vue";
             </div>
           </RouterLink>
 
-          <RouterLink to="/equipment">
+          <RouterLink to="/home/equipment">
             <div class="p-8 bg-transparent border border-gray-300 hover:shadow-xl transition-all duration-300 h-full flex flex-col">
               <div class="p-2 w-12 h-10">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
@@ -91,7 +91,7 @@ import BaseSlideImage from "./SlideImage.vue";
             </div>
           </RouterLink>
 
-          <RouterLink to="/vehicle">
+          <RouterLink to="/home/vehicle">
             <div class="p-8 bg-transparent border border-gray-300 hover:shadow-xl transition-all duration-300 h-full flex flex-col">
               <div class="p-2 w-12 h-10">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
@@ -117,5 +117,7 @@ import BaseSlideImage from "./SlideImage.vue";
 
 
 </style>
+
+
 
 

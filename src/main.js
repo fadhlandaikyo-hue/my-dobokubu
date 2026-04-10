@@ -1,7 +1,6 @@
 ﻿import { createApp } from 'vue'
 import App from './App.vue'
 import {createRouter, createWebHistory} from "vue-router";
-import Layout from "./components/Layout.vue";
 import UserRegister from "./components/User/UserRegister.vue";
 import UserLogin from "./components/User/UserLogin.vue";
 import ConstructionUser from "./components/ContentUser/ConstructionUser.vue";
@@ -43,105 +42,76 @@ const router = createRouter({
     },
     routes: [
         {
-            path: "/home",
-            redirect: "/",
-        },
-        {
-            path: "/home/construction",
-            redirect: "/construction",
-        },
-        {
-            path: "/home/construction/:id",
-            redirect: "/construction/:id",
-        },
-        {
-            path: "/home/inspection",
-            redirect: "/inspection",
-        },
-        {
-            path: "/home/inspection/:id",
-            redirect: "/inspection/:id",
-        },
-        {
-            path: "/home/equipment",
-            redirect: "/equipment",
-        },
-        {
-            path: "/home/vehicle",
-            redirect: "/vehicle",
-        },
-        {
             component: Example,
             path: "/example",
         },
 
+        // Page for Users
         {
-            component: Layout,
-            children: [
-                // Page for Users
-                {
-                    path: "/register",
-                    component: UserRegister
-                },
-                {
-                    path: "/login",
-                    component: UserLogin
-                },
-                {
-                    path: "/register-copy",
-                    component: UserRegisterCopy
-                },
-                {
-                    component: Dashboard,
-                    path: "/dashboard",
-                    meta: {requiresAuth: true}
-                },
-                {
-                    component: UserProfile,
-                    path: "/dashboard/profile",
-                    meta: {requiresAuth: true}
-                },
-                {
-                    component: ConstructionUser,
-                    path: "/dashboard/construction",
-                    meta: {requiresAuth: true}
-                },
-                {
-                    component: Member,
-                    path: "/dashboard/member",
-                    meta: {requiresAuth: true}
-                },
+            path: "/register",
+            component: UserRegister
+        },
+        {
+            path: "/login",
+            component: UserLogin
+        },
+        {
+            path: "/register-copy",
+            component: UserRegisterCopy
+        },
+        {
+            component: Dashboard,
+            path: "/dashboard",
+            meta: {requiresAuth: true}
+        },
+        {
+            component: UserProfile,
+            path: "/dashboard/profile",
+            meta: {requiresAuth: true}
+        },
+        {
+            component: ConstructionUser,
+            path: "/dashboard/construction",
+            meta: {requiresAuth: true}
+        },
+        {
+            component: Member,
+            path: "/dashboard/member",
+            meta: {requiresAuth: true}
+        },
 
-                // Page for Public
-                {
-                    component: Home,
-                    path: "/",
-                },
-                {
-                    component: ConstructionList,
-                    path: "/construction",
-                },
-                {
-                    component: ConstructionDetail,
-                    path: "/construction/:id",
-                },
-                {
-                    component: InspectionList,
-                    path: "/inspection",
-                },
-                {
-                    component: InspectionDetail,
-                    path: "/inspection/:id",
-                },
-                {
-                    component: EquipmentList,
-                    path: "/equipment",
-                },
-                {
-                    component: VehicleList,
-                    path: "/vehicle",
-                },
-            ]
+        // Page for Public
+        {
+            component: Home,
+            path: "/",
+        },
+        {
+            path: "/home",
+            redirect: "/",
+        },
+        {
+            component: ConstructionList,
+            path: "/home/construction",
+        },
+        {
+            component: ConstructionDetail,
+            path: "/home/construction/:id",
+        },
+        {
+            component: InspectionList,
+            path: "/home/inspection",
+        },
+        {
+            component: InspectionDetail,
+            path: "/home/inspection/:id",
+        },
+        {
+            component: EquipmentList,
+            path: "/home/equipment",
+        },
+        {
+            component: VehicleList,
+            path: "/home/vehicle",
         },
 
         {
@@ -184,3 +154,4 @@ app.component('BaseButtonBackConstruction', ButtonBackConstruction)
 app.component('BaseButtonBackInspection', ButtonBackInspection)
 
 app.use(router).mount('#app')
+

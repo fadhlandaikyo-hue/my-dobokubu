@@ -1,4 +1,4 @@
-// src/composables/useLocalStorage.js
+﻿// src/composables/useLocalStorage.js
 // Menyimpan dan memuat progress dari localStorage.
 
 const STORAGE_KEY = 'construction_progress'
@@ -20,7 +20,7 @@ export function useLocalStorage() {
     /**
      * Menyimpan progress satu proyek ke localStorage.
      * @param {number|string} id       - ID proyek
-     * @param {number}        progress - Nilai progress 0–100
+     * @param {number}        progress - Nilai progress 0窶・00
      */
     function saveOne(id, progress) {
         const all = loadAll()

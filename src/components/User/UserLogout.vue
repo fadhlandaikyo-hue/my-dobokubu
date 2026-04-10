@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import {useLocalStorage} from "@vueuse/core";
 import {useRouter} from "vue-router";
 import {userLogout} from "../../lib/api/UserApi.js";
@@ -16,7 +16,7 @@ async function handleLogout(){
   if(response.status === 200){
     token.value = "";
     await router.push({
-      path: "/"
+      path: "/home"
     })
   } else {
     await alertError(responseBody.errors)
@@ -35,3 +35,5 @@ onBeforeMount(async () => {
 <style scoped>
 
 </style>
+
+

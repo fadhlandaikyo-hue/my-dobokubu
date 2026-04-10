@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import {useLocalStorage} from "@vueuse/core";
 import {onBeforeMount, ref} from "vue";
 import {
@@ -62,7 +62,7 @@ async function handleChangeName() {
   console.log(responseBody);
 
   if (response.status === 200) {
-    await alertSuccess("プロフィールが更新されました！");
+    await alertSuccess("Profile updated successfully.");
   } else {
     await alertError(responseBody.errors)
   }
@@ -71,7 +71,7 @@ async function handleChangeName() {
 
 async function handleChangePassword() {
   if (password.value !== confirm_password.value) {
-    await alertError("パスワードが一致しません");
+    await alertError("繝代せ繝ｯ繝ｼ繝峨′荳閾ｴ縺励∪縺帙ｓ");
     return;
   }
 
@@ -82,7 +82,7 @@ async function handleChangePassword() {
   if (response.status === 200) {
     password.value = "";
     confirm_password.value = "";
-    await alertSuccess("パスワードが更新されました！");
+    await alertSuccess("Password updated successfully.");
   } else {
     await alertError(responseBody.errors)
   }
@@ -110,8 +110,8 @@ onBeforeMount(async () => {
           </svg>
         </RouterLink>
         <div>
-          <h1 class="text-2xl font-bold text-gray-900">設定</h1>
-          <p class="text-gray-500 text-sm">プロフィールとセキュリティを管理</p>
+          <h1 class="text-2xl font-bold text-gray-900">Settings</h1>
+          <p class="text-gray-500 text-sm">Manage your profile and security settings</p>
         </div>
       </div>
 
@@ -119,8 +119,8 @@ onBeforeMount(async () => {
 
         <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
           <div class="p-6 border-b border-gray-100 bg-gray-50">
-            <h2 class="text-lg font-semibold text-gray-800">ユーザー編集</h2>
-            <p class="text-xs text-gray-500">本情報は他のメンバーが閲覧可能です</p>
+            <h2 class="text-lg font-semibold text-gray-800">User Profile</h2>
+            <p class="text-xs text-gray-500">Basic information visible to account administrators</p>
           </div>
 
           <div class="p-6">
@@ -132,7 +132,7 @@ onBeforeMount(async () => {
                        src="/img/profile.png" alt="Current profile photo">
                   <button type="button"
                           class="absolute bottom-0 right-0 bg-blue-600 text-white rounded-full p-1.5 hover:bg-blue-700 border-2 border-white shadow-sm"
-                          title="Ganti Foto">
+                          title="Change Photo">
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
@@ -142,30 +142,30 @@ onBeforeMount(async () => {
                   </button>
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700">写真</label>
+                  <label class="block text-sm font-medium text-gray-700">Photo</label>
                   <div class="mt-1 flex items-center space-x-3">
                     <button type="button"
                             class="bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
-                      変更
+                      Upload
                     </button>
-                    <button type="button" class="text-sm text-red-600 hover:text-red-800 font-medium">削除</button>
+                    <button type="button" class="text-sm text-red-600 hover:text-red-800 font-medium">Remove</button>
                   </div>
                 </div>
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label for="username" class="block text-sm font-medium text-gray-700">ユーザー名</label>
+                  <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
                   <div class="mt-1">
                     <input type="text" name="username" id="username"
                            class="block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border p-2.5 bg-gray-50"
                            readonly v-model="userName">
-                    <p class="mt-1 text-xs text-gray-400">ユーザー名は変更できません</p>
+                    <p class="mt-1 text-xs text-gray-400">Username cannot be changed</p>
                   </div>
                 </div>
 
                 <div>
-                  <label for="name" class="block text-sm font-medium text-gray-700">お名前</label>
+                  <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
                   <div class="mt-1">
                     <input type="text" name="name" id="name"
                            class="block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border p-2.5"
@@ -174,7 +174,7 @@ onBeforeMount(async () => {
                 </div>
 
                 <div>
-                  <label for="email" class="block text-sm font-medium text-gray-700">メールアドレス</label>
+                  <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
                   <div class="mt-1">
                     <input type="email" name="email" id="email" value="admin@konstruksitrack.id"
                            class="block w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border p-2.5">
@@ -182,14 +182,14 @@ onBeforeMount(async () => {
                 </div>
 
                 <div>
-                  <label for="role" class="block text-sm font-medium text-gray-700">役職</label>
+                  <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
                   <div class="mt-1">
                     <select v-model="role"
                             class="block w-full bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2.5">
-                      <option value="管理">管理</option>
-                      <option value="事務員">事務員</option>
-                      <option value="部長">部長</option>
-                      <option value="課長">課長</option>
+                      <option value="Manager">Manager</option>
+                      <option value="Foreman">Foreman</option>
+                      <option value="Supervisor">Supervisor</option>
+                      <option value="Inspector">Inspector</option>
                     </select>
                   </div>
                 </div>
@@ -198,7 +198,7 @@ onBeforeMount(async () => {
               <div class="flex justify-end pt-4">
                 <button type="submit"
                         class="bg-blue-600 border border-transparent rounded-lg shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">
-                  保存
+                  Save Changes
                 </button>
               </div>
             </form>
@@ -207,40 +207,40 @@ onBeforeMount(async () => {
 
         <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
           <div class="p-6 border-b border-gray-100 bg-gray-50">
-            <h2 class="text-lg font-semibold text-gray-800">パスワード変更</h2>
-            <p class="text-xs text-gray-500">強力で安全なパスワードを使用してください</p>
+            <h2 class="text-lg font-semibold text-gray-800">Change Password</h2>
+            <p class="text-xs text-gray-500">Use a strong password to keep your account secure</p>
           </div>
 
           <div class="p-6">
             <form class="space-y-5 max-w-2xl" v-on:submit.prevent="handleChangePassword">
 
               <div>
-                <label for="new_password" class="block text-sm font-medium text-gray-700">新しいパスワード</label>
+                <label for="new_password" class="block text-sm font-medium text-gray-700">New Password</label>
                 <div class="mt-1 relative rounded-md shadow-sm">
                   <input type="password" name="new_password" id="new_password"
                          class="block w-full border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm border p-2.5"
-                         placeholder="新しいパスワード入力してください" v-model="password">
+                         placeholder="Enter new password" v-model="password">
                 </div>
               </div>
 
               <div>
                 <label for="confirm_password"
-                       class="block text-sm font-medium text-gray-700">新しいパスワード確認してください</label>
+                       class="block text-sm font-medium text-gray-700">Confirm New Password</label>
                 <div class="mt-1 relative rounded-md shadow-sm">
                   <input type="password" name="confirm_password" id="confirm_password"
                          class="block w-full border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm border p-2.5"
-                         placeholder="もう一回新しいパスワード確認してください" v-model="confirm_password">
+                         placeholder="Re-enter new password" v-model="confirm_password">
                 </div>
               </div>
 
               <div class="flex justify-end pt-4">
                 <button type="button"
                         class="bg-white border border-gray-300 rounded-lg shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none mr-3">
-                  キャンセル
+                  Cancel
                 </button>
                 <button type="submit"
                         class="bg-blue-600 border border-transparent rounded-lg shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">
-                  パスワードを更新する
+                  Update Password
                 </button>
               </div>
 
@@ -262,3 +262,5 @@ onBeforeMount(async () => {
 <style scoped>
 
 </style>
+
+

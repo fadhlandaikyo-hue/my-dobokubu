@@ -1,13 +1,13 @@
-<script setup>
+﻿<script setup>
 import { useProgressColor } from "../ContentHome/composables/useProgressColor.js"
 
-// defineModel → menerima angka progress langsung via v-model
+// defineModel 竊・menerima angka progress langsung via v-model
 // Tidak perlu prop 'project' sama sekali
 const progress = defineModel({ type: Number, required: true })
 
 const { progressColor } = useProgressColor()
 
-// ── Drag logic (langsung di sini, tidak butuh composable terpisah) ──
+// 笏笏 Drag logic (langsung di sini, tidak butuh composable terpisah) 笏笏
 let trackEl = null
 
 function calcProgress(clientX) {
@@ -64,3 +64,4 @@ function startDrag(event) {
 </template>
 
 <style scoped></style>
+

@@ -1,9 +1,9 @@
-<script setup>
+﻿<script setup>
 const legend = [
-  { color: '#3b82f6', label: '進行中 (51–100%)' },
-  { color: '#facc15', label: '序盤 (26–50%)'    },
-  { color: '#fb923c', label: '早期 (11–25%)'    },
-  { color: '#f87171', label: '開始 (0–10%)'     },
+  { color: '#3b82f6', label: '騾ｲ陦御ｸｭ (51窶・00%)' },
+  { color: '#facc15', label: '蠎冗乢 (26窶・0%)'    },
+  { color: '#fb923c', label: '譌ｩ譛・(11窶・5%)'    },
+  { color: '#f87171', label: '髢句ｧ・(0窶・0%)'     },
 ]
 </script>
 

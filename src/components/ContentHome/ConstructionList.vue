@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import { ref, computed, shallowRef } from "vue"
 import BaseNavbarHome from "../HomeComponents/NavbarHome.vue"
 import BaseFooterHome from "../HomeComponents/FooterHome.vue"
@@ -13,18 +13,18 @@ const { saveOne, getOne } = useLocalStorage()
 const { progressColor, statusLabel, badgeColor } = useProgressColor()
 
 const projectsRaw = [
-  { id: 1, name: '美保(5)格納庫等新設舗装工事',     code: '20250009', defaultProgress: 75,  completionDate: '2026年3月31日', type: '法面', img: '/construction_img/',     badgeLabel: null, badgeClass: null, completed: false },
-  { id: 2, name: '鍵掛峠道路日南地区改良工事',     code: '20260002', defaultProgress: 15,  completionDate: '2026年3月31日',  type: '橋梁', img: '/construction_img/日南/日南.webp',     badgeLabel: null, badgeClass: null, completed: false },
-  { id: 3, name: '奥陰田3地区急傾斜地崩壊 対策工事その2',     code: '20250008', defaultProgress: 30,  completionDate: '2026年3月31日',  type: '砂防土工',   img: '/construction_img/奥陰/奥陰.webp',     badgeLabel: null, badgeClass: null, completed: false },
-  { id: 4, name: '中山3期営農飲雑用水 (高田工区)工事',  code: '20250006', defaultProgress: 100, completionDate: '2026年5月23日', type: '砂防', img: '/construction_img/',  badgeLabel: null, badgeClass: null, completed: true  },
-  { id: 5, name: '車尾五丁目ほか枝線工事',code: '20260006', defaultProgress: 100, completionDate: '2026年9月30日', type: '砂防', img: '/construction_img/', badgeLabel: null, badgeClass: null, completed: true  },
-  { id: 6, name: '県道西伯伯太線(宮ノ前歩道橋) 橋梁塗装工事(2工区)(補助)',  code: '20240009', defaultProgress: 100, completionDate: '2026年3月16日', type: '道路', img: '/construction_img/宮ノ前/宮ノ前.webp',  badgeLabel: null, badgeClass: null, completed: true  },
-  { id: 7, name: '外港中野地区承水路護岸補修工事 (老朽化対策) (3工区)',   code: '20240006', defaultProgress: 100, completionDate: '2026年9月18日', type: '砂防土工', img: '/construction_img/',   badgeLabel: null, badgeClass: null, completed: true  },
-  { id: 8, name: '船越地区急傾斜地崩壊対策工事 (2工区)(交付金)(国補正)',  code: '20250005', defaultProgress: 100, completionDate: '2026年10月21日', type: '法面', img: '/construction_img/',  badgeLabel: null, badgeClass: null, completed: true  },
-  { id: 9, name: '県道大山寺岸本線(小林工区) 電線共同溝設置工事(2工区)(補助)',  code: '20250005', defaultProgress: 100, completionDate: '2026年10月30日', type: '法面', img: '/construction_img/',  badgeLabel: null, badgeClass: null, completed: true  },
-  { id: 10, name: '佐陀川砂防堰堤(K1)工事(9工区) (補助)(国補正)',  code: '20250005', defaultProgress: 100, completionDate: '2026年12月25日', type: '砂防土工', img: '/construction_img/佐陀/佐陀.webp',  badgeLabel: null, badgeClass: null, completed: true  },
-  { id: 11, name: '奥山川砂防堰堤工事(4工区) (交付金)(国補正)',  code: '20250005', defaultProgress: 100, completionDate: '2026年11月9日', type: '砂防土工', img: '/construction_img/奥山/奥山.webp',  badgeLabel: null, badgeClass: null, completed: true  },
-  { id: 12, name: '鍵掛峠道路新屋地区 第13改良工事',  code: '20250005', defaultProgress: 100, completionDate: '2027年2月26', type: '法面', img: '/construction_img/',  badgeLabel: null, badgeClass: null, completed: true  },
+  { id: 1, name: "美保(5)格納庫等新設舗装工事", code: "20250009", defaultProgress: 75, completionDate: "2026年3月31日", type: "法面", img: "/public/construction_img/", badgeLabel: null, badgeClass: null, completed: false },
+  { id: 2, name: "鍵掛峠道路日南地区改良工事", code: "20260002", defaultProgress: 15, completionDate: "2026年3月31日", type: "橋梁", img: "/public/construction_img/日南/日南.webp", badgeLabel: null, badgeClass: null, completed: false },
+  { id: 3, name: "奥陰田3地区急傾斜地崩壊 対策工事その2", code: "20250008", defaultProgress: 30, completionDate: "2026年3月31日", type: "砂防土工", img: "/public/construction_img/奥陰/奥陰.webp", badgeLabel: null, badgeClass: null, completed: false },
+  { id: 4, name: "中山3期営農飲雑用水 (高田工区)工事", code: "20250006", defaultProgress: 100, completionDate: "2026年5月23日", type: "砂防", img: "/construction_img/", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 5, name: "車尾五丁目ほか枝線工事", code: "20260006", defaultProgress: 100, completionDate: "2026年9月30日", type: "砂防", img: "/construction_img/", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 6, name: "県道西伯伯太線(宮ノ前歩道橋) 橋梁塗装工事(2工区)(補助)", code: "20240009", defaultProgress: 100, completionDate: "2026年3月16日", type: "道路", img: "/public/construction_img/宮ノ前/宮ノ前.webp", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 7, name: "外港中野地区承水路護岸補修工事 (老朽化対策) (3工区)", code: "20240006", defaultProgress: 100, completionDate: "2026年9月18日", type: "砂防土工", img: "/construction_img/", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 8, name: "船越地区急傾斜地崩壊対策工事 (2工区)(交付金)(国補正)", code: "20250005", defaultProgress: 100, completionDate: "2026年10月21日", type: "法面", img: "/construction_img/", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 9, name: "県道大山寺岸本線(小林工区) 電線共同溝設置工事(2工区)(補助)", code: "20250005", defaultProgress: 100, completionDate: "2026年10月30日", type: "法面", img: "/construction_img/", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 10, name: "佐陀川砂防堰堤(K1)工事(9工区) (補助)(国補正)", code: "20250005", defaultProgress: 100, completionDate: "2026年12月25日", type: "砂防土工", img: "/public/construction_img/佐陀/佐陀.webp", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 11, name: "奥山川砂防堰堤工事(4工区) (交付金)(国補正)", code: "20250005", defaultProgress: 100, completionDate: "2026年11月9日", type: "砂防土工", img: "/public/construction_img/奥山/奥山.webp", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 12, name: "鍵掛峠道路新屋地区 第13改良工事", code: "20250005", defaultProgress: 100, completionDate: "2027年2月26日", type: "法面", img: "/construction_img/", badgeLabel: null, badgeClass: null, completed: true },
 ]
 
 const drafts = ref(Object.fromEntries(projectsRaw.map(p => [p.id, getOne(p.id, p.defaultProgress)])))
@@ -44,11 +44,11 @@ const projectsDisplay = computed(() =>
     })
 )
 
-const filters = ['全計画', '計画', '進行中', '完了']
-const activeFilter = ref(localStorage.getItem('construction_filter') || '全計画')
+const filters = ["全計画", "計画", "進行中", "完成"]
+const activeFilter = ref(localStorage.getItem("construction_filter") || "All")
 
 const filteredProjects = computed(() => {
-  if (activeFilter.value === '全計画') return projectsDisplay.value
+  if (activeFilter.value === "All") return projectsDisplay.value
   return projectsDisplay.value.filter(p => p.label === activeFilter.value)
 })
 
@@ -72,7 +72,7 @@ function updateDraft(id, val) {
 }
 
 function goToDetail(id) {
-  router.push(`/construction/${id}`)
+  router.push(`/home/construction/${id}`)
 }
 </script>
 
@@ -103,7 +103,7 @@ function goToDetail(id) {
     <div class="max-w-7xl mx-auto">
 
       <div v-if="filteredProjects.length === 0" class="text-center py-20 text-gray-400">
-        <p class="text-lg">プロジェクトがありません</p>
+        <p class="text-lg"></p>
       </div>
 
       <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -126,10 +126,6 @@ function goToDetail(id) {
                 @error="e => e.target.style.display='none'"
             />
 
-            <!--
-              ✅ Overlay opacity 0→1, BUKAN grayscale filter.
-              opacity transition = GPU-composited, tidak ada repaint sama sekali.
-            -->
             <div class="img-overlay absolute inset-0 bg-black flex items-center justify-center">
 
             </div>
@@ -155,7 +151,7 @@ function goToDetail(id) {
               <div class="flex justify-between text-sm font-medium text-gray-600 mb-1">
                 <span class="flex items-center gap-1.5">
                   {{ p.label }}
-                  <span v-if="p.dirty" class="text-xs font-semibold px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 border border-amber-300">未保存</span>
+                  <span v-if="p.dirty" class="text-xs font-semibold px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 border border-amber-300">譛ｪ菫晏ｭ・</span>
                 </span>
                 <span :style="{ color: p.color }">{{ p.draft }}%</span>
               </div>
@@ -167,13 +163,13 @@ function goToDetail(id) {
               />
 
               <div v-if="p.dirty" class="flex gap-2 mb-4">
-                <button @click="saveProject(p.id)" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-150">保存する</button>
-                <button @click="discardProject(p.id)" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors duration-150">元に戻す</button>
+                <button @click="saveProject(p.id)" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-150">菫晏ｭ倥☆繧・</button>
+                <button @click="discardProject(p.id)" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors duration-150">蜈・↓謌ｻ縺・</button>
               </div>
 
               <div class="grid grid-cols-2 gap-4 border-t border-gray-100 pt-4">
                 <div>
-                  <p class="text-xs text-gray-400 uppercase font-semibold">{{ p.completed ? '終了' : '完成予定日' }}</p>
+                  <p class="text-xs text-gray-400 uppercase font-semibold">{{ p.completed ? '完了' : '完了予定日' }}</p>
                   <p class="text-sm font-medium text-gray-800">{{ p.completionDate }}</p>
                 </div>
                 <div>
@@ -182,7 +178,7 @@ function goToDetail(id) {
                 </div>
               </div>
 
-              <button @click="goToDetail(p.id)" class="mt-4 w-full py-2 rounded-lg text-sm font-semibold text-blue-600 border border-blue-200 hover:bg-blue-50 transition-colors duration-150">詳細を見る →</button>
+              <button @click="goToDetail(p.id)" class="mt-4 w-full py-2 rounded-lg text-sm font-semibold text-blue-600 border border-blue-200 hover:bg-blue-50 transition-colors duration-150">詳細を見る</button>
             </div>
           </div>
         </article>
@@ -194,28 +190,19 @@ function goToDetail(id) {
 </template>
 
 <style scoped>
-/*
-  ✅ will-change: transform → browser alokasikan GPU layer dari awal
-  Semua card sudah siap di GPU sebelum hover terjadi, tidak ada jeda
-*/
+
 .card-item {
   will-change: transform;
   transform: translateZ(0);           /* paksa composite layer sejak awal */
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
-/*
-  ✅ Ganti hover:shadow-xl (repaint) dengan translateY (GPU transform)
-  transform tidak memicu layout/paint sama sekali
-*/
 .card-item:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.15);
 }
 
-/*
-  ✅ Gambar: will-change transform untuk zoom halus
-*/
+
 .img-wrap {
   overflow: hidden;
 }
@@ -228,14 +215,6 @@ function goToDetail(id) {
   transform: scale(1.04) translateZ(0);
 }
 
-/*
-  ✅ GANTI grayscale CSS filter → opacity overlay
-  grayscale transition = repaint setiap frame (sangat berat)
-  opacity transition   = GPU-composited (0 repaint, selalu 60fps)
-
-  Cara kerja: overlay hitam opacity 0.55 menutupi gambar (kesan grayscale),
-  saat hover overlay menghilang → gambar berwarna terlihat kembali
-*/
 .img-overlay {
   will-change: opacity;
   background-color: rgba(0, 0, 0, 0.55); /* kesan "grayscale" */
@@ -243,13 +222,11 @@ function goToDetail(id) {
   transition: opacity 350ms ease;
 }
 .card-item:hover .img-overlay {
-  opacity: 0; /* hilang saat hover → gambar berwarna */
+  opacity: 0; /* hilang saat hover 竊・gambar berwarna */
 }
 
-
-/*
-  ✅ Kurangi durasi transition global Tailwind yang tidak perlu
-  'transition' default Tailwind = 150ms untuk semua property termasuk box-shadow
-  Kita override hanya ke 'colors' agar tidak ada transisi yang tidak sengaja
-*/
 </style>
+
+
+
+

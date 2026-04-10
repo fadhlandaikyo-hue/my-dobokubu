@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import {useTemplateRef} from "vue";
 import {useDraggable} from "@vueuse/core";
 
@@ -35,7 +35,7 @@ const {x, y, style} = useDraggable(el, {
           </tr>
           </thead>
 
-          <!-- Body — semua data ditulis langsung di template -->
+          <!-- Body 窶・semua data ditulis langsung di template -->
           <tbody>
           <tr class="border-b border-gray-100 hover:bg-blue-50 transition-colors">
             <td class="px-5 py-3 text-gray-500 font-mono text-xs">001</td>

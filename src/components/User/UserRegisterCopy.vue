@@ -1,4 +1,4 @@
-<script setup>
+﻿<script setup>
 import {useRouter} from "vue-router";
 import {reactive} from "vue";
 import {alertError, alertSuccess} from "../../lib/alert.js";
@@ -15,7 +15,7 @@ const user = reactive({
 
 async function handleSubmit() {
   if (user.password !== user.confirm_password) {
-    await alertError("パスワード間違えて")
+    await alertError("Passwords do not match.")
     return;
   }
 
@@ -24,7 +24,7 @@ async function handleSubmit() {
   console.log(responseBody)
 
   if (response.status === 200) {
-    await alertSuccess("ユーザー作成できた")
+    await alertSuccess("User registered successfully.")
     await router.push({
       path: "/login"
     })
@@ -46,10 +46,10 @@ async function handleSubmit() {
         </svg>
       </div>
       <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
-        アカウント作成
+        Create Account
       </h2>
       <p class="mt-2 text-sm text-gray-600">
-        システムアクセスを登録する
+        Register your system access
       </p>
     </div>
 
@@ -57,66 +57,66 @@ async function handleSubmit() {
 
       <div>
         <label for="full-name" class="block text-sm font-medium text-gray-700 mb-1">
-          名前
+          Full Name
         </label>
         <input id="full-name" name="full-name" type="text" required v-model="user.name"
                class="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm transition duration-200"
-               placeholder="お名前を入力してください">
+               placeholder="Enter your full name">
       </div>
 
       <div>
         <label for="username" class="block text-sm font-medium text-gray-700 mb-1">
-          ユーザー名
+          Username
         </label>
         <input id="username" name="username" type="text" required v-model="user.username"
                class="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm transition duration-200"
-               placeholder="ユーザーを入力してください">
+               placeholder="Enter your username">
       </div>
 
       <div>
         <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
-          パスワード
+          Password
         </label>
         <input id="password" name="password" type="password" required v-model="user.password"
                class="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm transition duration-200"
-               placeholder="パスワード作成">
+               placeholder="Enter your password">
       </div>
 
       <div>
         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
-          パスワード確認
+          Confirm Password
         </label>
         <input id="confirm-password" name="confirm-password" type="password" required v-model="user.confirm_password"
                class="appearance-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm transition duration-200"
-               placeholder="もう一度確認">
+               placeholder="Re-enter your password">
       </div>
 
       <div>
         <label for="work-position" class="block text-sm font-medium text-gray-700 mb-1">
-          役職
+          Work Position
         </label>
         <select id="work-position" name="work-position" type="text" required v-model="user.work_position"
             class="block w-full bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2.5">
-          <option>管理</option>
-          <option selected>事務員</option>
-          <option>部長</option>
-          <option>課長</option>
+          <option>Manager</option>
+          <option selected>Foreman</option>
+          <option>Supervisor</option>
+          <option>Inspector</option>
         </select>
       </div>
 
       <div class="pt-2">
         <button type="submit"
                 class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-red-300 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out shadow-md hover:shadow-lg">
-          作成
+          Register
         </button>
       </div>
 
       <div class="text-center mt-4">
         <p class="text-sm text-gray-600">
-          アカウントをお持ちの場合
+          Already have an account?
           <RouterLink to="/login"
              class="font-medium text-blue-600 hover:text-blue-500 hover:underline transition duration-150">
-            こちにログイン
+            Log in here
           </RouterLink>
         </p>
       </div>
@@ -128,3 +128,4 @@ async function handleSubmit() {
 <style scoped>
 
 </style>
+
