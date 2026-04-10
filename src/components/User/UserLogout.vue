@@ -16,7 +16,7 @@ async function handleLogout(){
   if(response.status === 200){
     token.value = "";
     await router.push({
-      path: "/home"
+      path: "/"
     })
   } else {
     await alertError(responseBody.errors)

@@ -72,7 +72,7 @@ function updateDraft(id, val) {
 }
 
 function goToDetail(id) {
-  router.push(`/home/construction/${id}`)
+  router.push(`/construction/${id}`)
 }
 </script>
 

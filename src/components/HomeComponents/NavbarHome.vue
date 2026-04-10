@@ -7,7 +7,7 @@
   <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
     <nav class="max-w-7xl mx-auto flex items-center px-4 z-50 justify-between p-6 lg:px-8">
       <div class="flex sm:flex-1">
-        <RouterLink to="/home">
+        <RouterLink to="/">
           <span class="sr-only">Your Company</span>
           <img class="h-8 w-auto" src="/img/dk_logo.png" alt=""/>
         </RouterLink>

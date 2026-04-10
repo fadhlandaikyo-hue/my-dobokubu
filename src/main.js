@@ -43,8 +43,32 @@ const router = createRouter({
     },
     routes: [
         {
-            path: "/",
-            redirect: "/home",
+            path: "/home",
+            redirect: "/",
+        },
+        {
+            path: "/home/construction",
+            redirect: "/construction",
+        },
+        {
+            path: "/home/construction/:id",
+            redirect: "/construction/:id",
+        },
+        {
+            path: "/home/inspection",
+            redirect: "/inspection",
+        },
+        {
+            path: "/home/inspection/:id",
+            redirect: "/inspection/:id",
+        },
+        {
+            path: "/home/equipment",
+            redirect: "/equipment",
+        },
+        {
+            path: "/home/vehicle",
+            redirect: "/vehicle",
         },
         {
             component: Example,
@@ -91,31 +115,31 @@ const router = createRouter({
                 // Page for Public
                 {
                     component: Home,
-                    path: "/home",
+                    path: "/",
                 },
                 {
                     component: ConstructionList,
-                    path: "/home/construction",
+                    path: "/construction",
                 },
                 {
                     component: ConstructionDetail,
-                    path: "/home/construction/:id",
+                    path: "/construction/:id",
                 },
                 {
                     component: InspectionList,
-                    path: "/home/inspection",
+                    path: "/inspection",
                 },
                 {
                     component: InspectionDetail,
-                    path: "/home/inspection/:id",
+                    path: "/inspection/:id",
                 },
                 {
                     component: EquipmentList,
-                    path: "/home/equipment",
+                    path: "/equipment",
                 },
                 {
                     component: VehicleList,
-                    path: "/home/vehicle",
+                    path: "/vehicle",
                 },
             ]
         },
@@ -160,4 +184,3 @@ app.component('BaseButtonBackConstruction', ButtonBackConstruction)
 app.component('BaseButtonBackInspection', ButtonBackInspection)
 
 app.use(router).mount('#app')
-

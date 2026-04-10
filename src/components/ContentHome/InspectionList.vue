@@ -46,7 +46,7 @@ const filtered = computed(() => {
 })
 
 function goToDetail(id) {
-  router.push(`/home/inspection/${id}`)
+  router.push(`/inspection/${id}`)
 }
 </script>
 
