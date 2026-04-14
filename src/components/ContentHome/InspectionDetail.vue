@@ -8,7 +8,7 @@ import BaseButtonBackInspection from "../Utilities/UtilitiesHome/ButtonBackInspe
 
 const route = useRoute();
 const projectId = Number(route.params.id);
-const apiBaseUrl = import.meta.env.VITE_API_PATH || "http://localhost:3000/api";
+const apiBaseUrl = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
 const constructions = [
   { id: 1, code: "20250009", name: "美保(5)格納庫等新設舗装工事", type: "Civil", contractor: "小島" },
