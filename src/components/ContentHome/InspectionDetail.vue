@@ -196,7 +196,12 @@ async function submitPost(section) {
       }
     });
 
-    posts.value[section].unshift(mapPost(result.data));
+    if (result && result.data && result.data.id) {
+      posts.value[section].unshift(mapPost(result.data));
+    } else {
+      await loadPosts();
+    }
+
     newPostText.value[section] = "";
     newPostAuthor.value[section] = "";
     showPostForm.value[section] = false;
@@ -243,7 +248,12 @@ async function submitComment(section, postId) {
       }
     });
 
-    post.comments.push(mapComment(result.data));
+    if (result && result.data && result.data.id) {
+      post.comments.push(mapComment(result.data));
+    } else {
+      await loadPosts();
+    }
+    
     commentText.value[key] = "";
     commentAuthor.value[key] = "";
     showCommentBox.value[key] = false;
@@ -499,15 +509,5 @@ onMounted(loadPosts);
 </template>
 
 <style scoped>
-.slide-down-enter-active,
-.slide-down-leave-active {
-  transition: opacity 200ms ease, transform 200ms ease, max-height 200ms ease;
-  overflow: hidden;
-}
 
-.slide-down-enter-from,
-.slide-down-leave-to {
-  opacity: 0;
-  transform: translateY(-6px);
-}
 </style>
