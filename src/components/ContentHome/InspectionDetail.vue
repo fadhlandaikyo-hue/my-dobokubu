@@ -253,7 +253,7 @@ async function submitComment(section, postId) {
     } else {
       await loadPosts();
     }
-    
+
     commentText.value[key] = "";
     commentAuthor.value[key] = "";
     showCommentBox.value[key] = false;
