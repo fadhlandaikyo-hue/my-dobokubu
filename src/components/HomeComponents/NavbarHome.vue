@@ -9,7 +9,7 @@
       <div class="flex sm:flex-1">
         <RouterLink to="/home">
           <span class="sr-only">Your Company</span>
-          <img class="h-8 w-auto" src="/img/dk_logo.png" alt=""/>
+          <img class="h-12 w-auto" src="/img/dk_logo.png" alt=""/>
         </RouterLink>
       </div>
       <div class="flex flex-1 justify-end">

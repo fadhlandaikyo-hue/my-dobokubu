@@ -8,18 +8,18 @@ import BaseButtonBack             from "../Utilities/UtilitiesHome/ButtonBack.vu
 const router = useRouter()
 
 const constructions = [
-  { id: 1, code: '20250009', name: '美保(5)格納庫等新設舗装工事', type: 'Civil', contractor: '小島' },
-  { id: 2, code: '20260002', name: '美保(5)格納庫等新設舗装工事', type: 'Road', contractor: '池岡、内田' },
-  { id: 3, code: '20250008', name: '奥陰田3地区急傾斜地崩壊 対策工事その2', type: 'Slope', contractor: '長谷川、岩田ひ' },
-  { id: 4, code: '20250006', name: '中山3期営農飲雑用水 (高田工区)工事', type: 'River', contractor: '岩田こ' },
-  { id: 5, code: '20260006', name: '車尾五丁目ほか枝線工事', type: 'River', contractor: '西中' },
-  { id: 6, code: '20240009', name: '県道西伯伯太線(宮ノ前歩道橋) 橋梁塗装工事(2工区)(補助)', type: 'Road', contractor: '今中' },
-  { id: 7, code: '20240006', name: '外港中野地区承水路護岸補修工事 (老朽化対策) (3工区)', type: 'Road', contractor: '篠原' },
-  { id: 8, code: '20250005', name: '船越地区急傾斜地崩壊対策工事 (2工区)(交付金)(国補正)', type: 'Civil', contractor: '坪倉' },
-  { id: 9, code: '20250005', name: '県道大山寺岸本線(小林工区) 電線共同溝設置工事(2工区)(補助)', type: 'Civil', contractor: '西本' },
-  { id: 10, code: '20250005', name: '佐陀川砂防堰堤(K1)工事(9工区) (補助)(国補正)', type: 'River', contractor: '菊川' },
-  { id: 11, code: '20250005', name: '奥山川砂防堰堤工事(4工区) (交付金)(国補正)', type: 'River', contractor: '内田' },
-  { id: 12, code: '20250005', name: '鍵掛峠道路新屋地区 第13改良工事', type: 'Road', contractor: '池岡' },
+  { id: 1, code: '', name: '美保(5)格納庫等新設舗装工事', type: '道路', contractor: '小島' },
+  { id: 2, code: '', name: '美保(5)格納庫等新設舗装工事', type: '道路', contractor: '池岡、内田' },
+  { id: 3, code: '', name: '奥陰田3地区急傾斜地崩壊 対策工事その2', type: '砂防', contractor: '長谷川、岩田ひ' },
+  { id: 4, code: '', name: '中山3期営農飲雑用水 (高田工区)工事', type: '管路工', contractor: '岩田こ' },
+  { id: 5, code: '', name: '車尾五丁目ほか枝線工事', type: '枝線', contractor: '西中' },
+  { id: 6, code: '', name: '県道西伯伯太線(宮ノ前歩道橋) 橋梁塗装工事(2工区)(補助)', type: '道橋', contractor: '今中' },
+  { id: 7, code: '', name: '外港中野地区承水路護岸補修工事 (老朽化対策) (3工区)', type: '老朽化対策', contractor: '篠原' },
+  { id: 8, code: '', name: '船越地区急傾斜地崩壊対策工事 (2工区)(交付金)(国補正)', type: '崩壊対策', contractor: '坪倉' },
+  { id: 9, code: '', name: '県道大山寺岸本線(小林工区) 電線共同溝設置工事(2工区)(補助)', type: '共同溝設置', contractor: '西本' },
+  { id: 10, code: '', name: '佐陀川砂防堰堤(K1)工事(9工区) (補助)(国補正)', type: '砂防堰堤', contractor: '菊川' },
+  { id: 11, code: '', name: '奥山川砂防堰堤工事(4工区) (交付金)(国補正)', type: '砂防堰堤', contractor: '内田' },
+  { id: 12, code: '', name: '鍵掛峠道路新屋地区 第13改良工事', type: '道路', contractor: '池岡' },
 ]
 
 const typeBadge = {
@@ -90,7 +90,7 @@ function goToDetail(id) {
         >
           <!-- Code badge -->
           <div class="shrink-0 w-16 h-16 rounded-xl bg-blue-50 border border-blue-100 flex flex-col items-center justify-center">
-            <span class="text-xs text-blue-400 font-semibold leading-none">No.</span>
+            <span class="text-xs text-blue-400 font-semibold leading-none">番号</span>
             <span class="text-lg font-bold text-blue-700 leading-tight">{{ c.id }}</span>
           </div>
 

@@ -11,18 +11,18 @@ const projectId = Number(route.params.id);
 const apiBaseUrl = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
 const constructions = [
-  { id: 1, code: "20250009", name: "美保(5)格納庫等新設舗装工事", type: "Civil", contractor: "小島" },
-  { id: 2, code: "20260002", name: "美保(5)格納庫等新設舗装工事", type: "Road", contractor: "池岡、内田" },
-  { id: 3, code: "20250008", name: "奥陰田3地区急傾斜地崩壊 対策工事その2", type: "Slope", contractor: "長谷川、岩田ひ" },
-  { id: 4, code: "20250006", name: "中山3期営農飲雑用水 (高田工区)工事", type: "River", contractor: "岩田こ" },
-  { id: 5, code: "20260006", name: "車尾五丁目ほか枝線工事", type: "River", contractor: "西中" },
-  { id: 6, code: "20240009", name: "県道西伯伯太線(宮ノ前歩道橋) 橋梁塗装工事(2工区)(補助)", type: "Road", contractor: "今中" },
-  { id: 7, code: "20240006", name: "外港中野地区承水路護岸補修工事 (老朽化対策) (3工区)", type: "Road", contractor: "篠原" },
-  { id: 8, code: "20250005", name: "船越地区急傾斜地崩壊対策工事 (2工区)(交付金)(国補正)", type: "Civil", contractor: "坪倉" },
-  { id: 9, code: "20250005", name: "県道大山寺岸本線(小林工区) 電線共同溝設置工事(2工区)(補助)", type: "Civil", contractor: "西本" },
-  { id: 10, code: "20250005", name: "佐陀川砂防堰堤(K1)工事(9工区) (補助)(国補正)", type: "River", contractor: "菊川" },
-  { id: 11, code: "20250005", name: "奥山川砂防堰堤工事(4工区) (交付金)(国補正)", type: "River", contractor: "内田" },
-  { id: 12, code: "20250005", name: "鍵掛峠道路新屋地区 第13改良工事", type: "Road", contractor: "池岡" }
+  { id: 1, code: "", name: "美保(5)格納庫等新設舗装工事", type: "道路", contractor: "小島" },
+  { id: 2, code: "", name: "美保(5)格納庫等新設舗装工事", type: "道路", contractor: "池岡、内田" },
+  { id: 3, code: "", name: "奥陰田3地区急傾斜地崩壊 対策工事その2", type: "砂防", contractor: "長谷川、岩田ひ" },
+  { id: 4, code: "", name: "中山3期営農飲雑用水 (高田工区)工事", type: "管路工", contractor: "岩田こ" },
+  { id: 5, code: "", name: "車尾五丁目ほか枝線工事", type: "枝線", contractor: "西中" },
+  { id: 6, code: "", name: "県道西伯伯太線(宮ノ前歩道橋) 橋梁塗装工事(2工区)(補助)", type: "道橋", contractor: "今中" },
+  { id: 7, code: "", name: "外港中野地区承水路護岸補修工事 (老朽化対策) (3工区)", type: "老朽化対策", contractor: "篠原" },
+  { id: 8, code: "", name: "船越地区急傾斜地崩壊対策工事 (2工区)(交付金)(国補正)", type: "崩壊対策", contractor: "坪倉" },
+  { id: 9, code: "", name: "県道大山寺岸本線(小林工区) 電線共同溝設置工事(2工区)(補助)", type: "共同溝設置", contractor: "西本" },
+  { id: 10, code: "", name: "佐陀川砂防堰堤(K1)工事(9工区) (補助)(国補正)", type: "砂防堰堤", contractor: "菊川" },
+  { id: 11, code: "", name: "奥山川砂防堰堤工事(4工区) (交付金)(国補正)", type: "砂防堰堤", contractor: "内田" },
+  { id: 12, code: "", name: "鍵掛峠道路新屋地区 第13改良工事", type: "道路", contractor: "池岡" }
 ];
 
 const project = constructions.find((c) => c.id === projectId);
@@ -402,7 +402,7 @@ onMounted(loadPosts);
                   @click="submitPost(section)"
                   :class="['px-3 py-1.5 text-xs font-semibold rounded-lg text-white transition-colors', sectionMeta[section].buttonClass]"
                 >
-                  保存
+                  投稿
                 </button>
               </div>
             </div>
@@ -431,7 +431,7 @@ onMounted(loadPosts);
                       @click="deletePost(section, post.id)"
                       class="text-xs font-semibold px-2 py-0.5 rounded-md border border-red-200 text-red-600 hover:bg-red-50 transition-colors"
                     >
-                      Delete
+                      削除
                     </button>
                   </div>
                 </div>
@@ -451,7 +451,7 @@ onMounted(loadPosts);
                         @click="deleteComment(section, post.id, comment.id)"
                         class="ml-auto text-[10px] font-semibold px-2 py-0.5 rounded border border-red-200 text-red-600 hover:bg-red-50 transition-colors"
                       >
-                        Delete
+                        削除
                       </button>
                     </div>
                     <p class="text-xs text-gray-600 leading-relaxed whitespace-pre-line">{{ comment.text }}</p>
