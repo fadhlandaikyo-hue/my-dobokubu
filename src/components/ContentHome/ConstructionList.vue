@@ -157,25 +157,11 @@ function goToDetail(id) {
             <p class="text-sm text-gray-500 mb-4">{{ p.code }}</p>
 
             <div class="mt-auto">
-              <div class="flex justify-between text-sm font-medium text-gray-600 mb-1">
-                <span class="flex items-center gap-1.5">
-                  {{ p.label }}
-                  <span v-if="p.dirty" class="text-xs font-semibold px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 border border-amber-300">譛ｪ菫晏ｭ・</span>
-                </span>
-                <span :style="{ color: p.color }">{{ p.draft }}%</span>
-              </div>
-
               <BaseProgressBar
                   :model-value="p.draft"
                   @update:model-value="val => updateDraft(p.id, val)"
                   class="mb-3"
               />
-
-              <div v-if="p.dirty" class="flex gap-2 mb-4">
-                <button @click="saveProject(p.id)" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-150">菫晏ｭ倥☆繧・</button>
-                <button @click="discardProject(p.id)" class="flex-1 py-1.5 px-3 rounded-lg text-xs font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors duration-150">蜈・↓謌ｻ縺・</button>
-              </div>
-
               <div class="grid grid-cols-2 gap-4 border-t border-gray-100 pt-4">
                 <div>
                   <p class="text-xs text-gray-400 uppercase font-semibold">{{ p.completed ? '完了' : '完了予定日' }}</p>
