@@ -73,4 +73,3 @@ function startDrag(event) {
 </template>
 
 <style scoped></style>
-

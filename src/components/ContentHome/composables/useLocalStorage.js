@@ -1,43 +1,23 @@
-﻿// src/composables/useLocalStorage.js
-// Menyimpan dan memuat progress dari localStorage.
-
-const STORAGE_KEY = 'construction_progress'
+const apiUrl = import.meta.env.VITE_API_URL
 
 export function useLocalStorage() {
-    /**
-     * Memuat semua progress yang tersimpan.
-     * Mengembalikan object { id: progress } atau {} jika belum ada.
-     */
-    function loadAll() {
+    async function saveOne(id, progress) {
+        await fetch(`${apiUrl}/projects/${id}/progress`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ progress })
+        })
+    }
+
+    async function getOne(id, defaultValue = 0) {
         try {
-            const raw = localStorage.getItem(STORAGE_KEY)
-            return raw ? JSON.parse(raw) : {}
+            const res = await fetch(`${apiUrl}/projects/${id}/progress`)
+            const data = await res.json()
+            return data.data?.progress ?? defaultValue
         } catch {
-            return {}
+            return defaultValue
         }
     }
 
-    /**
-     * Menyimpan progress satu proyek ke localStorage.
-     * @param {number|string} id       - ID proyek
-     * @param {number}        progress - Nilai progress 0窶・00
-     */
-    function saveOne(id, progress) {
-        const all = loadAll()
-        all[id]   = progress
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(all))
-    }
-
-    /**
-     * Mengambil progress satu proyek.
-     * Mengembalikan defaultValue jika belum pernah disimpan.
-     * @param {number|string} id           - ID proyek
-     * @param {number}        defaultValue - Nilai awal jika belum ada di storage
-     */
-    function getOne(id, defaultValue = 0) {
-        const all = loadAll()
-        return all[id] ?? defaultValue
-    }
-
-    return { saveOne, getOne, loadAll }
+    return { saveOne, getOne }
 }

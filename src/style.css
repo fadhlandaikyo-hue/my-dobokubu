@@ -4,7 +4,6 @@ body {
     font-family: 'Noto Sans JP', sans-serif;
 }
 
-/* 笏笏 Progress track 笏笏 */
 .progress-track {
     position: relative;
     height: 8px;
@@ -14,7 +13,6 @@ body {
     user-select: none;
 }
 
-/* 笏笏 Animated fill bar 笏笏 */
 .progress-fill {
     height: 100%;
     border-radius: 9999px;
@@ -22,7 +20,6 @@ body {
     pointer-events: none;
 }
 
-/* 笏笏 Draggable thumb 笏笏 */
 .progress-thumb {
     position: absolute;
     top: 50%;
@@ -45,5 +42,4 @@ body {
     cursor: grabbing;
     transform: translate(-50%, -50%) scale(1.3);
 }
-
 

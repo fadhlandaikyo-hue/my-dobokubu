@@ -202,7 +202,7 @@ function goToDetail(id) {
 
 .card-item {
   will-change: transform;
-  transform: translateZ(0);           /* paksa composite layer sejak awal */
+  transform: translateZ(0);
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
@@ -226,16 +226,15 @@ function goToDetail(id) {
 
 .img-overlay {
   will-change: opacity;
-  background-color: rgba(0, 0, 0, 0.55); /* kesan "grayscale" */
+  background-color: rgba(0, 0, 0, 0.55);
   opacity: 1;
   transition: opacity 350ms ease;
 }
 .card-item:hover .img-overlay {
-  opacity: 0; /* hilang saat hover 竊・gambar berwarna */
+  opacity: 0;
 }
 
 </style>
-
 
 
 
