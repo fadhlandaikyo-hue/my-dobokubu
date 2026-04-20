@@ -15,7 +15,7 @@
             <img class="h-8 w-auto" src="/img/dk_logo.png" alt="">
           </div>
           <p class="text-sm leading-relaxed  max-w-sm">
-            險育判諤ｧ縺ｨ遒ｺ縺九↑謚陦薙↓蝓ｺ縺･縺丞ｻｺ險ｭ繧帝壹§縺ｦ縲√ｈ繧願憶縺・悴譚･縺ｨ萓｡蛟､縺ゅｋ遉ｾ莨壹ｒ蜑ｵ騾縺励∪縺・
+
           </p>
 
           <!-- Social icons -->
@@ -29,7 +29,7 @@
 
       <!-- Divider -->
       <div class="border-t border-slate-800 mt-12 pt-6 text-sm ">
-        ﾂｩ 2026 Your Company, Inc. All rights reserved.
+       2026 Your Company, Inc. All rights reserved.
       </div>
     </div>
   </footer>
