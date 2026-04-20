@@ -83,16 +83,37 @@ async function requestApi(path, { method = "GET", body } = {}) {
     headers["Content-Type"] = "application/json";
   }
 
-  const response = await fetch(`${apiBaseUrl}${path}`, {
+  const endpoint = `${apiBaseUrl}${path}`;
+  const response = await fetch(endpoint, {
     method,
     headers,
     body: body ? JSON.stringify(body) : undefined
   });
 
-  const responseBody = await response.json().catch(() => ({}));
+  const contentType = response.headers.get("content-type") || "";
+  const isJson = contentType.includes("application/json");
+  const responseText = await response.text();
+  let responseBody = null;
+
+  if (isJson) {
+    try {
+      responseBody = JSON.parse(responseText || "{}");
+    } catch (parseError) {
+      throw new Error(`Response API bukan JSON valid: ${endpoint}`);
+    }
+  }
 
   if (!response.ok) {
-    throw new Error(responseBody.errors || `Request gagal (${response.status})`);
+    throw new Error(responseBody?.errors || `Request gagal (${response.status})`);
+  }
+
+  if (!response.ok) {
+    const msg = responseBody?.errors || `Request gagal (${response.status})`;
+    throw new Error(msg);
+  }
+
+  if (!isJson || !responseBody || typeof responseBody !== "object") {
+    throw new Error(`Format response API tidak valid: ${endpoint}`);
   }
 
   return responseBody;
@@ -159,7 +180,9 @@ async function loadPosts() {
 
   try {
     const result = await requestApi(`/inspection-posts?project_id=${projectId}`);
-    applyPostsFromApi(result.data || []);
+    if (!Array.isArray(result.data)) {
+      throw new Error("Format data post tidak valid dari API");
+    }
   } catch (error) {
     posts.value = { kansei: [], chukan: [] };
     loadPostsError.value = error.message || "投稿データの取得に失敗しました";
