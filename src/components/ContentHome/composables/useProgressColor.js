@@ -3,6 +3,7 @@ export function useProgressColor() {
         if (value <= 10) return '#f87171'
         if (value <= 25) return '#fb923c'
         if (value <= 50) return '#facc15'
+        if (value === 100) return '#22c55e'
         return '#3b82f6'
     }
 

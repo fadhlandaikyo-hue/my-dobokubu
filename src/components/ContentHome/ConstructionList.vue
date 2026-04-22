@@ -1,5 +1,5 @@
 ﻿<script setup>
-import { ref, computed, shallowRef } from "vue"
+import {ref, computed, shallowRef, onMounted} from "vue"
 import BaseNavbarHome from "../HomeComponents/NavbarHome.vue"
 import BaseFooterHome from "../HomeComponents/FooterHome.vue"
 import BaseButtonBack from "../Utilities/UtilitiesHome/ButtonBack.vue"
@@ -27,8 +27,8 @@ const projectsRaw = [
   { id: 12, name: "鍵掛峠道路新屋地区 第13改良工事", code: "", defaultProgress: 100, completionDate: "2027年2月26日", type: "道路", img: "/construction_img/新屋/新屋.webp", badgeLabel: null, badgeClass: null, completed: true },
 ]
 
-const drafts = ref(Object.fromEntries(projectsRaw.map(p => [p.id, getOne(p.id, p.defaultProgress)])))
-const saved  = shallowRef(Object.fromEntries(projectsRaw.map(p => [p.id, getOne(p.id, p.defaultProgress)])))
+const drafts = ref(Object.fromEntries(projectsRaw.map(p => [p.id, p.defaultProgress])))
+const saved  = shallowRef(Object.fromEntries(projectsRaw.map(p => [p.id, p.defaultProgress])))
 
 const projectsDisplay = computed(() =>
     projectsRaw.map(p => {
@@ -66,10 +66,14 @@ function applyFilter(label) {
   localStorage.setItem("construction_filter", nextFilter)
 }
 
-function saveProject(id) {
+async function saveProject(id) {
   const val = drafts.value[id]
-  saveOne(id, val)
-  saved.value = { ...saved.value, [id]: val }
+  try {
+    await saveOne(id, val)
+    saved.value = { ...saved.value, [id]: val }
+  } catch (e) {
+    console.error(e)
+  }
 }
 
 function discardProject(id) {
@@ -83,6 +87,16 @@ function updateDraft(id, val) {
 function goToDetail(id) {
   router.push(`/home/construction/${id}`)
 }
+
+onMounted(async () => {
+  const entries = await Promise.all(
+      projectsRaw.map(async (p) => [p.id, await getOne(p.id, p.defaultProgress)])
+  )
+
+  const hydrated = Object.fromEntries(entries)
+  drafts.value = hydrated
+  saved.value = hydrated
+})
 </script>
 
 <template>

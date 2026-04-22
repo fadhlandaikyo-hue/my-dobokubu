@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from "vue"
+import {ref, computed, onMounted} from "vue"
 import { useRoute } from "vue-router"
 import BaseNavbarHome from "../HomeComponents/NavbarHome.vue"
 import BaseFooterHome from "../HomeComponents/FooterHome.vue"
@@ -194,8 +194,8 @@ const projectsRaw = [
     鉄筋挿入工 L = 4 ) N = 27本
     仮設工
     撤去 N = 1 式`,
-    location: "Kita",
-    contractor: "Main Contractor H",
+    location: "-",
+    contractor: "坪倉",
   },
   {
     id: 9,
@@ -280,8 +280,8 @@ const projectsRaw = [
 
 const projectId = Number(route.params.id)
 const raw = projectsRaw.find((p) => p.id === projectId)
-const persisted = raw ? getOne(raw.id, raw.defaultProgress) : 0
-const project = ref(raw ? { ...raw, draft: persisted, saved: persisted } : null)
+const defaultProgress = raw?.defaultProgress ?? 0
+const project = ref(raw ? { ...raw, draft: defaultProgress, saved: defaultProgress } : null)
 
 const isDirty = computed(() => project.value && project.value.draft !== project.value.saved)
 
@@ -376,11 +376,16 @@ function closeModal() {
   passwordError.value = ""
 }
 
-function confirmSave() {
+async function confirmSave() {
   if (passwordInput.value === CORRECT_PASSWORD) {
     if (pendingSaveType.value === "progress" || pendingSaveType.value === "both" || isDirty.value) {
-      saveOne(project.value.id, project.value.draft)
-      project.value.saved = project.value.draft
+      try {
+        await saveOne(project.value.id, project.value.draft)
+        project.value.saved = project.value.draft
+      } catch (e) {
+        passwordError.value = "データの保存に失敗しました"
+        return
+      }
     }
 
     if (pendingSaveType.value === "date" || pendingSaveType.value === "both") {
@@ -397,7 +402,7 @@ function confirmSave() {
       saveSuccess.value = false
     }, 2500)
   } else {
-    passwordError.value = "Incorrect password. Please try again."
+    passwordError.value = "パスワードが間違っています"
     isShaking.value = true
 
     setTimeout(() => {
@@ -418,6 +423,16 @@ function onModalKeydown(event) {
   if (event.key === "Enter") confirmSave()
   if (event.key === "Escape") closeModal()
 }
+
+onMounted(async () => {
+  if (!project.value) {
+    return
+  }
+
+  const persisted = await getOne(project.value.id, defaultProgress)
+  project.value.draft = persisted
+  project.value.saved = persisted
+})
 </script>
 
 <template>
@@ -520,7 +535,7 @@ function onModalKeydown(event) {
                     v-if="isDirty"
                     class="text-xs font-semibold px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 border border-amber-300"
                 >
-                  Unsaved
+                  未保存
                 </span>
               </span>
               <span :style="{ color: progressColor(project.draft) }">{{ project.draft }}%</span>
@@ -541,13 +556,13 @@ function onModalKeydown(event) {
                       d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                   />
                 </svg>
-                Save
+                保存
               </button>
               <button
                   @click="discard"
                   class="flex-1 py-2 px-3 rounded-lg text-sm font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors duration-150"
               >
-                Reset
+                リセット
               </button>
             </div>
 
@@ -559,7 +574,7 @@ function onModalKeydown(event) {
                 <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                Changes saved
+                保存しました
               </div>
             </Transition>
 
@@ -569,7 +584,7 @@ function onModalKeydown(event) {
           </div>
 
           <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
-            <h3 class="text-sm font-bold text-gray-700 mb-3">Status Legend</h3>
+            <h3 class="text-sm font-bold text-gray-700 mb-3">状況</h3>
             <div class="space-y-2 text-xs">
               <div class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded-full bg-red-400 inline-block"></span>
@@ -721,7 +736,7 @@ function onModalKeydown(event) {
                 v-if="pendingSaveType === 'progress' || pendingSaveType === 'both' || (!pendingSaveType && isDirty)"
                 class="text-gray-500 text-xs mt-0.5"
             >
-              Progress:
+              進行中:
               <span class="font-semibold" :style="{ color: progressColor(project?.draft) }">{{ project?.draft }}%</span>
               ({{ statusLabel(project?.draft) }})
             </p>

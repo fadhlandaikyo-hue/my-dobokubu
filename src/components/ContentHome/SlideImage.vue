@@ -75,13 +75,13 @@ onUnmounted(() => {
 
         <div class="w-full flex-shrink-0 relative">
           <a href="https://daikyou-g.dn-cloud.com/cgi-bin/dneo/dneo.cgi?cmd=login">
-            <img src="/img/desknet-neo-login.png" class="w-full h-full object-cover" alt="Slide 2">
+            <img src="/img/desknet-neo-login.webp" class="w-full h-full object-cover" alt="Slide 2">
           </a>
         </div>
 
         <div class="w-full flex-shrink-0 relative">
           <a href="https://auth.genbacloud.com/login/conne-space">
-            <img src="/img/genba-cloud-login.png" class="w-full h-full object-cover" alt="Slide 3">
+            <img src="/img/genba-cloud-login.webp" class="w-full h-full object-cover" alt="Slide 3">
           </a>
         </div>
 

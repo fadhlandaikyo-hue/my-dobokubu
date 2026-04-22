@@ -74,7 +74,7 @@
         <div>
           <h3 class="text-white font-semibold mb-3">住所</h3>
           <p class="text-sm">
-            日本, 鳥取県<br>
+            鳥取県米子市蚊屋235-2<br>
             support@buildpro.jp
           </p>
         </div>

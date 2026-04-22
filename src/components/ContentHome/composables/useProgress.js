@@ -1,14 +1,10 @@
-﻿// src/composables/useProgress.js
-// Handles drag interaction for the progress bar
+﻿
 
 export function useProgressDrag() {
     let activeProject = null
     let trackElement = null
 
-    /**
-     * Calculate progress (0窶・00) from a clientX position
-     * relative to the track element's bounding rect.
-     */
+
     function calcProgress(clientX) {
         const rect = trackElement.getBoundingClientRect()
         const ratio = (clientX - rect.left) / rect.width
@@ -35,11 +31,7 @@ export function useProgressDrag() {
         window.removeEventListener('touchend', onEnd)
     }
 
-    /**
-     * Call this on mousedown / touchstart on the track element.
-     * @param {Event}  event    - the DOM event
-     * @param {Object} project  - reactive project object with a `progress` field
-     */
+
     function startDrag(event, project) {
         activeProject = project
         trackElement = event.currentTarget

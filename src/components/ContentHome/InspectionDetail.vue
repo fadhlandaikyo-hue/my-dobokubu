@@ -8,7 +8,7 @@ import BaseButtonBackInspection from "../Utilities/UtilitiesHome/ButtonBackInspe
 
 const route = useRoute();
 const projectId = Number(route.params.id);
-const apiBaseUrl = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+const apiBaseUrl = import.meta.env.VITE_API_URL || "/api";
 
 const constructions = [
   { id: 1, code: "", name: "美保(5)格納庫等新設舗装工事", type: "道路", contractor: "小島" },
@@ -75,48 +75,43 @@ async function requestApi(path, { method = "GET", body } = {}) {
   const token = localStorage.getItem("token") || "";
   const headers = { Accept: "application/json" };
 
-  if (token) {
+  const isPublicPostApi = path.startsWith("/inspection-posts");
+  if (token && !isPublicPostApi) {
     headers.Authorization = token;
   }
 
-  if (body) {
-    headers["Content-Type"] = "application/json";
-  }
+  if (body) headers["Content-Type"] = "application/json";
 
   const endpoint = `${apiBaseUrl}${path}`;
-  const response = await fetch(endpoint, {
+  const res = await fetch(endpoint, {
     method,
     headers,
-    body: body ? JSON.stringify(body) : undefined
+    body: body ? JSON.stringify(body) : undefined,
+    cache: "no-store"
   });
 
-  const contentType = response.headers.get("content-type") || "";
+  const contentType = res.headers.get("content-type") || "";
   const isJson = contentType.includes("application/json");
-  const responseText = await response.text();
-  let responseBody = null;
+  const raw = await res.text();
 
-  if (isJson) {
+  let json = null;
+  if (raw && isJson) {
     try {
-      responseBody = JSON.parse(responseText || "{}");
-    } catch (parseError) {
+      json = JSON.parse(raw);
+    } catch {
       throw new Error(`Response API bukan JSON valid: ${endpoint}`);
     }
   }
 
-  if (!response.ok) {
-    throw new Error(responseBody?.errors || `Request gagal (${response.status})`);
+  if (!res.ok) {
+    throw new Error(json?.errors || `Request gagal (${res.status})`);
   }
 
-  if (!response.ok) {
-    const msg = responseBody?.errors || `Request gagal (${response.status})`;
-    throw new Error(msg);
-  }
-
-  if (!isJson || !responseBody || typeof responseBody !== "object") {
+  if (!isJson || !json || typeof json !== "object") {
     throw new Error(`Format response API tidak valid: ${endpoint}`);
   }
 
-  return responseBody;
+  return json;
 }
 
 function formatDate(value) {
@@ -183,6 +178,7 @@ async function loadPosts() {
     if (!Array.isArray(result.data)) {
       throw new Error("Format data post tidak valid dari API");
     }
+    applyPostsFromApi(result.data);
   } catch (error) {
     posts.value = { kansei: [], chukan: [] };
     loadPostsError.value = error.message || "投稿データの取得に失敗しました";
@@ -190,6 +186,7 @@ async function loadPosts() {
     isLoadingPosts.value = false;
   }
 }
+
 
 function togglePostForm(section) {
   showPostForm.value[section] = !showPostForm.value[section];

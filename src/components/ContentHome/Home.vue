@@ -29,7 +29,7 @@ import BaseSlideImage from "./SlideImage.vue";
     <div class="mx-auto grid max-w-2xl grid-cols-1 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
       <div class="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:w-full lg:max-w-7xl">
         <div class="lg:pr-4">
-          <div class="lg:max-w-lg pb-6">
+          <div class="lg:max-w-lg pb-6 pl-10">
             <p class="text-base/7 font-semibold text-indigo-400">内容</p>
             <h1 class="mt-2 text-4xl font-semibold tracking-tight text-pretty sm:text-5xl text-black">土木部</h1>
             <p class="mt-6 text-xl/8 -300 text-black">

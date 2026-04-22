@@ -4,6 +4,7 @@ import {useLocalStorage} from "@vueuse/core";
 import {reactive} from "vue";
 import {userLogin} from "../../lib/api/UserApi.js";
 import {alertError} from "../../lib/alert.js";
+import BaseButtonBack from "../Utilities/UtilitiesHome/ButtonBack.vue";
 
 const router = useRouter();
 const token = useLocalStorage("token", "")
@@ -33,9 +34,11 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <div class="min-h-screen flex items-center justify-center p-4">
+  <div class="min-h-screen flex items-center justify-center p-4 relative">
+    <div class="absolute top-4 left-4">
+      <BaseButtonBack/>
+    </div>
     <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg border border-gray-200">
-
       <div class="text-center">
         <div class="mx-auto h-12 w-12 bg-blue-100 rounded-full flex items-center justify-center">
           <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -92,7 +95,7 @@ async function handleSubmit() {
         <div>
           <button type="submit"
                   class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out shadow-md hover:shadow-lg">
-           ログイン
+            ログイン
           </button>
         </div>
       </form>
