@@ -15,6 +15,9 @@ coverage
 .vite
 .cache
 
+# Local archives and backups
+*.zip
+
 # Environment and local overrides
 .env
 .env.*
