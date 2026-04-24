@@ -38,22 +38,22 @@ const projectsRaw = [
     completionDate: "2024-05-01 - 2026-03-01",
     type: "道路",
     images: [
-      { src: "/construction_img/日南/2024-08-28.webp", takenAt: "2024-08-28" },
-      { src: "/construction_img/日南/2024-09-26.webp", takenAt: "2024-09-26" },
-      { src: "/construction_img/日南/2024-10-23.webp", takenAt: "2024-10-23" },
-      { src: "/construction_img/日南/2024-11-20.webp", takenAt: "2024-11-20" },
-      { src: "/construction_img/日南/2024-12-17.webp", takenAt: "2024-12-17" },
-      { src: "/construction_img/日南/2025-03-26.webp", takenAt: "2025-03-26" },
-      { src: "/construction_img/日南/2025-04-25.webp", takenAt: "2025-04-25" },
-      { src: "/construction_img/日南/2025-05-23.webp", takenAt: "2025-05-23" },
-      { src: "/construction_img/日南/2025-06-30.webp", takenAt: "2025-06-30" },
-      { src: "/construction_img/日南/2025-07-17.webp", takenAt: "2025-07-17" },
-      { src: "/construction_img/日南/2025-08-19.webp", takenAt: "2025-08-19" },
-      { src: "/construction_img/日南/2025-09-19.webp", takenAt: "2025-09-19" },
-      { src: "/construction_img/日南/2025-10-17.webp", takenAt: "2025-10-17" },
-      { src: "/construction_img/日南/2025-11-20.webp", takenAt: "2025-11-20" },
-      { src: "/construction_img/日南/2025-12-23.webp", takenAt: "2025-12-23" },
-      { src: "/construction_img/日南/2026-03-23.webp", takenAt: "2026-03-23" },
+      { src: "/construction_img/日南/2024-08-28.avif", takenAt: "2024-08-28" },
+      { src: "/construction_img/日南/2024-09-26.avif", takenAt: "2024-09-26" },
+      { src: "/construction_img/日南/2024-10-23.avif", takenAt: "2024-10-23" },
+      { src: "/construction_img/日南/2024-11-20.avif", takenAt: "2024-11-20" },
+      { src: "/construction_img/日南/2024-12-17.avif", takenAt: "2024-12-17" },
+      { src: "/construction_img/日南/2025-03-26.avif", takenAt: "2025-03-26" },
+      { src: "/construction_img/日南/2025-04-25.avif", takenAt: "2025-04-25" },
+      { src: "/construction_img/日南/2025-05-23.avif", takenAt: "2025-05-23" },
+      { src: "/construction_img/日南/2025-06-30.avif", takenAt: "2025-06-30" },
+      { src: "/construction_img/日南/2025-07-17.avif", takenAt: "2025-07-17" },
+      { src: "/construction_img/日南/2025-08-19.avif", takenAt: "2025-08-19" },
+      { src: "/construction_img/日南/2025-09-19.avif", takenAt: "2025-09-19" },
+      { src: "/construction_img/日南/2025-10-17.avif", takenAt: "2025-10-17" },
+      { src: "/construction_img/日南/2025-11-20.avif", takenAt: "2025-11-20" },
+      { src: "/construction_img/日南/2025-12-23.avif", takenAt: "2025-12-23" },
+      { src: "/construction_img/日南/2026-03-23.avif", takenAt: "2026-03-23" },
     ],
     badgeLabel: null,
     badgeClass: null,
@@ -77,14 +77,14 @@ const projectsRaw = [
     completionDate: "2025-07-15 - 2026-03-01",
     type: "砂防",
     images: [
-      { src: "/construction_img/奥陰/2025-09-09.webp", takenAt: "2025-09-09" },
-      { src: "/construction_img/奥陰/2025-09-22.webp", takenAt: "2025-09-22" },
-      { src: "/construction_img/奥陰/2025-10-22.webp", takenAt: "2025-10-22" },
-      { src: "/construction_img/奥陰/2025-11-20.webp", takenAt: "2025-11-20" },
-      { src: "/construction_img/奥陰/2025-12-18.webp", takenAt: "2025-12-18" },
-      { src: "/construction_img/奥陰/2026-01-19.webp", takenAt: "2026-01-19" },
-      { src: "/construction_img/奥陰/2026-02-26.webp", takenAt: "2026-02-26" },
-      { src: "/construction_img/奥陰/2026-03-26.webp", takenAt: "2026-03-26" },
+      { src: "/construction_img/奥陰/2025-09-09.avif", takenAt: "2025-09-09" },
+      { src: "/construction_img/奥陰/2025-09-22.avif", takenAt: "2025-09-22" },
+      { src: "/construction_img/奥陰/2025-10-22.avif", takenAt: "2025-10-22" },
+      { src: "/construction_img/奥陰/2025-11-20.avif", takenAt: "2025-11-20" },
+      { src: "/construction_img/奥陰/2025-12-18.avif", takenAt: "2025-12-18" },
+      { src: "/construction_img/奥陰/2026-01-19.avif", takenAt: "2026-01-19" },
+      { src: "/construction_img/奥陰/2026-02-26.avif", takenAt: "2026-02-26" },
+      { src: "/construction_img/奥陰/2026-03-26.avif", takenAt: "2026-03-26" },
     ],
     badgeLabel: null,
     badgeClass: null,
@@ -134,10 +134,10 @@ const projectsRaw = [
     completionDate: "2025-10-09 - 2026-03-06",
     type: "道橋",
     images: [
-      { src: "/construction_img/宮ノ前/2025-11-21.webp", takenAt: "2026-11-26" },
-      { src: "/construction_img/宮ノ前/2025-12-15.webp", takenAt: "2026-12-26" },
-      { src: "/construction_img/宮ノ前/2026-03-11(1).webp", takenAt: "2026-03-11" },
-      { src: "/construction_img/宮ノ前/2026-03-11(2).webp", takenAt: "2026-03-11" },
+      { src: "/construction_img/宮ノ前/2025-11-21.avif", takenAt: "2026-11-26" },
+      { src: "/construction_img/宮ノ前/2025-12-15.avif", takenAt: "2026-12-26" },
+      { src: "/construction_img/宮ノ前/2026-03-11(1).avif", takenAt: "2026-03-11" },
+      { src: "/construction_img/宮ノ前/2026-03-11(2).avif", takenAt: "2026-03-11" },
     ],
     badgeLabel: null,
     badgeClass: null,
@@ -226,7 +226,7 @@ const projectsRaw = [
     completionDate: "2026-03-01 - 2026-12-15",
     type: "砂防堰堤",
     images: [
-      { src: "/construction_img/佐陀/2026-03-11.webp", takenAt: "2026-03-11" },
+      { src: "/construction_img/佐陀/2026-03-11.avif", takenAt: "2026-03-11" },
     ],
     badgeLabel: null,
     badgeClass: null,
@@ -248,7 +248,8 @@ const projectsRaw = [
     completionDate: "2026-03-16 - 2026-11-08",
     type: "砂防堰堤",
     images: [
-      { src: "/construction_img/奥山/2026-03-16.webp", takenAt: "2026-03-16" },
+      { src: "/construction_img/奥山/2026-03-16.avif", takenAt: "2026-03-16" },
+      { src: "/construction_img/奥山/2026-03-16.avif", takenAt: "2026-04-16" },
     ],
     badgeLabel: null,
     badgeClass: null,
@@ -266,8 +267,8 @@ const projectsRaw = [
     completionDate: "2026-02-06 - 2027-05-08",
     type: "道路",
     images: [
-      { src: "/construction_img/新屋/2026-04-08(1).webp", takenAt: "2026-04-08" },
-      { src: "/construction_img/新屋/2026-04-08(2).webp", takenAt: "2026-04-08" },
+      { src: "/construction_img/新屋/2026-04-08(1).avif", takenAt: "2026-04-08" },
+      { src: "/construction_img/新屋/2026-04-08(2).avif", takenAt: "2026-04-08" },
     ],
     badgeLabel: null,
     badgeClass: null,
@@ -459,8 +460,12 @@ onMounted(async () => {
               :src="img.src"
               :alt="`${project.name} - ${idx + 1}`"
               class="w-full h-48 object-cover rounded-xl"
+              width="1280"
+              height="720"
               @error="(e) => (e.target.style.display = 'none')"
               loading="lazy"
+              decoding="async"
+              fetchpriority="low"
           />
           <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between gap-2">
             <span class="text-xs font-bold text-white bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded-full">

@@ -13,18 +13,18 @@ const { saveOne, getOne } = useLocalStorage()
 const { progressColor, statusLabel, badgeColor } = useProgressColor()
 
 const projectsRaw = [
-  { id: 1, name: "美保(5)格納庫等新設舗装工事", code: "", defaultProgress: 75, completionDate: "2026年3月31日", type: "道路", img: "/construction_img/example/ss.png", badgeLabel: null, badgeClass: null, completed: false },
-  { id: 2, name: "鍵掛峠道路日南地区改良工事", code: "", defaultProgress: 15, completionDate: "2026年3月31日", type: "道路", img: "/construction_img/日南/日南.webp", badgeLabel: null, badgeClass: null, completed: false },
-  { id: 3, name: "奥陰田3地区急傾斜地崩壊 対策工事その2", code: "", defaultProgress: 30, completionDate: "2026年3月31日", type: "砂防", img: "/construction_img/奥陰/奥陰.webp", badgeLabel: null, badgeClass: null, completed: false },
-  { id: 4, name: "中山3期営農飲雑用水 (高田工区)工事", code: "", defaultProgress: 100, completionDate: "2026年5月23日", type: "管路工", img: "/construction_img/example/ss.png", badgeLabel: null, badgeClass: null, completed: true },
-  { id: 5, name: "車尾五丁目ほか枝線工事", code: "", defaultProgress: 100, completionDate: "2026年9月30日", type: "枝線", img: "/construction_img/example/ss.png", badgeLabel: null, badgeClass: null, completed: true },
-  { id: 6, name: "県道西伯伯太線(宮ノ前歩道橋) 橋梁塗装工事(2工区)(補助)", code: "", defaultProgress: 100, completionDate: "2026年3月16日", type: "道橋", img: "/construction_img/宮ノ前/宮ノ前.webp", badgeLabel: null, badgeClass: null, completed: true },
-  { id: 7, name: "外港中野地区承水路護岸補修工事 (老朽化対策) (3工区)", code: "", defaultProgress: 100, completionDate: "2026年9月18日", type: "老朽化対策", img: "/construction_img/example/ss.png", badgeLabel: null, badgeClass: null, completed: true },
-  { id: 8, name: "船越地区急傾斜地崩壊対策工事 (2工区)(交付金)(国補正)", code: "", defaultProgress: 100, completionDate: "2026年10月21日", type: "崩壊対策", img: "/construction_img/example/ss.png", badgeLabel: null, badgeClass: null, completed: true },
-  { id: 9, name: "県道大山寺岸本線(小林工区) 電線共同溝設置工事(2工区)(補助)", code: "", defaultProgress: 100, completionDate: "2026年10月30日", type: "共同溝設置", img: "/construction_img/example/ss.png", badgeLabel: null, badgeClass: null, completed: true },
-  { id: 10, name: "佐陀川砂防堰堤(K1)工事(9工区) (補助)(国補正)", code: "", defaultProgress: 100, completionDate: "2026年12月25日", type: "砂防堰堤", img: "/construction_img/佐陀/佐陀.webp", badgeLabel: null, badgeClass: null, completed: true },
-  { id: 11, name: "奥山川砂防堰堤工事(4工区) (交付金)(国補正)", code: "", defaultProgress: 100, completionDate: "2026年11月9日", type: "砂防堰堤", img: "/construction_img/奥山/奥山.webp", badgeLabel: null, badgeClass: null, completed: true },
-  { id: 12, name: "鍵掛峠道路新屋地区 第13改良工事", code: "", defaultProgress: 100, completionDate: "2027年2月26日", type: "道路", img: "/construction_img/新屋/新屋.webp", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 1, name: "美保(5)格納庫等新設舗装工事", code: "", defaultProgress: 75, completionDate: "2026年3月31日", type: "道路", img: "/construction_img/example/daikyo-logo.avif", badgeLabel: null, badgeClass: null, completed: false },
+  { id: 2, name: "鍵掛峠道路日南地区改良工事", code: "", defaultProgress: 15, completionDate: "2026年3月31日", type: "道路", img: "/construction_img/日南/日南.avif", badgeLabel: null, badgeClass: null, completed: false },
+  { id: 3, name: "奥陰田3地区急傾斜地崩壊 対策工事その2", code: "", defaultProgress: 30, completionDate: "2026年3月31日", type: "砂防", img: "/construction_img/奥陰/奥陰.avif", badgeLabel: null, badgeClass: null, completed: false },
+  { id: 4, name: "中山3期営農飲雑用水 (高田工区)工事", code: "", defaultProgress: 100, completionDate: "2026年5月23日", type: "管路工", img: "/construction_img/example/daikyo-logo.avif", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 5, name: "車尾五丁目ほか枝線工事", code: "", defaultProgress: 100, completionDate: "2026年9月30日", type: "枝線", img: "/construction_img/example/daikyo-logo.avif", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 6, name: "県道西伯伯太線(宮ノ前歩道橋) 橋梁塗装工事(2工区)(補助)", code: "", defaultProgress: 100, completionDate: "2026年3月16日", type: "道橋", img: "/construction_img/宮ノ前/宮ノ前.avif", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 7, name: "外港中野地区承水路護岸補修工事 (老朽化対策) (3工区)", code: "", defaultProgress: 100, completionDate: "2026年9月18日", type: "老朽化対策", img: "/construction_img/example/daikyo-logo.avif", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 8, name: "船越地区急傾斜地崩壊対策工事 (2工区)(交付金)(国補正)", code: "", defaultProgress: 100, completionDate: "2026年10月21日", type: "崩壊対策", img: "/construction_img/example/daikyo-logo.avif", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 9, name: "県道大山寺岸本線(小林工区) 電線共同溝設置工事(2工区)(補助)", code: "", defaultProgress: 100, completionDate: "2026年10月30日", type: "共同溝設置", img: "/construction_img/example/daikyo-logo.avif", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 10, name: "佐陀川砂防堰堤(K1)工事(9工区) (補助)(国補正)", code: "", defaultProgress: 100, completionDate: "2026年12月25日", type: "砂防堰堤", img: "/construction_img/佐陀/佐陀.avif", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 11, name: "奥山川砂防堰堤工事(4工区) (交付金)(国補正)", code: "", defaultProgress: 100, completionDate: "2026年11月9日", type: "砂防堰堤", img: "/construction_img/奥山/奥山.avif", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 12, name: "鍵掛峠道路新屋地区 第13改良工事", code: "", defaultProgress: 100, completionDate: "2027年2月26日", type: "道路", img: "/construction_img/新屋/新屋.avif", badgeLabel: null, badgeClass: null, completed: true },
 ]
 
 const drafts = ref(Object.fromEntries(projectsRaw.map(p => [p.id, p.defaultProgress])))
@@ -64,20 +64,6 @@ function applyFilter(label) {
   const nextFilter = normalizeFilter(label)
   activeFilter.value = nextFilter
   localStorage.setItem("construction_filter", nextFilter)
-}
-
-async function saveProject(id) {
-  const val = drafts.value[id]
-  try {
-    await saveOne(id, val)
-    saved.value = { ...saved.value, [id]: val }
-  } catch (e) {
-    console.error(e)
-  }
-}
-
-function discardProject(id) {
-  drafts.value = { ...drafts.value, [id]: saved.value[id] }
 }
 
 function updateDraft(id, val) {
@@ -144,8 +130,11 @@ onMounted(async () => {
                 class="img-el h-full w-full object-cover"
                 :src="p.img"
                 :alt="p.name"
+                width="1280"
+                height="720"
                 loading="lazy"
                 decoding="async"
+                fetchpriority="low"
                 @error="e => e.target.style.display='none'"
             />
 

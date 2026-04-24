@@ -129,7 +129,7 @@ onBeforeMount(async () => {
               <div class="flex items-center space-x-6">
                 <div class="shrink-0 relative">
                   <img class="h-20 w-20 object-cover rounded-full border-2 border-white shadow-md"
-                       src="/img/profile.png" alt="Current profile photo">
+                       src="/img/profile.png" alt="Current profile photo" width="80" height="80" loading="lazy" decoding="async">
                   <button type="button"
                           class="absolute bottom-0 right-0 bg-blue-600 text-white rounded-full p-1.5 hover:bg-blue-700 border-2 border-white shadow-sm"
                           title="Change Photo">

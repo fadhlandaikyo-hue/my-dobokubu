@@ -7,7 +7,7 @@ import BaseSlideImage from "./SlideImage.vue";
 <template>
   <BaseNavbarHome />
   <!-- Header Section 1-->
-  <div class="relative isolate overflow-hidden py-24 sm:py-32 bg-[url(/img/beko.webp)] bg-cover bg-center bg-no-repeat">
+  <div class="relative isolate overflow-hidden py-24 sm:py-32 bg-[url(/img/beko.avif)] bg-cover bg-center bg-no-repeat">
     <div class="pointer-events-none absolute inset-0 bg-black/15" aria-hidden="true"></div>
     <div class="relative mx-auto max-w-7xl px-6 lg:px-8 lg:py-8">
       <div
@@ -28,14 +28,14 @@ import BaseSlideImage from "./SlideImage.vue";
   <div class="relative isolate overflow-hidden px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
     <div class="mx-auto grid max-w-2xl grid-cols-1 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
       <div class="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:w-full lg:max-w-7xl">
-        <div class="lg:pr-4">
-          <div class="lg:max-w-lg pb-6 pl-10">
+
+          <div class="lg:max-w-lg pb-6 pl-8">
             <p class="text-base/7 font-semibold text-indigo-400">内容</p>
             <h1 class="mt-2 text-4xl font-semibold tracking-tight text-pretty sm:text-5xl text-black">土木部</h1>
             <p class="mt-6 text-xl/8 -300 text-black">
               明るい未来を築くために、お客様のビジョンを実現する包括的な計画サービスを提供します
             </p>
-          </div>
+
         </div>
       </div>
       <div class="-mt-12 p-12 lg:col-start-2 lg:row-start-1">

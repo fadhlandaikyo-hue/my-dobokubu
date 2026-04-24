@@ -52,7 +52,7 @@
 
     <div class="p-4 border-t border-gray-100">
       <div class="flex items-center">
-        <img class="h-10 w-10 rounded-full object-cover" src="/img/profile.png" alt="Avatar">
+        <img class="h-10 w-10 rounded-full object-cover" src="/img/profile.png" alt="Avatar" width="40" height="40" loading="lazy" decoding="async">
         <div class="ml-3">
           <p class="text-sm font-medium text-gray-700">Fadhlan</p>
           <RouterLink to="/users/logout" class="text-xs text-blue-600 hover:underline">Logout</RouterLink>

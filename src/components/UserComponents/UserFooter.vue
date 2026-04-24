@@ -12,7 +12,7 @@
         <!-- Brand -->
         <div class="md:col-span-2 space-y-4">
           <div class="flex items-center gap-2  font-semibold text-lg">
-            <img class="h-8 w-auto" src="/img/dk_logo.png" alt="">
+            <img class="h-8 w-auto" src="/img/dk_logo.avif" alt="" width="180" height="60" decoding="async">
           </div>
           <p class="text-sm leading-relaxed  max-w-sm">
 

@@ -1,35 +1,7 @@
 ﻿import { createApp } from 'vue'
 import App from './App.vue'
-import {createRouter, createWebHistory} from "vue-router";
-import UserRegister from "./components/User/UserRegister.vue";
-import UserLogin from "./components/User/UserLogin.vue";
-import ConstructionUser from "./components/ContentUser/ConstructionUser.vue";
-import NavbarHome from "./components/HomeComponents/NavbarHome.vue";
-import FooterHome from "./components/HomeComponents/FooterHome.vue";
-import Member from "./components/ContentUser/Member.vue";
-import NavbarComponents from "./components/UserComponents/NavbarComponents.vue";
-import UserFooter from "./components/UserComponents/UserFooter.vue";
-import UserProfile from "./components/User/UserProfile.vue";
-import SidebarUser from "./components/UserComponents/SidebarUser.vue";
-import UserLogout from "./components/User/UserLogout.vue";
-import InspectionList from "./components/ContentHome/InspectionList.vue";
-import ButtonBack from "./components/Utilities/UtilitiesHome/ButtonBack.vue";
-import SlideImage from "./components/ContentHome/SlideImage.vue";
-import Example from "./components/Example.vue";
-import EquipmentList from "./components/ContentHome/EquipmentList.vue";
-import VehicleList from "./components/ContentHome/VehicleList.vue";
-import UserRegisterCopy from "./components/User/UserRegisterCopy.vue";
-import SidebarHome from "./components/HomeComponents/SidebarHome.vue";
-import Home from "./components/ContentHome/Home.vue";
-import Dashboard from "./components/User/Dashboard.vue";
-import ConstructionList from "./components/ContentHome/ConstructionList.vue";
+import { createRouter, createWebHistory } from "vue-router"
 import './style.css'
-import ProgressBar from "./components/HomeComponents/ProgressBar.vue";
-import ConstructionDetail from "./components/ContentHome/ConstructionDetail.vue";
-import ButtonBackConstruction from "./components/Utilities/UtilitiesHome/ButtonBackConstruction.vue";
-import ProgressBarDetail from "./components/HomeComponents/ProgressBarDetail.vue";
-import InspectionDetail from "./components/ContentHome/InspectionDetail.vue";
-import ButtonBackInspection from "./components/Utilities/UtilitiesHome/ButtonBackInspection.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -42,81 +14,80 @@ const router = createRouter({
     },
     routes: [
         {
-            component: Example,
             path: "/example",
+            component: () => import("./components/Example.vue"),
         },
 
         // Page for Users
         {
             path: "/register",
-            component: UserRegister
+            component: () => import("./components/User/UserRegister.vue"),
         },
         {
             path: "/login",
-            component: UserLogin
+            component: () => import("./components/User/UserLogin.vue"),
         },
         {
             path: "/register-copy",
-            component: UserRegisterCopy
+            component: () => import("./components/User/UserRegisterCopy.vue"),
         },
         {
-            component: Dashboard,
             path: "/dashboard",
-            meta: {requiresAuth: true}
+            component: () => import("./components/User/Dashboard.vue"),
+            meta: { requiresAuth: true }
         },
         {
-            component: UserProfile,
             path: "/dashboard/profile",
-            meta: {requiresAuth: true}
+            component: () => import("./components/User/UserProfile.vue"),
+            meta: { requiresAuth: true }
         },
         {
-            component: ConstructionUser,
             path: "/dashboard/construction",
-            meta: {requiresAuth: true}
+            component: () => import("./components/ContentUser/ConstructionUser.vue"),
+            meta: { requiresAuth: true }
         },
         {
-            component: Member,
             path: "/dashboard/member",
-            meta: {requiresAuth: true}
+            component: () => import("./components/ContentUser/Member.vue"),
+            meta: { requiresAuth: true }
         },
 
         // Page for Public
         {
-            component: Home,
             path: "/",
+            component: () => import("./components/ContentHome/Home.vue"),
         },
         {
             path: "/home",
             redirect: "/",
         },
         {
-            component: ConstructionList,
             path: "/home/construction",
+            component: () => import("./components/ContentHome/ConstructionList.vue"),
         },
         {
-            component: ConstructionDetail,
             path: "/home/construction/:id",
+            component: () => import("./components/ContentHome/ConstructionDetail.vue"),
         },
         {
-            component: InspectionList,
             path: "/home/inspection",
+            component: () => import("./components/ContentHome/InspectionList.vue"),
         },
         {
-            component: InspectionDetail,
             path: "/home/inspection/:id",
+            component: () => import("./components/ContentHome/InspectionDetail.vue"),
         },
         {
-            component: EquipmentList,
             path: "/home/equipment",
+            component: () => import("./components/ContentHome/EquipmentList.vue"),
         },
         {
-            component: VehicleList,
             path: "/home/vehicle",
+            component: () => import("./components/ContentHome/VehicleList.vue"),
         },
-
         {
-            component: UserLogout,
             path: "/users/logout",
+            component: () => import("./components/User/UserLogout.vue"),
         }
     ]
 })
@@ -125,33 +96,12 @@ router.beforeEach((to, from, next) => {
     const token = localStorage.getItem("token")
 
     if (to.meta.requiresAuth && !token) {
-        next("/login") // belum login 竊・lempar ke login
+        next("/login")
     } else if (to.path === "/login" && token) {
-        next("/dashboard") // sudah login 竊・jangan balik ke login
+        next("/dashboard")
     } else {
         next()
     }
 })
 
-
-// Home Components
-const app = createApp(App)
-app.component('BaseNavbarHome', NavbarHome)
-app.component('BaseFooterHome', FooterHome)
-app.component('BaseSlideImage', SlideImage)
-app.component('BaseSideBarHome', SidebarHome)
-app.component('BaseProgressBar', ProgressBar)
-app.component('BaseProgressBarDetail', ProgressBarDetail)
-
-// User Components
-app.component('UserNavbar', NavbarComponents)
-app.component('UserFooter', UserFooter)
-app.component('BaseSidebar', SidebarUser)
-
-//Utilities
-app.component('BaseButtonBack', ButtonBack)
-app.component('BaseButtonBackConstruction', ButtonBackConstruction)
-app.component('BaseButtonBackInspection', ButtonBackInspection)
-
-app.use(router).mount('#app')
-
+createApp(App).use(router).mount('#app')
