@@ -12,8 +12,8 @@ const route = useRoute();
 const fileFilters = [
   { label: "全ファイル", value: "all" },
   { label: "PDF", value: "pdf" },
-  { label: "DOCX", value: "word" },
-  { label: "XLSX", value: "excel" },
+  { label: "DOCX", value: "docx" },
+  { label: "XLSX", value: "xlsx" },
 ];
 
 const fileThemes = {
@@ -46,7 +46,7 @@ const fileThemes = {
   },
 };
 
-const equipmentFiles = [
+const Files = [
   {
     title: "機器名と管理番号",
     description: "機器名と管理番号の一覧ファイル",
@@ -73,7 +73,7 @@ const equipmentFiles = [
     filename: "社内報取材.docx",
     path: "/files/社内報取材.docx",
     fileType: "word",
-    type: "DOCX",
+    type: "WORD",
     size: "18 KB",
     updatedAt: "2026-04-27",
   },
@@ -84,9 +84,9 @@ const activeFileType = computed(() => {
   return fileFilters.some((filter) => filter.value === fileType) ? fileType : "all";
 });
 
-const filteredEquipmentFiles = computed(() => {
-  if (activeFileType.value === "all") return equipmentFiles;
-  return equipmentFiles.filter((file) => file.fileType === activeFileType.value);
+const filteredFiles = computed(() => {
+  if (activeFileType.value === "all") return Files;
+  return Files.filter((file) => file.fileType === activeFileType.value);
 });
 
 function themeFor(fileType) {
@@ -125,22 +125,22 @@ function requestPasswordAndDownload(file) {
   showModal.value = true;
 
   setTimeout(() => {
-    document.getElementById("equipment-pw-input")?.focus();
+    document.getElementById("files-pw-input")?.focus();
   }, 100);
 }
 
 function goToFile(file) {
-  router.push(`/home/equipment/${file.fileType}`);
+  router.push(`/home/files/${file.fileType}`);
   requestPasswordAndDownload(file);
 }
 
 function applyFilter(filter) {
   if (filter.value === "all") {
-    router.push("/home/equipment");
+    router.push("/home/files");
     return;
   }
 
-  router.push(`/home/equipment/${filter.value}`);
+  router.push(`/home/files/${filter.value}`);
 }
 
 function closeModal() {
@@ -160,7 +160,7 @@ function confirmDownload() {
     }, 500);
 
     passwordInput.value = "";
-    document.getElementById("equipment-pw-input")?.focus();
+    document.getElementById("files-pw-input")?.focus();
     return;
   }
 
@@ -214,7 +214,7 @@ function onModalKeydown(event) {
           </div>
 
           <button
-              v-for="file in filteredEquipmentFiles"
+              v-for="file in filteredFiles"
               :key="file.path"
               type="button"
               class="grid w-full grid-cols-12 items-center gap-3 border-b border-gray-100 px-5 py-4 text-left transition last:border-b-0 focus:outline-none focus:ring-2 focus:ring-inset"
@@ -253,7 +253,7 @@ function onModalKeydown(event) {
           </button>
 
           <div
-              v-if="filteredEquipmentFiles.length === 0"
+              v-if="filteredFiles.length === 0"
               class="px-5 py-12 text-center text-sm text-gray-500"
           >
             選択したファイル形式のファイルはありません。
@@ -302,7 +302,7 @@ function onModalKeydown(event) {
           <label class="mb-1.5 block text-xs font-semibold text-gray-600">パスワード</label>
           <div class="relative">
             <input
-                id="equipment-pw-input"
+                id="files-pw-input"
                 v-model="passwordInput"
                 :type="showPassword ? 'text' : 'password'"
                 placeholder="パスワードを入力してください..."

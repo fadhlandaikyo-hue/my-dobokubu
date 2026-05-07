@@ -1,335 +1,120 @@
 ﻿<script setup>
+import { ref, computed } from "vue"
+import { useRouter } from "vue-router"
+import BaseNavbarHome from "../HomeComponents/NavbarHome.vue"
+import BaseFooterHome from "../HomeComponents/FooterHome.vue"
+import BaseButtonBack from "../Utilities/UtilitiesHome/ButtonBack.vue"
 
-import BaseNavbarHome from "../HomeComponents/NavbarHome.vue";
-import BaseFooterHome from "../HomeComponents/FooterHome.vue";
-import BaseButtonBack from "../Utilities/UtilitiesHome/ButtonBack.vue";
+const router = useRouter()
+
+const projects = [
+  { id: 1, code: 'K-001', name: '美保(5)格納庫等新設舗装工事',              type: '道路',       contractor: '小島' },
+  { id: 2, code: 'K-002', name: '美保(5)格納庫等新設舗装工事',              type: '道路',       contractor: '池岡、内田' },
+  { id: 3, code: 'K-003', name: '奥陰田3地区急傾斜地崩壊対策工事その2',     type: '砂防',       contractor: '長谷川、岩田ひ' },
+  { id: 4, code: 'K-004', name: '中山3期営農飲雑用水(高田工区)工事',        type: '管路工',     contractor: '岩田こ' },
+  { id: 5, code: 'K-005', name: '車尾五丁目ほか枝線工事',                   type: '枝線',       contractor: '西中' },
+  { id: 6, code: 'K-006', name: '県道西伯伯太線(宮ノ前歩道橋)橋梁塗装工事', type: '道橋',       contractor: '今中' },
+  { id: 7, code: 'K-007', name: '外港中野地区承水路護岸補修工事',            type: '老朽化対策', contractor: '篠原' },
+  { id: 8, code: 'K-008', name: '船越地区急傾斜地崩壊対策工事',             type: '崩壊対策',   contractor: '坪倉' },
+  { id: 9, code: 'K-009', name: '県道大山寺岸本線電線共同溝設置工事',        type: '共同溝設置', contractor: '西本' },
+  { id: 10, code: 'K-010', name: '佐陀川砂防堰堤(K1)工事',                 type: '砂防堰堤',   contractor: '菊川' },
+  { id: 11, code: 'K-011', name: '奥山川砂防堰堤工事',                      type: '砂防堰堤',   contractor: '内田' },
+  { id: 12, code: 'K-012', name: '鍵掛峠道路新屋地区第13改良工事',           type: '道路',       contractor: '池岡' },
+]
+
+const query = ref('')
+const filtered = computed(() => {
+  const q = query.value.trim().toLowerCase()
+  if (!q) return projects
+  return projects.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.code.toLowerCase().includes(q) ||
+      p.contractor.includes(q) ||
+      p.type.includes(q)
+  )
+})
+
+function goToCounter(id) {
+  router.push(`/home/inspection-counter/${id}`)
+}
 </script>
 
 <template>
-  <BaseNavbarHome/>
+  <BaseNavbarHome />
 
-  <div class="bg-slate-50">
-    <section class="mx-auto min-h-screen max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
+  <div class="min-h-screen bg-gray-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <BaseButtonBack />
 
-      <div class="mt-8 rounded-3xl border border-slate-200 bg-white px-6 py-20 text-center shadow-sm sm:px-10">
-        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">
-          車両
-        </p>
-        <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-          近日公開
-        </h1>
-        <p class="mt-4 text-base text-slate-600 sm:text-lg">
-          このページは現在準備中です
-        </p>
+      <!-- Page header -->
+      <div class="mt-6 mb-8 flex items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-blue-500 flex items-center justify-center shadow-md">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900">検査対策一覧</h1>
+          <p class="text-sm text-gray-500 mt-0.5">工事を選択して安全検査チェックリストを記入できます</p>
+        </div>
       </div>
-    </section>
-  </div>
 
-  <!-- Previous Equipment List content is temporarily disabled.
-    <div class="bg-white border-gray-200 py-10">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <BaseButtonBack/>
-        <div class="text-center max-w-2xl mx-auto mb-8">
-          <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">その他</h1>
-          <p class="mt-3 text-lg text-gray-500">その他</p>
+      <!-- Search bar -->
+      <div class="relative mb-6">
+        <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input
+            v-model="query"
+            type="text"
+            placeholder="工事名・コード・担当者で検索"
+            class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all"
+        />
+      </div>
+
+      <!-- Project list -->
+      <div class="space-y-3">
+        <div
+            v-for="p in filtered"
+            :key="p.id"
+            class="w-full text-left bg-white rounded-2xl border border-gray-200 p-5 flex items-center gap-5 hover:border-blue-300 hover:shadow-md transition-all duration-200 group cursor-pointer"
+            @click="goToCounter(p.id)"
+        >
+          <div class="shrink-0 w-16 h-16 rounded-xl bg-blue-50 flex flex-col items-center justify-center">
+            <span class="text-xs text-blue-400 font-semibold leading-none">番号</span>
+            <span class="text-lg font-bold text-blue-600 leading-tight">{{ p.id }}</span>
+          </div>
+
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs font-mono text-gray-400">{{ p.code }}</span>
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-100">{{ p.type }}</span>
+            </div>
+            <p class="text-sm font-semibold text-gray-800 leading-snug truncate">{{ p.name }}</p>
+            <p class="text-xs text-gray-500 mt-1">担当者: {{ p.contractor }}</p>
+          </div>
+
+          <div class="flex items-center gap-2 shrink-0">
+            <svg class="w-5 h-5 text-orange-300 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            <svg class="w-5 h-5 text-gray-300 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
         </div>
 
-        <div class="flex justify-center space-x-2">
-          <span class="px-4 py-2 rounded-full bg-blue-100 text-blue-800 text-sm font-semibold cursor-pointer border border-blue-200">その他</span>
-          <span class="px-4 py-2 rounded-full bg-white text-gray-600 text-sm font-medium hover:bg-gray-50 cursor-pointer border border-gray-200 transition">その他</span>
-          <span class="px-4 py-2 rounded-full bg-white text-gray-600 text-sm font-medium hover:bg-gray-50 cursor-pointer border border-gray-200 transition">その他</span>
+        <div v-if="filtered.length === 0" class="py-20 text-center text-gray-400">
+          <svg class="w-12 h-12 mx-auto mb-3 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <p class="text-sm">該当する工事が見つかりません</p>
         </div>
       </div>
     </div>
+  </div>
 
-    <main class="flex-grow px-4 sm:px-6 lg:px-8">
-      <div class="max-w-7xl mx-auto">
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-          <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition duration-300 group">
-            <div class="relative h-48 bg-gray-200">
-              <img src="/img/unik.jpg" class="w-full h-full object-cover" alt="Dump Truck" width="1280" height="720" loading="lazy" decoding="async">
-              <div class="absolute top-3 right-3">
-                              <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200 shadow-sm backdrop-blur-md bg-opacity-90">
-                                  <span class="w-2 h-2 mr-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                                  その他(45 km/h)
-                              </span>
-              </div>
-              <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm px-2 py-1 rounded text-white text-xs font-mono flex items-center">
-                <svg class="w-3 h-3 mr-1 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.172 2.828a1 1 0 00-1.414-1.414l-1 1a1 1 0 001.414 1.414l1-1zM11 5a1 1 0 011 1v4a1 1 0 11-2 0V6a1 1 0 011-1zm6.243 1.343a1 1 0 01-1.415-1.414l-1 1a1 1 0 011.415 1.414l1-1z" clip-rule="evenodd"></path></svg>
-                その他 65%
-              </div>
-            </div>
-            <div class="p-5">
-              <div class="flex justify-between items-start mb-3">
-                <div>
-                  <h3 class="text-lg font-bold text-gray-900">その他</h3>
-                  <p class="text-xs text-gray-500">Honda</p>
-                </div>
-                <div class="bg-black text-white px-2 py-1 rounded border-2 border-white shadow-sm">
-                  <div>
-                    <span class="text-xs font-mono font-bold tracking-widest">その他</span>
-                  </div>
-                  <div>
-                    <span class="text-xs font-mono font-bold tracking-widest">その他</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="bg-gray-50 rounded-lg p-3 space-y-2 mb-4 border border-gray-100">
-                <div class="flex items-center text-sm text-gray-600">
-                  <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                  <span class="font-medium">その他</span>&nbsp;その他
-                </div>
-                <div class="flex items-center text-sm text-gray-600">
-                  <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                  <span class="font-medium">その他</span>&nbsp;その他
-                </div>
-              </div>
-
-              <div class="w-full bg-blue-50 text-blue-700 text-xs font-semibold py-2 rounded text-center border border-blue-100">
-                その他
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition duration-300 group">
-            <div class="relative h-48 bg-gray-200">
-              <img src="/img/bekekcil.jpeg" class="w-full h-full object-cover" alt="Mixer Truck" width="1280" height="720" loading="lazy" decoding="async">
-              <div class="absolute top-3 right-3">
-                              <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 border border-blue-200 shadow-sm backdrop-blur-md bg-opacity-90">
-                                  <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                                 その他
-                              </span>
-              </div>
-              <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm px-2 py-1 rounded text-white text-xs font-mono flex items-center">
-                <svg class="w-3 h-3 mr-1 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.172 2.828a1 1 0 00-1.414-1.414l-1 1a1 1 0 001.414 1.414l1-1zM11 5a1 1 0 011 1v4a1 1 0 11-2 0V6a1 1 0 011-1zm6.243 1.343a1 1 0 01-1.415-1.414l-1 1a1 1 0 011.415 1.414l1-1z" clip-rule="evenodd"></path></svg>
-                その他: 90%
-              </div>
-            </div>
-            <div class="p-5">
-              <div class="flex justify-between items-start mb-3">
-                <div>
-                  <h3 class="text-lg font-bold text-gray-900">その他</h3>
-                  <p class="text-xs text-gray-500">Honda</p>
-                </div>
-                <div class="bg-black text-white px-2 py-1 rounded border-2 border-white shadow-sm">
-                  <div>
-                    <span class="text-xs font-mono font-bold tracking-widest">その他300</span>
-                  </div>
-                  <div>
-                    <span class="text-xs font-mono font-bold tracking-widest">その他12-34</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="bg-gray-50 rounded-lg p-3 space-y-2 mb-4 border border-gray-100">
-                <div class="flex items-center text-sm text-gray-600">
-                  <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                  <span class="font-medium">その他</span>&nbsp;その他
-                </div>
-                <div class="flex items-center text-sm text-gray-600">
-                  <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                  <span class="font-medium">その他</span>&nbsp;その他
-                </div>
-              </div>
-
-              <div class="w-full bg-blue-50 text-blue-700 text-xs font-semibold py-2 rounded text-center border border-blue-100">
-                その他
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition duration-300 group">
-            <div class="relative h-48 bg-gray-200">
-              <img src="/img/kolbak.jpg" class="w-full h-full object-cover" alt="Pickup" width="1280" height="720" loading="lazy" decoding="async">
-              <div class="absolute top-3 right-3">
-                              <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200 shadow-sm backdrop-blur-md bg-opacity-90">
-                                  <span class="w-2 h-2 mr-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                                  その他(80 km/h)
-                              </span>
-              </div>
-              <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm px-2 py-1 rounded text-white text-xs font-mono flex items-center">
-                <svg class="w-3 h-3 mr-1 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.172 2.828a1 1 0 00-1.414-1.414l-1 1a1 1 0 001.414 1.414l1-1zM11 5a1 1 0 011 1v4a1 1 0 11-2 0V6a1 1 0 011-1zm6.243 1.343a1 1 0 01-1.415-1.414l-1 1a1 1 0 011.415 1.414l1-1z" clip-rule="evenodd"></path></svg>
-                その他: 40%
-              </div>
-            </div>
-            <div class="p-5">
-              <div class="flex justify-between items-start mb-3">
-                <div>
-                  <h3 class="text-lg font-bold text-gray-900">その他</h3>
-                  <p class="text-xs text-gray-500">Honda</p>
-                </div>
-                <div class="bg-black text-white px-2 py-1 rounded border-2 border-white shadow-sm">
-                  <div>
-                    <span class="text-xs font-mono font-bold tracking-widest">その他300</span>
-                  </div>
-                  <div>
-                    <span class="text-xs font-mono font-bold tracking-widest">その他12-34</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="bg-gray-50 rounded-lg p-3 space-y-2 mb-4 border border-gray-100">
-                <div class="flex items-center text-sm text-gray-600">
-                  <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                  <span class="font-medium">その他</span>&nbsp;その他
-                </div>
-                <div class="flex items-center text-sm text-gray-600">
-                  <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                  <span class="font-medium">その他</span>&nbsp;その他
-                </div>
-              </div>
-
-              <div class="w-full bg-green-50 text-green-700 text-xs font-semibold py-2 rounded text-center border border-green-100">
-                その他
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition duration-300 group opacity-90">
-            <div class="relative h-48 bg-gray-200">
-              <img src="/img/bekobesar.jpg" class="w-full h-full object-cover" alt="Trailer" width="1280" height="720" loading="lazy" decoding="async">
-              <div class="absolute top-3 right-3">
-                              <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-gray-800 text-white border border-gray-600 shadow-sm backdrop-blur-md bg-opacity-90">
-                                  その他
-                              </span>
-              </div>
-            </div>
-            <div class="p-5">
-              <div class="flex justify-between items-start mb-3">
-                <div>
-                  <h3 class="text-lg font-bold text-gray-900">その他</h3>
-                  <p class="text-xs text-gray-500">Honda</p>
-                </div>
-                <div class="bg-black text-white px-2 py-1 rounded border-2 border-white shadow-sm">
-                  <div>
-                    <span class="text-xs font-mono font-bold tracking-widest">その他300</span>
-                  </div>
-                  <div>
-                    <span class="text-xs font-mono font-bold tracking-widest">その他12-34</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="bg-gray-50 rounded-lg p-3 space-y-2 mb-4 border border-gray-100">
-                <div class="flex items-center text-sm text-gray-600">
-                  <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                  <span class="font-medium">その他</span>&nbsp;その他
-                </div>
-                <div class="flex items-center text-sm text-gray-600">
-                  <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                  <span class="font-medium">その他</span>&nbsp;その他
-                </div>
-              </div>
-
-              <div class="w-full bg-gray-100 text-gray-600 text-xs font-semibold py-2 rounded text-center border border-gray-200">
-                その他
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition duration-300 group">
-            <div class="relative h-48 bg-gray-200">
-              <img src="/img/kolbak2.jpg" class="w-full h-full object-cover" alt="Water Tank" width="1280" height="720" loading="lazy" decoding="async">
-              <div class="absolute top-3 right-3">
-                              <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200 shadow-sm backdrop-blur-md bg-opacity-90">
-                                  <span class="w-2 h-2 mr-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                                  その他
-                              </span>
-              </div>
-              <div class="absolute bottom-3 left-3 bg-black/60 backdrop-blur-sm px-2 py-1 rounded text-white text-xs font-mono flex items-center">
-                <svg class="w-3 h-3 mr-1 text-red-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.172 2.828a1 1 0 00-1.414-1.414l-1 1a1 1 0 001.414 1.414l1-1zM11 5a1 1 0 011 1v4a1 1 0 11-2 0V6a1 1 0 011-1zm6.243 1.343a1 1 0 01-1.415-1.414l-1 1a1 1 0 011.415 1.414l1-1z" clip-rule="evenodd"></path></svg>
-                その他: 20%
-              </div>
-            </div>
-            <div class="p-5">
-              <div class="flex justify-between items-start mb-3">
-                <div>
-                  <h3 class="text-lg font-bold text-gray-900">その他</h3>
-                  <p class="text-xs text-gray-500">Honda</p>
-                </div>
-                <div class="bg-black text-white px-2 py-1 rounded border-2 border-white shadow-sm">
-                  <div>
-                    <span class="text-xs font-mono font-bold tracking-widest">その他300</span>
-                  </div>
-                  <div>
-                    <span class="text-xs font-mono font-bold tracking-widest">その他12-34</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="bg-gray-50 rounded-lg p-3 space-y-2 mb-4 border border-gray-100">
-                <div class="flex items-center text-sm text-gray-600">
-                  <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                  <span class="font-medium">その他</span>&nbsp;その他
-                </div>
-                <div class="flex items-center text-sm text-gray-600">
-                  <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                  <span class="font-medium">その他</span>&nbsp;その他
-                </div>
-              </div>
-
-              <div class="w-full bg-red-50 text-red-700 text-xs font-semibold py-2 rounded text-center border border-red-100 flex justify-center items-center">
-                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                その他
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-lg transition duration-300 group ring-2 ring-red-50">
-            <div class="relative h-48 bg-gray-200">
-              <div class="absolute inset-0 bg-red-500 bg-opacity-10 pointer-events-none z-10"></div>
-              <img src="/img/kolbak3.jpg" class="w-full h-full object-cover grayscale" alt="Crane Truck" width="1280" height="720" loading="lazy" decoding="async">
-              <div class="absolute top-3 right-3 z-20">
-                              <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 border border-red-200 shadow-sm backdrop-blur-md bg-opacity-90">
-                                  その他
-                              </span>
-              </div>
-            </div>
-            <div class="p-5">
-              <div class="flex justify-between items-start mb-3">
-                <div>
-                  <h3 class="text-lg font-bold text-gray-900">その他</h3>
-                  <p class="text-xs text-gray-500">Honda</p>
-                </div>
-                <div class="bg-black text-white px-2 py-1 rounded border-2 border-white shadow-sm">
-                  <div>
-                    <span class="text-xs font-mono font-bold tracking-widest">その他300</span>
-                  </div>
-                  <div>
-                    <span class="text-xs font-mono font-bold tracking-widest">その他12-34</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="bg-gray-50 rounded-lg p-3 space-y-2 mb-4 border border-gray-100">
-                <div class="flex items-center text-sm text-gray-600">
-                  <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                  <span class="font-medium">その他</span>&nbsp;その他
-                </div>
-                <div class="flex items-center text-sm text-gray-600">
-                  <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                  <span class="font-medium">その他</span>&nbsp;その他
-                </div>
-              </div>
-
-              <div class="w-full bg-red-50 text-red-700 text-xs font-semibold py-2 rounded text-center border border-red-100">
-                その他
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </main>
-    -->
-    <BaseFooterHome/>
-  </template>
-
-  <style scoped>
-
-  </style>
-
+  <BaseFooterHome />
+</template>

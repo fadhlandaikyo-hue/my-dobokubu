@@ -1,18 +1,18 @@
 <script setup>
 import {ref, computed, onMounted} from "vue"
-import { useRoute } from "vue-router"
+import {useRoute} from "vue-router"
 import BaseNavbarHome from "../HomeComponents/NavbarHome.vue"
 import BaseFooterHome from "../HomeComponents/FooterHome.vue"
 import BaseButtonBack from "../Utilities/UtilitiesHome/ButtonBack.vue"
 import BaseButtonBackConstruction from "../Utilities/UtilitiesHome/ButtonBackConstruction.vue"
 import BaseProgressBarDetail from "../HomeComponents/ProgressBarDetail.vue"
-import { useProgressColor } from "./composables/useProgressColor.js"
-import { useLocalStorage } from "./composables/useLocalStorage.js"
+import {useProgressColor} from "./composables/useProgressColor.js"
+import {useLocalStorage} from "./composables/useLocalStorage.js"
 import "./constructiondetail.css"
 
 const route = useRoute()
-const { saveOne, getOne } = useLocalStorage()
-const { progressColor, statusLabel, badgeColor } = useProgressColor()
+const {saveOne, getOne} = useLocalStorage()
+const {progressColor, statusLabel, badgeColor} = useProgressColor()
 
 const CORRECT_PASSWORD = "191101"
 
@@ -23,7 +23,7 @@ const projectsRaw = [
     code: "20250009",
     completionDate: "2023-11-08 - 2026-03-01",
     type: "道路",
-    images: [{ src: "", takenAt: "2026-03-01" }],
+    images: [{src: "", takenAt: "2026-03-01"}],
     badgeLabel: null,
     badgeClass: null,
     completed: false,
@@ -38,35 +38,27 @@ const projectsRaw = [
     completionDate: "2024-05-01 - 2026-03-01",
     type: "道路",
     images: [
-      { src: "/construction_img/日南/2024-08-28.avif", takenAt: "2024-08-28" },
-      { src: "/construction_img/日南/2024-09-26.avif", takenAt: "2024-09-26" },
-      { src: "/construction_img/日南/2024-10-23.avif", takenAt: "2024-10-23" },
-      { src: "/construction_img/日南/2024-11-20.avif", takenAt: "2024-11-20" },
-      { src: "/construction_img/日南/2024-12-17.avif", takenAt: "2024-12-17" },
-      { src: "/construction_img/日南/2025-03-26.avif", takenAt: "2025-03-26" },
-      { src: "/construction_img/日南/2025-04-25.avif", takenAt: "2025-04-25" },
-      { src: "/construction_img/日南/2025-05-23.avif", takenAt: "2025-05-23" },
-      { src: "/construction_img/日南/2025-06-30.avif", takenAt: "2025-06-30" },
-      { src: "/construction_img/日南/2025-07-17.avif", takenAt: "2025-07-17" },
-      { src: "/construction_img/日南/2025-08-19.avif", takenAt: "2025-08-19" },
-      { src: "/construction_img/日南/2025-09-19.avif", takenAt: "2025-09-19" },
-      { src: "/construction_img/日南/2025-10-17.avif", takenAt: "2025-10-17" },
-      { src: "/construction_img/日南/2025-11-20.avif", takenAt: "2025-11-20" },
-      { src: "/construction_img/日南/2025-12-23.avif", takenAt: "2025-12-23" },
-      { src: "/construction_img/日南/2026-03-23.avif", takenAt: "2026-03-23" },
+      {src: "/construction_img/日南/2024-08-28.avif", takenAt: "2024-08-28"},
+      {src: "/construction_img/日南/2024-09-26.avif", takenAt: "2024-09-26"},
+      {src: "/construction_img/日南/2024-10-23.avif", takenAt: "2024-10-23"},
+      {src: "/construction_img/日南/2024-11-20.avif", takenAt: "2024-11-20"},
+      {src: "/construction_img/日南/2024-12-17.avif", takenAt: "2024-12-17"},
+      {src: "/construction_img/日南/2025-03-26.avif", takenAt: "2025-03-26"},
+      {src: "/construction_img/日南/2025-04-25.avif", takenAt: "2025-04-25"},
+      {src: "/construction_img/日南/2025-05-23.avif", takenAt: "2025-05-23"},
+      {src: "/construction_img/日南/2025-06-30.avif", takenAt: "2025-06-30"},
+      {src: "/construction_img/日南/2025-07-17.avif", takenAt: "2025-07-17"},
+      {src: "/construction_img/日南/2025-08-19.avif", takenAt: "2025-08-19"},
+      {src: "/construction_img/日南/2025-09-19.avif", takenAt: "2025-09-19"},
+      {src: "/construction_img/日南/2025-10-17.avif", takenAt: "2025-10-17"},
+      {src: "/construction_img/日南/2025-11-20.avif", takenAt: "2025-11-20"},
+      {src: "/construction_img/日南/2025-12-23.avif", takenAt: "2025-12-23"},
+      {src: "/construction_img/日南/2026-03-23.avif", takenAt: "2026-03-23"},
     ],
     badgeLabel: null,
     badgeClass: null,
     completed: false,
-    description: `工事延長 L = 1,240m
-    道路土工1式(掘削V=15,410m3、盛土 V = 15,190m3)
-    法面工1式(植生工 A = 1 1,620m2、法枠工 A = 1,673m2)
-    擁壁工1式重力式擁壁1式
-    補強盛土工ジオテキスタイル補強土壁1式
-    コンクリートブロック積工A=92m2
-    排水構造物工1式
-    舗装工1式下層路盤(C-40 t = 1 ) A = 3 3,800m2
-    仮設工1式`,
+    description: `-`,
     location: "-",
     contractor: "池岡、内田",
   },
@@ -77,14 +69,14 @@ const projectsRaw = [
     completionDate: "2025-07-15 - 2026-03-01",
     type: "砂防",
     images: [
-      { src: "/construction_img/奥陰/2025-09-09.avif", takenAt: "2025-09-09" },
-      { src: "/construction_img/奥陰/2025-09-22.avif", takenAt: "2025-09-22" },
-      { src: "/construction_img/奥陰/2025-10-22.avif", takenAt: "2025-10-22" },
-      { src: "/construction_img/奥陰/2025-11-20.avif", takenAt: "2025-11-20" },
-      { src: "/construction_img/奥陰/2025-12-18.avif", takenAt: "2025-12-18" },
-      { src: "/construction_img/奥陰/2026-01-19.avif", takenAt: "2026-01-19" },
-      { src: "/construction_img/奥陰/2026-02-26.avif", takenAt: "2026-02-26" },
-      { src: "/construction_img/奥陰/2026-03-26.avif", takenAt: "2026-03-26" },
+      {src: "/construction_img/奥陰/2025-09-09.avif", takenAt: "2025-09-09"},
+      {src: "/construction_img/奥陰/2025-09-22.avif", takenAt: "2025-09-22"},
+      {src: "/construction_img/奥陰/2025-10-22.avif", takenAt: "2025-10-22"},
+      {src: "/construction_img/奥陰/2025-11-20.avif", takenAt: "2025-11-20"},
+      {src: "/construction_img/奥陰/2025-12-18.avif", takenAt: "2025-12-18"},
+      {src: "/construction_img/奥陰/2026-01-19.avif", takenAt: "2026-01-19"},
+      {src: "/construction_img/奥陰/2026-02-26.avif", takenAt: "2026-02-26"},
+      {src: "/construction_img/奥陰/2026-03-26.avif", takenAt: "2026-03-26"},
     ],
     badgeLabel: null,
     badgeClass: null,
@@ -93,7 +85,8 @@ const projectsRaw = [
     砂防土工一式
     法面工一式
     仮設工一式`,
-    location: "-",
+    location: "鳥取県米子市陰田町地内",
+    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d904.5526520373922!2d133.32948553888713!3d35.40691549907043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzXCsDI0JzI1LjAiTiAxMzPCsDE5JzQ4LjAiRQ!5e1!3m2!1sid!2sjp!4v1777270106487!5m2!1sid!2sjp",
     contractor: "長谷川、岩田ひ",
   },
   {
@@ -102,7 +95,7 @@ const projectsRaw = [
     code: "20250006",
     completionDate: "2025-09-09 - 2026-05-09",
     type: "管路工",
-    images: [{ src: "", takenAt: "2026-05-09" }],
+    images: [{src: "", takenAt: "2026-05-09"}],
     badgeLabel: null,
     badgeClass: null,
     completed: true,
@@ -110,7 +103,8 @@ const projectsRaw = [
     本線L=975.4m→962.7m
     A路線L=579.0m→578.7m
     B路線L=118.1m`,
-    location: "-",
+    location: "鳥取県西伯郡大山町高田",
+    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3503.9226128821806!2d133.52290130896196!3d35.454418689219814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzXCsDI3JzEzLjAiTiAxMzPCsDMxJzI1LjAiRQ!5e1!3m2!1sid!2sjp!4v1777271398390!5m2!1sid!2sjp",
     contractor: "岩田こ",
   },
   {
@@ -119,7 +113,7 @@ const projectsRaw = [
     code: "20260006",
     completionDate: "2025-09-09 - 2026-09-30",
     type: "枝線",
-    images: [{ src: "", takenAt: "2026-09-30" }],
+    images: [{src: "", takenAt: "2026-09-30"}],
     badgeLabel: null,
     badgeClass: null,
     completed: true,
@@ -134,10 +128,10 @@ const projectsRaw = [
     completionDate: "2025-10-09 - 2026-03-06",
     type: "道橋",
     images: [
-      { src: "/construction_img/宮ノ前/2025-11-21.avif", takenAt: "2026-11-26" },
-      { src: "/construction_img/宮ノ前/2025-12-15.avif", takenAt: "2026-12-26" },
-      { src: "/construction_img/宮ノ前/2026-03-11(1).avif", takenAt: "2026-03-11" },
-      { src: "/construction_img/宮ノ前/2026-03-11(2).avif", takenAt: "2026-03-11" },
+      {src: "/construction_img/宮ノ前/2025-11-21.avif", takenAt: "2026-11-26"},
+      {src: "/construction_img/宮ノ前/2025-12-15.avif", takenAt: "2026-12-26"},
+      {src: "/construction_img/宮ノ前/2026-03-11(1).avif", takenAt: "2026-03-11"},
+      {src: "/construction_img/宮ノ前/2026-03-11(2).avif", takenAt: "2026-03-11"},
     ],
     badgeLabel: null,
     badgeClass: null,
@@ -149,6 +143,7 @@ const projectsRaw = [
     孔食補修工一式
     仮設工一式`,
     location: "-",
+    mapEmbedUrl:"https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d435.1656378281137!2d133.3239725145303!3d35.34101184002479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzXCsDIwJzI4LjAiTiAxMzPCsDE5JzI2LjAiRQ!5e1!3m2!1sid!2sjp!4v1777270345800!5m2!1sid!2sjp",
     contractor: "今中",
   },
   {
@@ -157,7 +152,7 @@ const projectsRaw = [
     code: "20240006",
     completionDate: "2026-02-20 - 2026-09-28",
     type: "老朽化対策",
-    images: [{ src: "", takenAt: "2026-02-20" }],
+    images: [{src: "", takenAt: "2026-02-20"}],
     badgeLabel: null,
     badgeClass: null,
     completed: true,
@@ -172,7 +167,8 @@ const projectsRaw = [
     構造物撤去工
     コンクリート構造物取壊しV=108m3
     殼運搬V=108m3`,
-    location: "-",
+    location: "鳥取県境港市中野町",
+    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d10545.623166593052!2d133.24345820832121!3d35.52724178600848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzXCsDMxJzQ4LjAiTiAxMzPCsDE0JzM4LjAiRQ!5e1!3m2!1sid!2sjp!4v1777267970740!5m2!1sid!2sjp",
     contractor: "篠原",
   },
   {
@@ -181,7 +177,7 @@ const projectsRaw = [
     code: "20250005",
     completionDate: "2026-02-27 - 2026-10-01",
     type: "崩壊対策",
-    images: [{ src: "", takenAt: "2026-03-01" }],
+    images: [{src: "", takenAt: "2026-03-01"}],
     badgeLabel: null,
     badgeClass: null,
     completed: true,
@@ -194,7 +190,8 @@ const projectsRaw = [
     鉄筋挿入工 L = 4 ) N = 27本
     仮設工
     撤去 N = 1 式`,
-    location: "-",
+    location: "鳥取県西伯郡伯耆町船越",
+    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d995.386742814881!2d133.41213572329113!3d35.31239190467777!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzXCsDE4JzQ1LjAiTiAxMzPCsDI0JzQ1LjAiRQ!5e1!3m2!1sid!2sjp!4v1777270812990!5m2!1sid!2sjp",
     contractor: "坪倉",
   },
   {
@@ -203,7 +200,7 @@ const projectsRaw = [
     code: "20250005",
     completionDate: "2026-03-10 - 2026-10-10",
     type: "共同溝設置",
-    images: [{ src: "", takenAt: "2026-03-10" }],
+    images: [{src: "", takenAt: "2026-03-10"}],
     badgeLabel: null,
     badgeClass: null,
     completed: true,
@@ -216,7 +213,8 @@ const projectsRaw = [
     管路L=176.8m
     S型マンホールN=1基
     通信接続桝N=1基`,
-    location: "-",
+    location: "鳥取県西伯郡伯耆町小林",
+    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1164.2770046039059!2d133.5106739104638!3d35.377765926138245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzXCsDIyJzM5LjAiTiAxMzPCsDMwJzQxLjAiRQ!5e1!3m2!1sid!2sjp!4v1777270570589!5m2!1sid!2sjp",
     contractor: "西本",
   },
   {
@@ -226,7 +224,8 @@ const projectsRaw = [
     completionDate: "2026-03-01 - 2026-12-15",
     type: "砂防堰堤",
     images: [
-      { src: "/construction_img/佐陀/2026-03-11.avif", takenAt: "2026-03-11" },
+      {src: "/construction_img/佐陀/2026-03-11.avif", takenAt: "2026-03-11"},
+      {src: "/construction_img/佐陀/2026-04-28.avif", takenAt: "2026-04-28"},
     ],
     badgeLabel: null,
     badgeClass: null,
@@ -238,7 +237,8 @@ const projectsRaw = [
     水叩工V=353m3
     護床工N=72個
     仮設工N=一式`,
-    location: "-",
+    location: "鳥取県西伯郡伯耆町丸山",
+    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3894.761663767313!2d133.47349316962246!3d35.395854098018084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzXCsDIzJzQ2LjAiTiAxMzPCsDI4JzMwLjAiRQ!5e1!3m2!1sid!2sjp!4v1777269053608!5m2!1sid!2sjp",
     contractor: "菊川",
   },
   {
@@ -248,8 +248,9 @@ const projectsRaw = [
     completionDate: "2026-03-16 - 2026-11-08",
     type: "砂防堰堤",
     images: [
-      { src: "/construction_img/奥山/2026-03-16.avif", takenAt: "2026-03-16" },
-      { src: "/construction_img/奥山/2026-03-16.avif", takenAt: "2026-04-16" },
+      {src: "/construction_img/奥山/2026-03-16.avif", takenAt: "2026-03-16"},
+      {src: "/construction_img/奥山/2026-04-16.avif", takenAt: "2026-04-16"},
+      {src: "/construction_img/奥山/2026-04-28.avif", takenAt: "2026-04-28"},
     ],
     badgeLabel: null,
     badgeClass: null,
@@ -257,7 +258,8 @@ const projectsRaw = [
     description: `砂防土工
     埋戻し工V=1,790m3
     コンクリート堰堤工V=989m3`,
-    location: "-",
+    location: "鳥取県西伯郡伯耆町根雨原",
+    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d14489.440137836162!2d133.47875159203832!3d35.31437411503594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzXCsDE5JzA3LjAiTiAxMzPCsDI4JzMyLjAiRQ!5e1!3m2!1sid!2sjp!4v1777269719271!5m2!1sid!2sjp",
     contractor: "内田",
   },
   {
@@ -267,14 +269,23 @@ const projectsRaw = [
     completionDate: "2026-02-06 - 2027-05-08",
     type: "道路",
     images: [
-      { src: "/construction_img/新屋/2026-04-08(1).avif", takenAt: "2026-04-08" },
-      { src: "/construction_img/新屋/2026-04-08(2).avif", takenAt: "2026-04-08" },
+      {src: "/construction_img/新屋/2026-04-08(1).avif", takenAt: "2026-04-08"},
+      {src: "/construction_img/新屋/2026-04-08(2).avif", takenAt: "2026-04-08"},
     ],
     badgeLabel: null,
     badgeClass: null,
     completed: true,
-    description: `-`,
-    location: "-",
+    description: `工事延長 L = 1,240m
+    道路土工1式(掘削V=15,410m3、盛土 V = 15,190m3)
+    法面工1式(植生工 A = 1 1,620m2、法枠工 A = 1,673m2)
+    擁壁工1式重力式擁壁1式
+    補強盛土工ジオテキスタイル補強土壁1式
+    コンクリートブロック積工A=92m2
+    排水構造物工1式
+    舗装工1式下層路盤(C-40 t = 1 ) A = 3 3,800m2
+    仮設工1式`,
+    location: "鳥取県日野郡日南町新屋",
+    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2566.117436563203!2d133.31988953406096!3d35.16499917080911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzXCsDA5JzU0LjAiTiAxMzPCsDE5JzEyLjAiRQ!5e1!3m2!1sid!2sjp!4v1777271202186!5m2!1sid!2sjp",
     contractor: "池岡",
   },
 ]
@@ -282,21 +293,41 @@ const projectsRaw = [
 const projectId = Number(route.params.id)
 const raw = projectsRaw.find((p) => p.id === projectId)
 const defaultProgress = raw?.defaultProgress ?? 0
-const project = ref(raw ? { ...raw, draft: defaultProgress, saved: defaultProgress } : null)
+const project = ref(raw ? {...raw, draft: defaultProgress, saved: defaultProgress} : null)
 
 const isDirty = computed(() => project.value && project.value.draft !== project.value.saved)
+
+const mapEmbedUrl = computed(() => {
+  if (project.value?.mapEmbedUrl) {
+    return project.value.mapEmbedUrl
+  }
+
+  if (project.value?.location && project.value.location !== "-") {
+    return `https://www.google.com/maps?q=${encodeURIComponent(project.value.location)}&output=embed`
+  }
+
+  return ""
+})
+
+const mapLocationLabel = computed(() => {
+  if (project.value?.location && project.value.location !== "-") {
+    return project.value.location
+  }
+
+  return "-"
+})
 
 const projectImages = computed(() => {
   if (!project.value) return []
   if (project.value.images?.length) {
     return project.value.images.map((img) =>
-        typeof img === "string" ? { src: img, takenAt: null } : img,
+        typeof img === "string" ? {src: img, takenAt: null} : img,
     )
   }
   if (project.value.img) {
-    return [{ src: project.value.img, takenAt: null }]
+    return [{src: project.value.img, takenAt: null}]
   }
-  return [{ src: "/building.svg", takenAt: null }]
+  return [{src: "/building.svg", takenAt: null}]
 })
 
 function parseISODate(str) {
@@ -326,7 +357,7 @@ function splitCompletionDate(value) {
 }
 
 function displayDateRange(value) {
-  const { start, end } = splitCompletionDate(value)
+  const {start, end} = splitCompletionDate(value)
   if (!start && !end) return "-"
   return `${formatDisplayDate(start)} - ${formatDisplayDate(end)}`
 }
@@ -337,7 +368,7 @@ const draftEndDate = ref("")
 const pendingSaveType = ref("")
 
 function openDateModal() {
-  const { start, end } = splitCompletionDate(project.value.completionDate)
+  const {start, end} = splitCompletionDate(project.value.completionDate)
   draftStartDate.value = parseISODate(start)
   draftEndDate.value = parseISODate(end)
   showDateModal.value = true
@@ -437,18 +468,18 @@ onMounted(async () => {
 </script>
 
 <template>
-  <BaseNavbarHome />
+  <BaseNavbarHome/>
 
   <div v-if="!project" class="min-h-screen flex items-center justify-center">
     <div class="text-center">
       <p class="text-2xl font-bold text-gray-700 mb-4">Project not found</p>
-      <BaseButtonBack />
+      <BaseButtonBack/>
     </div>
   </div>
 
   <div v-else class="min-h-screen bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <BaseButtonBackConstruction />
+      <BaseButtonBackConstruction/>
 
       <div class="flex snap-x snap-mandatory overflow-x-auto gap-4 px-8 mt-4 pb-2">
         <div
@@ -516,10 +547,19 @@ onMounted(async () => {
               </div>
               <div>
                 <p class="text-xs text-gray-400 uppercase font-semibold mb-1">施工場所</p>
-                <p class="text-sm font-medium text-gray-800">{{ project.location }}</p>
+                <p class="text-sm font-medium text-gray-800">{{ mapLocationLabel }}</p>
+                <div v-if="mapEmbedUrl" class="mt-3 overflow-hidden rounded-xl border border-gray-200 bg-gray-100">
+                  <iframe
+                      :src="mapEmbedUrl"
+                      title="施工場所 Google Maps"
+                      class="h-40 w-full"
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
               </div>
               <div>
-                <p class="text-xs text-gray-400 uppercase font-semibold mb-1">担当者</p>
+                <p class="text-xs text-gray-400 uppercase font-semibold mb-1">監督</p>
                 <p class="text-sm font-medium text-gray-800">{{ project.contractor }}</p>
               </div>
             </div>
@@ -546,7 +586,7 @@ onMounted(async () => {
               <span :style="{ color: progressColor(project.draft) }">{{ project.draft }}%</span>
             </div>
 
-            <BaseProgressBarDetail v-model="project.draft" class="mb-4" />
+            <BaseProgressBarDetail v-model="project.draft" class="mb-4"/>
 
             <div v-if="isDirty" class="flex gap-2 mt-2">
               <button
@@ -577,7 +617,7 @@ onMounted(async () => {
                   class="mt-3 flex items-center gap-2 text-xs font-semibold text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-2"
               >
                 <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                 </svg>
                 保存しました
               </div>
@@ -613,7 +653,7 @@ onMounted(async () => {
   <Teleport to="body">
     <Transition name="modal">
       <div v-if="showDateModal" class="fixed inset-0 z-50 flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="closeDateModal" />
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="closeDateModal"/>
 
         <div class="modal-box relative bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6">
           <div class="flex items-center gap-3 mb-5">
@@ -653,7 +693,7 @@ onMounted(async () => {
 
             <div class="flex items-center justify-center text-gray-300">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
               </svg>
             </div>
 
@@ -705,7 +745,7 @@ onMounted(async () => {
           class="fixed inset-0 z-50 flex items-center justify-center p-4"
           @keydown="onModalKeydown"
       >
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="closeModal" />
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="closeModal"/>
 
         <div
             class="modal-box relative bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6"
@@ -769,7 +809,8 @@ onMounted(async () => {
                 tabindex="-1"
             >
               <svg v-if="!showPassword" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                 <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -820,5 +861,5 @@ onMounted(async () => {
     </Transition>
   </Teleport>
 
-  <BaseFooterHome />
+  <BaseFooterHome/>
 </template>

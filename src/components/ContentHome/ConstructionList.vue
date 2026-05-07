@@ -158,7 +158,6 @@ onMounted(async () => {
               <h3 class="text-xl font-bold text-gray-900 leading-tight">{{ p.name }}</h3>
             </div>
             <p class="text-sm text-gray-500 mb-4">{{ p.code }}</p>
-
             <div class="mt-auto">
               <BaseProgressBar
                   :model-value="p.draft"

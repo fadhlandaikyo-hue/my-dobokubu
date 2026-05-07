@@ -78,12 +78,20 @@ const router = createRouter({
             component: () => import("./components/ContentHome/InspectionDetail.vue"),
         },
         {
-            path: "/home/equipment",
-            component: () => import("./components/ContentHome/EquipmentList.vue"),
+            path: "/home/files",
+            component: () => import("./components/ContentHome/FilesList.vue"),
         },
         {
-            path: "/home/vehicle",
-            component: () => import("./components/ContentHome/VehicleList.vue"),
+            path: "/home/files/:fileType",
+            component: () => import("./components/ContentHome/FilesList.vue"),
+        },
+        {
+            path: "/home/inspection-counter",
+            component: () => import("./components/ContentHome/InspectionCounterList.vue"),
+        },
+        {
+            path: "/home/inspection-counter/:id",
+            component: () => import("./components/ContentHome/InspectionCounterDetail.vue"),
         },
         {
             path: "/users/logout",
