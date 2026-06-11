@@ -5,7 +5,7 @@ import BaseSlideImage from "./SlideImage.vue";
 import {shallowRef} from "vue";
 import {useQRCode} from "@vueuse/integrations/useQRCode";
 
-const text = shallowRef('https://github.com/fadhlandaikyo-hue')
+const text = shallowRef('https://canva.link/6k0j8cdswheq3w1')
 const qrcode = useQRCode(text, {
   errorCorrectionLevel: 'H',
   margin: 1,

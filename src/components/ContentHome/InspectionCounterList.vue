@@ -68,8 +68,8 @@ function goToCounter(id) {
         <input
             v-model="query"
             type="text"
-            placeholder="工事名・コード・担当者で検索"
-            class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all"
+            placeholder="工事名・監督で検索"
+            class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-orange-100 transition-all"
         />
       </div>
 
@@ -82,25 +82,20 @@ function goToCounter(id) {
             @click="goToCounter(p.id)"
         >
           <div class="shrink-0 w-16 h-16 rounded-xl bg-blue-50 flex flex-col items-center justify-center">
-            <span class="text-xs text-blue-400 font-semibold leading-none">番号</span>
             <span class="text-lg font-bold text-blue-600 leading-tight">{{ p.id }}</span>
           </div>
 
           <div class="flex-1 min-w-0">
-            <div class="flex items-center gap-2 mb-1">
-              <span class="text-xs font-mono text-gray-400">{{ p.code }}</span>
-              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-100">{{ p.type }}</span>
-            </div>
             <p class="text-sm font-semibold text-gray-800 leading-snug truncate">{{ p.name }}</p>
-            <p class="text-xs text-gray-500 mt-1">担当者: {{ p.contractor }}</p>
+            <p class="text-xs text-gray-500 mt-1">監督: {{ p.contractor }}</p>
           </div>
 
           <div class="flex items-center gap-2 shrink-0">
-            <svg class="w-5 h-5 text-orange-300 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-orange-300 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
             </svg>
-            <svg class="w-5 h-5 text-gray-300 group-hover:text-orange-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 text-gray-300 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
           </div>

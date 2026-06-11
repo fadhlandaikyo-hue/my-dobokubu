@@ -19,20 +19,14 @@ const fileFilters = [
 const fileThemes = {
   pdf: {
     badge: "border-red-100 bg-red-50 text-red-600",
-    icon: "bg-red-100 text-red-700",
-    active: "border-red-200 bg-red-100 text-red-700",
     hover: "hover:bg-red-50 focus:ring-red-500",
   },
-  word: {
+  docx: {
     badge: "border-blue-100 bg-blue-50 text-blue-600",
-    icon: "bg-blue-100 text-blue-700",
-    active: "border-blue-200 bg-blue-100 text-blue-700",
     hover: "hover:bg-blue-50 focus:ring-blue-500",
   },
-  excel: {
+  xlsx: {
     badge: "border-green-100 bg-green-50 text-green-600",
-    icon: "bg-green-100 text-green-700",
-    active: "border-green-200 bg-green-100 text-green-700",
     hover: "hover:bg-green-50 focus:ring-green-500",
   },
   all: {
@@ -40,8 +34,6 @@ const fileThemes = {
   },
   default: {
     badge: "border-slate-100 bg-slate-50 text-slate-600",
-    icon: "bg-slate-100 text-slate-700",
-    active: "border-slate-200 bg-slate-100 text-slate-700",
     hover: "hover:bg-slate-50 focus:ring-slate-500",
   },
 };
@@ -62,8 +54,8 @@ const Files = [
     description: "機器名と管理番号の一覧ファイル",
     filename: "稟議書.xlsx",
     path: "/files/稟議書.xlsx",
-    fileType: "excel",
-    type: "EXCEL",
+    fileType: "xlsx",
+    type: "XLSX",
     size: "18 KB",
     updatedAt: "2026-04-27",
   },
@@ -72,8 +64,8 @@ const Files = [
     description: "社内報取材",
     filename: "社内報取材.docx",
     path: "/files/社内報取材.docx",
-    fileType: "word",
-    type: "WORD",
+    fileType: "docx",
+    type: "DOCX",
     size: "18 KB",
     updatedAt: "2026-04-27",
   },

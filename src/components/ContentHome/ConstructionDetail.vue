@@ -142,7 +142,7 @@ const projectsRaw = [
     橋梁塗替塗装工A=136m2
     孔食補修工一式
     仮設工一式`,
-    location: "-",
+    location: "鳥取県西伯郡南部町法勝寺",
     mapEmbedUrl:"https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d435.1656378281137!2d133.3239725145303!3d35.34101184002479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzXCsDIwJzI4LjAiTiAxMzPCsDE5JzI2LjAiRQ!5e1!3m2!1sid!2sjp!4v1777270345800!5m2!1sid!2sjp",
     contractor: "今中",
   },
@@ -200,7 +200,9 @@ const projectsRaw = [
     code: "20250005",
     completionDate: "2026-03-10 - 2026-10-10",
     type: "共同溝設置",
-    images: [{src: "", takenAt: "2026-03-10"}],
+    images: [
+      {src: "/construction_img/小村/2026-05-25.avif", takenAt: "2026-05-25"},
+    ],
     badgeLabel: null,
     badgeClass: null,
     completed: true,
@@ -251,6 +253,7 @@ const projectsRaw = [
       {src: "/construction_img/奥山/2026-03-16.avif", takenAt: "2026-03-16"},
       {src: "/construction_img/奥山/2026-04-16.avif", takenAt: "2026-04-16"},
       {src: "/construction_img/奥山/2026-04-28.avif", takenAt: "2026-04-28"},
+      {src: "/construction_img/奥山/2026-05-25.avif", takenAt: "2026-05-25"},
     ],
     badgeLabel: null,
     badgeClass: null,
@@ -451,6 +454,13 @@ function discard() {
   project.value.draft = project.value.saved
 }
 
+function formatProgress(value) {
+  const progress = Number(value)
+  if (Number.isNaN(progress)) return "0.0"
+  return progress.toFixed(1)
+}
+
+
 function onModalKeydown(event) {
   if (event.key === "Enter") confirmSave()
   if (event.key === "Escape") closeModal()
@@ -583,7 +593,7 @@ onMounted(async () => {
                   未保存
                 </span>
               </span>
-              <span :style="{ color: progressColor(project.draft) }">{{ project.draft }}%</span>
+              <span :style="{ color: progressColor(project.draft) }">{{ formatProgress(project.draft) }}%</span>
             </div>
 
             <BaseProgressBarDetail v-model="project.draft" class="mb-4"/>
@@ -782,7 +792,7 @@ onMounted(async () => {
                 class="text-gray-500 text-xs mt-0.5"
             >
               進行中:
-              <span class="font-semibold" :style="{ color: progressColor(project?.draft) }">{{ project?.draft }}%</span>
+              <span class="font-semibold" :style="{ color: progressColor(project?.draft) }">{{ formatProgress(project?.draft) }}%</span>
               ({{ statusLabel(project?.draft) }})
             </p>
           </div>

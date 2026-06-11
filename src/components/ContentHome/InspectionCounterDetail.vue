@@ -40,7 +40,7 @@ const categories = [
     ]
   },
   {
-    id: 'equipment', label: '機械・設備', icon: 'cog', color: 'orange',
+    id: 'equipment', label: '機械・設備', icon: 'cog', color: 'blue',
     items: [
       { id: 'e1', label: '重機・車両の始業点検が完了している' },
       { id: 'e2', label: '誘導員が配置されている' },
@@ -50,7 +50,7 @@ const categories = [
     ]
   },
   {
-    id: 'environment', label: '作業環境', icon: 'map', color: 'green',
+    id: 'environment', label: '作業環境', icon: 'map', color: 'blue',
     items: [
       { id: 'v1', label: '作業現場の整理整頓が行われている' },
       { id: 'v2', label: '雨天・強風等の気象条件を確認した' },
@@ -60,7 +60,7 @@ const categories = [
     ]
   },
   {
-    id: 'fire', label: '火災・防災', icon: 'fire', color: 'red',
+    id: 'fire', label: '火災・防災', icon: 'fire', color: 'blue',
     items: [
       { id: 'f1', label: '消火器が設置・点検されている' },
       { id: 'f2', label: '可燃物の管理・保管場所が適切である' },
@@ -324,13 +324,13 @@ const catColorMap = {
               v-model="inspector"
               type="text"
               placeholder="氏名を入力してください"
-              class="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all"
+              class="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 outline-none focus:border-blue-400 focus:ring-2 focus:ring-orange-100 transition-all"
           />
         </div>
 
         <!-- Category checklists -->
         <div v-for="cat in categories" :key="cat.id" class="mt-5">
-          <div :class="['rounded-2xl border p-5 shadow-sm', catColorMap[cat.color].bg, catColorMap[cat.color].border]">
+          <div :class="['rounded-2xl border p-5 shadow-sm',  catColorMap[cat.color].border]">
             <div class="flex items-center justify-between mb-4">
               <div class="flex items-center gap-3">
                 <div :class="['w-9 h-9 rounded-xl flex items-center justify-center', catColorMap[cat.color].icon]">

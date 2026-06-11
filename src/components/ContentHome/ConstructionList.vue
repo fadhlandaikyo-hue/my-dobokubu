@@ -1,15 +1,14 @@
 ﻿<script setup>
-import {ref, computed, shallowRef, onMounted} from "vue"
+import {ref, computed, shallowRef, onMounted, onActivated} from "vue"
 import BaseNavbarHome from "../HomeComponents/NavbarHome.vue"
 import BaseFooterHome from "../HomeComponents/FooterHome.vue"
 import BaseButtonBack from "../Utilities/UtilitiesHome/ButtonBack.vue"
-import BaseProgressBar from "../HomeComponents/ProgressBar.vue"
 import { useProgressColor } from "./composables/useProgressColor.js"
 import { useLocalStorage } from "./composables/useLocalStorage.js"
 import { useRouter } from "vue-router"
 
 const router = useRouter()
-const { saveOne, getOne } = useLocalStorage()
+const { getOne } = useLocalStorage()
 const { progressColor, statusLabel, badgeColor } = useProgressColor()
 
 const projectsRaw = [
@@ -21,7 +20,7 @@ const projectsRaw = [
   { id: 6, name: "県道西伯伯太線(宮ノ前歩道橋) 橋梁塗装工事(2工区)(補助)", code: "", defaultProgress: 100, completionDate: "2026年3月16日", type: "道橋", img: "/construction_img/宮ノ前/宮ノ前.avif", badgeLabel: null, badgeClass: null, completed: true },
   { id: 7, name: "外港中野地区承水路護岸補修工事 (老朽化対策) (3工区)", code: "", defaultProgress: 100, completionDate: "2026年9月18日", type: "老朽化対策", img: "/construction_img/example/daikyo-logo.avif", badgeLabel: null, badgeClass: null, completed: true },
   { id: 8, name: "船越地区急傾斜地崩壊対策工事 (2工区)(交付金)(国補正)", code: "", defaultProgress: 100, completionDate: "2026年10月21日", type: "崩壊対策", img: "/construction_img/example/daikyo-logo.avif", badgeLabel: null, badgeClass: null, completed: true },
-  { id: 9, name: "県道大山寺岸本線(小林工区) 電線共同溝設置工事(2工区)(補助)", code: "", defaultProgress: 100, completionDate: "2026年10月30日", type: "共同溝設置", img: "/construction_img/example/daikyo-logo.avif", badgeLabel: null, badgeClass: null, completed: true },
+  { id: 9, name: "県道大山寺岸本線(小林工区) 電線共同溝設置工事(2工区)(補助)", code: "", defaultProgress: 100, completionDate: "2026年10月30日", type: "共同溝設置", img: "/construction_img/小村/小村.avif", badgeLabel: null, badgeClass: null, completed: true },
   { id: 10, name: "佐陀川砂防堰堤(K1)工事(9工区) (補助)(国補正)", code: "", defaultProgress: 100, completionDate: "2026年12月25日", type: "砂防堰堤", img: "/construction_img/佐陀/佐陀.avif", badgeLabel: null, badgeClass: null, completed: true },
   { id: 11, name: "奥山川砂防堰堤工事(4工区) (交付金)(国補正)", code: "", defaultProgress: 100, completionDate: "2026年11月9日", type: "砂防堰堤", img: "/construction_img/奥山/奥山.avif", badgeLabel: null, badgeClass: null, completed: true },
   { id: 12, name: "鍵掛峠道路新屋地区 第13改良工事", code: "", defaultProgress: 100, completionDate: "2027年2月26日", type: "道路", img: "/construction_img/新屋/新屋.avif", badgeLabel: null, badgeClass: null, completed: true },
@@ -66,15 +65,18 @@ function applyFilter(label) {
   localStorage.setItem("construction_filter", nextFilter)
 }
 
-function updateDraft(id, val) {
-  drafts.value = { ...drafts.value, [id]: val }
+
+function formatProgress(value) {
+  const progress = Number(value)
+  if (Number.isNaN(progress)) return "0.0"
+  return progress.toFixed(1)
 }
 
 function goToDetail(id) {
   router.push(`/home/construction/${id}`)
 }
 
-onMounted(async () => {
+async function loadProgress() {
   const entries = await Promise.all(
       projectsRaw.map(async (p) => [p.id, await getOne(p.id, p.defaultProgress)])
   )
@@ -82,7 +84,10 @@ onMounted(async () => {
   const hydrated = Object.fromEntries(entries)
   drafts.value = hydrated
   saved.value = hydrated
-})
+}
+
+onMounted(loadProgress)
+onActivated(loadProgress)
 </script>
 
 <template>
@@ -124,7 +129,7 @@ onMounted(async () => {
             class="card-item flex flex-col bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden"
             :class="{ 'opacity-90': p.completed }"
         >
-          <!-- Thumbnail -->
+
           <div class="img-wrap relative h-56 w-full cursor-pointer overflow-hidden" @click="goToDetail(p.id)">
             <img
                 class="img-el h-full w-full object-cover"
@@ -141,11 +146,6 @@ onMounted(async () => {
             <div class="img-overlay absolute inset-0 bg-black flex items-center justify-center">
 
             </div>
-
-            <div class="absolute top-4 right-4">
-              <span v-if="p.badgeLabel" class="px-3 py-1 rounded-full text-xs font-bold shadow-sm tracking-wide uppercase" :class="p.badgeClass">{{ p.badgeLabel }}</span>
-              <span v-else class="px-3 py-1 rounded-full text-xs font-bold text-white shadow-sm tracking-wide uppercase" :style="{ backgroundColor: p.bgColor }">{{ p.label }}</span>
-            </div>
           </div>
 
           <!-- Card body -->
@@ -159,23 +159,11 @@ onMounted(async () => {
             </div>
             <p class="text-sm text-gray-500 mb-4">{{ p.code }}</p>
             <div class="mt-auto">
-              <BaseProgressBar
-                  :model-value="p.draft"
-                  @update:model-value="val => updateDraft(p.id, val)"
-                  class="mb-3"
-              />
-              <div class="grid grid-cols-2 gap-4 border-t border-gray-100 pt-4">
-                <div>
-                  <p class="text-xs text-gray-400 uppercase font-semibold">{{ p.completed ? '完了' : '完了予定日' }}</p>
-                  <p class="text-sm font-medium text-gray-800">{{ p.completionDate }}</p>
-                </div>
-                <div>
-                  <p class="text-xs text-gray-400 uppercase font-semibold">工事種別</p>
-                  <p class="text-sm font-medium text-gray-800">{{ p.type }}</p>
-                </div>
+              <div class="flex justify-between text-sm font-medium text-gray-600 mb-1">
+                <span>{{ p.label }}</span>
+                <span :style="{ color: p.color }">{{ formatProgress(p.draft) }}%</span>
               </div>
-
-              <button @click="goToDetail(p.id)" class="mt-4 w-full py-2 rounded-lg text-sm font-semibold text-blue-600 border border-blue-200 hover:bg-blue-50 transition-colors duration-150">詳細を見る</button>
+              <button @click="goToDetail(p.id)" class="mt-4 w-full py-2 rounded-lg text-sm font-semibold  border border-blue-200 hover:bg-blue-50 transition-colors duration-150">詳細</button>
             </div>
           </div>
         </article>

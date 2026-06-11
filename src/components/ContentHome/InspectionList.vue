@@ -75,7 +75,7 @@ function goToDetail(id) {
         <input
             v-model="query"
             type="text"
-            placeholder="工事名・コード・担当者で検査"
+            placeholder="工事名・監督で検査"
             class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all"
         />
       </div>
@@ -90,7 +90,6 @@ function goToDetail(id) {
         >
           <!-- Code badge -->
           <div class="shrink-0 w-16 h-16 rounded-xl bg-blue-50 border border-blue-100 flex flex-col items-center justify-center">
-            <span class="text-xs text-blue-400 font-semibold leading-none">番号</span>
             <span class="text-lg font-bold text-blue-700 leading-tight">{{ c.id }}</span>
           </div>
 
@@ -98,12 +97,9 @@ function goToDetail(id) {
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2 mb-1">
               <span class="text-xs font-mono text-gray-400">{{ c.code }}</span>
-              <span :class="['text-xs font-semibold px-2 py-0.5 rounded-full', typeBadge[c.type] || 'bg-gray-100 text-gray-600']">
-                {{ c.type }}
-              </span>
             </div>
             <p class="text-sm font-semibold text-gray-800 leading-snug truncate">{{ c.name }}</p>
-            <p class="text-xs text-gray-500 mt-1">担当者{{ c.contractor }}</p>
+            <p class="text-xs text-gray-500 mt-1">監督:{{ c.contractor }}</p>
           </div>
 
           <!-- Arrow -->

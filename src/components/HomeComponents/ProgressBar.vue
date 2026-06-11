@@ -10,7 +10,7 @@ let trackEl = null
 function calcProgress(clientX) {
   const rect  = trackEl.getBoundingClientRect()
   const ratio = (clientX - rect.left) / rect.width
-  return Math.min(100, Math.max(0, Math.round(ratio * 100)))
+  return Math.min(100, Math.max(0, Math.round(ratio * 1000) / 10))
 }
 
 function onMouseMove(e) {
@@ -46,6 +46,8 @@ function startDrag(event) {
   <!-- Track -->
   <div
       class="progress-track"
+      @mousedown="startDrag"
+      @touchstart.prevent="startDrag"
   >
     <!-- Fill bar -->
     <div
