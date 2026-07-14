@@ -9,17 +9,15 @@ const token = useLocalStorage("token", "")
 const router = useRouter()
 
 async function handleLogout(){
-  const response = await userLogout(token.value);
-  const responseBody = await response.json();
-  console.log(responseBody);
-
-  if(response.status === 200){
+  try {
+    if (token.value) {
+      await userLogout(token.value);
+    }
+  } finally {
     token.value = "";
     await router.push({
       path: "/home"
     })
-  } else {
-    await alertError(responseBody.errors)
   }
 }
 

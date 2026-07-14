@@ -1,4 +1,4 @@
-﻿<script setup>
+<script setup>
 import { useProgressColor } from "../ContentHome/composables/useProgressColor.js"
 
 const progress = defineModel({ type: Number, required: true })
@@ -43,9 +43,29 @@ function startDrag(event) {
 </script>
 
 <template>
-  <div class="progress-track">
-    <div class="progress-fill" :style="{width: progress + '%',backgroundColor: progressColor(progress),}"/>
-    <div/>
+  <!-- Track -->
+  <div
+      class="progress-track"
+      @mousedown="startDrag"
+      @touchstart.prevent="startDrag"
+  >
+    <!-- Fill bar -->
+    <div
+        class="progress-fill"
+        :style="{
+        width: progress + '%',
+        backgroundColor: progressColor(progress),
+      }"
+    />
+
+    <!-- Thumb -->
+    <div
+        class="progress-thumb"
+        :style="{
+        left: progress + '%',
+        backgroundColor: progressColor(progress),
+      }"
+    />
   </div>
 </template>
 

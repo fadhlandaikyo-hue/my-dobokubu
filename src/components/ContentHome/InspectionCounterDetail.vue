@@ -9,8 +9,6 @@ const route     = useRoute()
 const projectId = Number(route.params.id)
 const apiUrl    = import.meta.env.VITE_API_URL || "/api"
 
-const CORRECT_PASSWORD = "191101"
-
 const projects = [
   { id: 1,  code: 'K-001', name: '美保(5)格納庫等新設舗装工事',              type: '道路',       contractor: '小島' },
   { id: 2,  code: 'K-002', name: '美保(5)格納庫等新設舗装工事',              type: '道路',       contractor: '池岡、内田' },
@@ -27,7 +25,6 @@ const projects = [
 ]
 const project = projects.find(p => p.id === projectId) || null
 
-// ── checklist categories ──────────────────────────────────────
 const categories = [
   {
     id: 'general', label: '一般安全', icon: 'shield', color: 'blue',
@@ -70,32 +67,14 @@ const categories = [
   },
 ]
 
-// ── state ─────────────────────────────────────────────────────
 const checked     = ref({})
 const inspector   = ref('')
 const isLoading   = ref(true)
-const saveSuccess = ref(false)
 const savedAt     = ref(null)
-
-// modal state
-const showModal     = ref(false)
-const passwordInput = ref('')
-const passwordError = ref('')
-const showPassword  = ref(false)
-const isShaking     = ref(false)
-const isSaving      = ref(false)
-
-// reset modal
-const showResetModal      = ref(false)
-const resetPasswordInput  = ref('')
-const resetPasswordError  = ref('')
-const showResetPassword   = ref(false)
-const isResetShaking      = ref(false)
 
 const localKey = `inspection_counter_${projectId}`
 const today    = new Date().toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' })
 
-// ── API helpers ───────────────────────────────────────────────
 async function loadFromApi() {
   const res  = await fetch(`${apiUrl}/projects/${projectId}/checklist`)
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
@@ -103,16 +82,6 @@ async function loadFromApi() {
   return json.data
 }
 
-async function saveToApi(payload) {
-  const res = await fetch(`${apiUrl}/projects/${projectId}/checklist`, {
-    method:  'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body:    JSON.stringify(payload),
-  })
-  if (!res.ok) throw new Error(`HTTP ${res.status}`)
-}
-
-// ── load on mount ─────────────────────────────────────────────
 onMounted(async () => {
   try {
     const data      = await loadFromApi()
@@ -134,96 +103,6 @@ onMounted(async () => {
   }
 })
 
-// ── modal controls ────────────────────────────────────────────
-function openPasswordModal() {
-  passwordInput.value = ''
-  passwordError.value = ''
-  showPassword.value  = false
-  showModal.value     = true
-  setTimeout(() => { document.getElementById('ic-pw-input')?.focus() }, 100)
-}
-
-function closeModal() {
-  showModal.value     = false
-  passwordInput.value = ''
-  passwordError.value = ''
-}
-
-function onModalKeydown(e) {
-  if (e.key === 'Enter') confirmSave()
-  if (e.key === 'Escape') closeModal()
-}
-
-// ── confirm save (called from modal) ─────────────────────────
-async function confirmSave() {
-  if (passwordInput.value !== CORRECT_PASSWORD) {
-    passwordError.value = 'パスワードが間違っています'
-    isShaking.value     = true
-    setTimeout(() => { isShaking.value = false }, 500)
-    passwordInput.value = ''
-    document.getElementById('ic-pw-input')?.focus()
-    return
-  }
-
-  isSaving.value = true
-  passwordError.value = ''
-
-  const payload = { checked: checked.value, inspector: inspector.value }
-
-  // Always save to localStorage as offline backup
-  localStorage.setItem(localKey, JSON.stringify({ ...payload, savedAt: new Date().toISOString() }))
-
-  try {
-    await saveToApi(payload)
-    savedAt.value = new Date().toLocaleString('ja-JP')
-    showModal.value     = false
-    passwordInput.value = ''
-    saveSuccess.value   = true
-    setTimeout(() => { saveSuccess.value = false }, 2500)
-  } catch {
-    passwordError.value = 'データの保存に失敗しました'
-  } finally {
-    isSaving.value = false
-  }
-}
-
-function openResetModal() {
-  resetPasswordInput.value  = ''
-  resetPasswordError.value  = ''
-  showResetPassword.value   = false
-  showResetModal.value      = true
-  setTimeout(() => { document.getElementById('ic-reset-pw-input')?.focus() }, 100)
-}
-
-function closeResetModal() {
-  showResetModal.value     = false
-  resetPasswordInput.value = ''
-  resetPasswordError.value = ''
-}
-
-function onResetModalKeydown(e) {
-  if (e.key === 'Enter') confirmReset()
-  if (e.key === 'Escape') closeResetModal()
-}
-
-function confirmReset() {
-  if (resetPasswordInput.value !== CORRECT_PASSWORD) {
-    resetPasswordError.value = 'パスワードが間違っています'
-    isResetShaking.value     = true
-    setTimeout(() => { isResetShaking.value = false }, 500)
-    resetPasswordInput.value = ''
-    document.getElementById('ic-reset-pw-input')?.focus()
-    return
-  }
-
-  checked.value   = {}
-  inspector.value = ''
-  savedAt.value   = null
-  localStorage.removeItem(localKey)
-  showResetModal.value = false
-}
-
-// ── computed ──────────────────────────────────────────────────
 const totalItems   = computed(() => categories.reduce((s, c) => s + c.items.length, 0))
 const checkedCount = computed(() => Object.values(checked.value).filter(Boolean).length)
 const progressPct  = computed(() => Math.round((checkedCount.value / totalItems.value) * 100))
@@ -245,12 +124,7 @@ function categoryProgress(cat) {
   const done = cat.items.filter(i => checked.value[i.id]).length
   return { done, total: cat.items.length, pct: Math.round((done / cat.items.length) * 100) }
 }
-function toggleAll(cat) {
-  const allDone = categoryProgress(cat).done === cat.items.length
-  cat.items.forEach(i => { checked.value[i.id] = !allDone })
-}
 
-// ── UI maps ───────────────────────────────────────────────────
 const iconPath = {
   shield: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
   cog:    'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
@@ -272,7 +146,6 @@ const catColorMap = {
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <ButtonBackInspectionCounter />
 
-      <!-- Project header -->
       <div v-if="project" class="mt-6 bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
         <div class="flex items-start gap-4">
           <div class="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center shrink-0">
@@ -293,14 +166,12 @@ const catColorMap = {
         </div>
       </div>
 
-      <!-- Loading skeleton -->
       <div v-if="isLoading" class="mt-5 space-y-4 animate-pulse">
         <div class="bg-white rounded-2xl border border-gray-200 p-5 h-24"></div>
         <div class="bg-white rounded-2xl border border-gray-200 p-5 h-40"></div>
       </div>
 
       <template v-else>
-        <!-- Progress summary -->
         <div class="mt-5 bg-white rounded-2xl border border-gray-200 p-5 shadow-sm">
           <div class="flex items-center justify-between mb-3">
             <div>
@@ -317,18 +188,6 @@ const catColorMap = {
           </div>
         </div>
 
-        <!-- Inspector name -->
-        <div class="mt-4 bg-white rounded-2xl border border-gray-200 p-4 shadow-sm">
-          <label class="block text-xs font-semibold text-gray-600 mb-1.5">点検者名</label>
-          <input
-              v-model="inspector"
-              type="text"
-              placeholder="氏名を入力してください"
-              class="w-full px-3 py-2 text-sm rounded-xl border border-gray-200 outline-none focus:border-blue-400 focus:ring-2 focus:ring-orange-100 transition-all"
-          />
-        </div>
-
-        <!-- Category checklists -->
         <div v-for="cat in categories" :key="cat.id" class="mt-5">
           <div :class="['rounded-2xl border p-5 shadow-sm',  catColorMap[cat.color].border]">
             <div class="flex items-center justify-between mb-4">
@@ -347,12 +206,6 @@ const catColorMap = {
                 <span :class="['text-xs font-semibold px-2 py-0.5 rounded-full', catColorMap[cat.color].badge]">
                   {{ categoryProgress(cat).pct }}%
                 </span>
-                <button
-                    @click="toggleAll(cat)"
-                    class="text-xs text-gray-500 hover:text-gray-700 border border-gray-200 bg-white px-2.5 py-1 rounded-lg transition"
-                >
-                  {{ categoryProgress(cat).done === cat.items.length ? '全解除' : '全選択' }}
-                </button>
               </div>
             </div>
 
@@ -365,260 +218,26 @@ const catColorMap = {
               <label
                   v-for="item in cat.items"
                   :key="item.id"
-                  class="flex items-start gap-3 bg-white rounded-xl px-4 py-3 border border-white/80 cursor-pointer hover:shadow-sm transition-all"
+                  class="flex items-start gap-3 bg-white rounded-xl px-4 py-3 border border-white/80 cursor-default select-none"
               >
-                <input type="checkbox" v-model="checked[item.id]"
-                       class="mt-0.5 w-4 h-4 rounded border-gray-300 shrink-0 cursor-pointer" />
-                <span :class="['text-sm leading-snug transition-colors', checked[item.id] ? 'text-gray-400 line-through' : 'text-gray-700']">
+                <input
+                    type="checkbox"
+                    :checked="!!checked[item.id]"
+                    disabled
+                    aria-disabled="true"
+                    class="mt-0.5 w-4 h-4 rounded border-gray-300 shrink-0 cursor-default"
+                />
+                <span :class="['text-sm leading-snug', checked[item.id] ? 'text-gray-400 line-through' : 'text-gray-700']">
                   {{ item.label }}
                 </span>
               </label>
             </div>
           </div>
         </div>
-
-        <!-- Action buttons -->
-        <div class="mt-6 flex gap-3">
-          <button
-              @click="openResetModal"
-              class="flex-none px-5 py-3 rounded-xl text-sm font-semibold border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition"
-          >
-            リセット
-          </button>
-          <button
-              @click="openPasswordModal"
-              class="flex-1 py-3 rounded-xl text-sm font-semibold bg-blue-500 text-white hover:bg-blue-600 transition shadow-sm flex items-center justify-center gap-2"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-            保存
-          </button>
-        </div>
-
-        <!-- Success banner -->
-        <Transition enter-active-class="transition duration-300 ease-out" enter-from-class="opacity-0 translate-y-2"
-                    leave-active-class="transition duration-200 ease-in" leave-to-class="opacity-0">
-          <div v-if="saveSuccess"
-               class="mt-4 bg-green-50 border border-green-200 text-green-700 text-sm font-medium px-4 py-3 rounded-xl flex items-center gap-2">
-            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            保存しました
-          </div>
-        </Transition>
       </template>
     </div>
   </div>
-
-  <!-- ── Password modal ─────────────────────────────────────── -->
-  <Teleport to="body">
-    <Transition name="modal">
-      <div
-          v-if="showModal"
-          class="fixed inset-0 z-50 flex items-center justify-center p-4"
-          @keydown="onModalKeydown"
-      >
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="closeModal" />
-
-        <div
-            class="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6"
-            :class="{ shake: isShaking }"
-        >
-          <!-- Header -->
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-            </div>
-            <div>
-              <h3 class="text-base font-bold text-gray-900">認証が必要です</h3>
-              <p class="text-xs text-gray-500">保存するにはパスワードを入力してください</p>
-            </div>
-          </div>
-
-          <!-- Save preview -->
-          <div class="bg-gray-50 rounded-xl px-4 py-3 mb-5 text-sm">
-            <p class="text-gray-500 text-xs mb-1">保存内容</p>
-            <p class="font-semibold text-gray-800">{{ project?.name }}</p>
-            <p class="text-gray-500 text-xs mt-0.5">
-              進行中:
-              <span class="font-semibold text-gray-700">{{ checkedCount }} / {{ totalItems }} 項目</span>
-              ({{ progressPct }}% ・ {{ statusLabel.text }})
-            </p>
-            <p v-if="inspector" class="text-gray-500 text-xs mt-0.5">
-              点検者: <span class="font-semibold text-gray-700">{{ inspector }}</span>
-            </p>
-          </div>
-
-          <!-- Password input -->
-          <label class="block text-xs font-semibold text-gray-600 mb-1.5">パスワード</label>
-          <div class="relative">
-            <input
-                id="ic-pw-input"
-                v-model="passwordInput"
-                :type="showPassword ? 'text' : 'password'"
-                placeholder="パスワードを入力..."
-                class="w-full rounded-xl border px-4 py-2.5 text-sm pr-10 outline-none transition-colors duration-150"
-                :class="passwordError
-                  ? 'border-red-400 bg-red-50 focus:border-red-500'
-                  : 'border-gray-300 bg-white focus:border-blue-500'"
-                @keydown.enter="confirmSave"
-            />
-            <button
-                type="button"
-                @click="showPassword = !showPassword"
-                class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-                tabindex="-1"
-            >
-              <svg v-if="!showPassword" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-              </svg>
-              <svg v-else class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-              </svg>
-            </button>
-          </div>
-
-          <Transition name="fade">
-            <p v-if="passwordError" class="mt-2 text-xs text-red-600 flex items-center gap-1">
-              <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                      clip-rule="evenodd" />
-              </svg>
-              {{ passwordError }}
-            </p>
-          </Transition>
-
-          <!-- Buttons -->
-          <div class="flex gap-2 mt-5">
-            <button
-                @click="closeModal"
-                class="flex-1 py-2.5 rounded-xl text-sm font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors duration-150"
-            >
-              キャンセル
-            </button>
-            <button
-                @click="confirmSave"
-                :disabled="isSaving"
-                class="flex-1 py-2.5 rounded-xl text-sm font-semibold bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-150 disabled:opacity-60"
-            >
-              {{ isSaving ? '保存中...' : '確認して保存' }}
-            </button>
-          </div>
-        </div>
-      </div>
-    </Transition>
-  </Teleport>
-
   <BaseFooterHome />
-
-  <!-- ── Reset modal ───────────────────────────────────────── -->
-  <Teleport to="body">
-    <Transition name="modal">
-      <div
-          v-if="showResetModal"
-          class="fixed inset-0 z-50 flex items-center justify-center p-4"
-          @keydown="onResetModalKeydown"
-      >
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="closeResetModal" />
-
-        <div
-            class="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm p-6"
-            :class="{ shake: isResetShaking }"
-        >
-          <!-- Header -->
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-              </svg>
-            </div>
-            <div>
-              <h3 class="text-base font-bold text-gray-900">リセットの確認</h3>
-              <p class="text-xs text-gray-500">パスワードを入力してリセットを実行してください</p>
-            </div>
-          </div>
-
-          <!-- Warning -->
-          <div class="bg-red-50 border border-red-100 rounded-xl px-4 py-3 mb-5">
-            <p class="text-xs font-semibold text-red-700 mb-1">⚠ 注意</p>
-            <p class="text-xs text-red-600">{{ project?.name }}</p>
-            <p class="text-xs text-red-500 mt-1">
-              現在のチェック状態（{{ checkedCount }} / {{ totalItems }} 項目）がすべてクリアされます。この操作は元に戻せません。
-            </p>
-          </div>
-
-          <!-- Password input -->
-          <label class="block text-xs font-semibold text-gray-600 mb-1.5">パスワード</label>
-          <div class="relative">
-            <input
-                id="ic-reset-pw-input"
-                v-model="resetPasswordInput"
-                :type="showResetPassword ? 'text' : 'password'"
-                placeholder="パスワードを入力..."
-                class="w-full rounded-xl border px-4 py-2.5 text-sm pr-10 outline-none transition-colors duration-150"
-                :class="resetPasswordError
-                  ? 'border-red-400 bg-red-50 focus:border-red-500'
-                  : 'border-gray-300 bg-white focus:border-red-400'"
-                @keydown.enter="confirmReset"
-            />
-            <button
-                type="button"
-                @click="showResetPassword = !showResetPassword"
-                class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-                tabindex="-1"
-            >
-              <svg v-if="!showResetPassword" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-              </svg>
-              <svg v-else class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-              </svg>
-            </button>
-          </div>
-
-          <Transition name="fade">
-            <p v-if="resetPasswordError" class="mt-2 text-xs text-red-600 flex items-center gap-1">
-              <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                      clip-rule="evenodd" />
-              </svg>
-              {{ resetPasswordError }}
-            </p>
-          </Transition>
-
-          <!-- Buttons -->
-          <div class="flex gap-2 mt-5">
-            <button
-                @click="closeResetModal"
-                class="flex-1 py-2.5 rounded-xl text-sm font-semibold bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors duration-150"
-            >
-              キャンセル
-            </button>
-            <button
-                @click="confirmReset"
-                class="flex-1 py-2.5 rounded-xl text-sm font-semibold bg-red-500 text-white hover:bg-red-600 transition-colors duration-150"
-            >
-              リセットする
-            </button>
-          </div>
-        </div>
-      </div>
-    </Transition>
-  </Teleport>
 
 </template>
 
@@ -630,5 +249,4 @@ const catColorMap = {
   60%       { transform: translateX(-4px); }
   80%       { transform: translateX(4px); }
 }
-.shake { animation: shake 0.4s ease; }
 </style>

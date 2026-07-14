@@ -13,10 +13,6 @@ const router = createRouter({
         return { top: 0, left: 0 }
     },
     routes: [
-        {
-            path: "/example",
-            component: () => import("./components/Example.vue"),
-        },
 
         // Page for Users
         {
@@ -43,12 +39,42 @@ const router = createRouter({
         },
         {
             path: "/dashboard/construction",
-            component: () => import("./components/ContentUser/ConstructionUser.vue"),
+            component: () => import("./components/ContentUser/UserConstructionList.vue"),
             meta: { requiresAuth: true }
         },
         {
-            path: "/dashboard/member",
-            component: () => import("./components/ContentUser/Member.vue"),
+            path: "/dashboard/file",
+            component: () => import("./components/ContentUser/UserFileList.vue"),
+            meta: { requiresAuth: true }
+        },
+        {
+            path: "/dashboard/files/:fileType",
+            component: () => import("./components/ContentUser/UserFileList.vue"),
+            meta: { requiresAuth: true }
+        },
+        {
+            path: "/dashboard/inspection",
+            component: () => import("./components/ContentUser/UserInspectionList.vue"),
+            meta: { requiresAuth: true }
+        },
+        {
+            path: "/dashboard/inspection-counter",
+            component: () => import("./components/ContentUser/UserInspectionCounterList.vue"),
+            meta: { requiresAuth: true }
+        },
+        {
+            path: "/dashboard/construction/:id",
+            component: () => import("./components/ContentUser/UserConstructionDetail.vue"),
+            meta: { requiresAuth: true }
+        },
+        {
+            path: "/dashboard/inspection/:id",
+            component: () => import("./components/ContentUser/UserInspectionDetail.vue"),
+            meta: { requiresAuth: true }
+        },
+        {
+            path: "/dashboard/inspection-counter/:id",
+            component: () => import("./components/ContentUser/UserInspectionCounterDetail.vue"),
             meta: { requiresAuth: true }
         },
 
@@ -105,8 +131,6 @@ router.beforeEach((to, from, next) => {
 
     if (to.meta.requiresAuth && !token) {
         next("/login")
-    } else if (to.path === "/login" && token) {
-        next("/dashboard")
     } else {
         next()
     }

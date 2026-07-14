@@ -1,5 +1,24 @@
-﻿export const userRegister = async ({username, password, name, role}) => {
-    return await fetch(`${import.meta.env.VITE_API_URL}/users`, {
+const API_URL = import.meta.env.VITE_API_URL || "/api"
+
+const handleUnauthorized = (response, redirectOnUnauthorized = true) => {
+    if (redirectOnUnauthorized && response.status === 401) {
+        localStorage.removeItem("token")
+
+        if (window.location.pathname !== "/login") {
+            window.location.replace("/login")
+        }
+    }
+
+    return response
+}
+
+const apiFetch = async (path, options, {redirectOnUnauthorized = true} = {}) => {
+    const response = await fetch(`${API_URL}${path}`, options)
+    return handleUnauthorized(response, redirectOnUnauthorized)
+}
+
+export const userRegister = async ({username, password, name, role}) => {
+    return await apiFetch('/users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -11,11 +30,11 @@
             name,
             role
         }),
-    })
+    }, {redirectOnUnauthorized: false})
 }
 
 export const userLogin = async ({username, password}) => {
-    return await fetch(`${import.meta.env.VITE_API_URL}/users/login`, {
+    return await apiFetch('/users/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -25,11 +44,11 @@ export const userLogin = async ({username, password}) => {
             username,
             password,
         }),
-    })
+    }, {redirectOnUnauthorized: false})
 }
 
 export const userDetailName = async (token) => {
-    return await fetch(`${import.meta.env.VITE_API_URL}/users/current`, {
+    return await apiFetch('/users/current', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -39,7 +58,7 @@ export const userDetailName = async (token) => {
 }
 
 export const userDetailRole = async (token) => {
-    return await fetch(`${import.meta.env.VITE_API_URL}/users/current`, {
+    return await apiFetch('/users/current', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -49,7 +68,7 @@ export const userDetailRole = async (token) => {
 }
 
 export const userDetail = async (token) => {
-    return await fetch(`${import.meta.env.VITE_API_URL}/users/current`, {
+    return await apiFetch('/users/current', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -59,7 +78,7 @@ export const userDetail = async (token) => {
 }
 
 export const userUpdateProfile = async (token, {name, role}) => {
-    return await fetch(`${import.meta.env.VITE_API_URL}/users/current`, {
+    return await apiFetch('/users/current', {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -74,7 +93,7 @@ export const userUpdateProfile = async (token, {name, role}) => {
 }
 
 export const userUpdatePassword = async (token, {password}) => {
-    return await fetch(`${import.meta.env.VITE_API_URL}/users/current`, {
+    return await apiFetch('/users/current', {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -88,7 +107,7 @@ export const userUpdatePassword = async (token, {password}) => {
 }
 
 export const userLogout = async (token) => {
-    return await fetch(`${import.meta.env.VITE_API_URL}/users/logout`, {
+    return await apiFetch('/users/logout', {
         method: 'DELETE',
         headers: {
             'Accept': 'application/json',

@@ -1,11 +1,7 @@
-﻿
-
-export function useProgressDrag() {
+﻿export function useProgressDrag() {
     let activeProject = null
     let trackElement = null
-
-
-    function calcProgress(clientX) {
+function calcProgress(clientX) {
         const rect = trackElement.getBoundingClientRect()
         const ratio = (clientX - rect.left) / rect.width
         return Math.min(100, Math.max(0, Math.round(ratio * 100)))

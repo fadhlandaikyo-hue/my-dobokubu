@@ -1,15 +1,13 @@
-﻿<script setup>
+<script setup>
 import { ref, computed } from "vue"
 import { useRouter }     from "vue-router"
-import BaseNavbarHome             from "../HomeComponents/NavbarHome.vue"
-import BaseFooterHome             from "../HomeComponents/FooterHome.vue"
-import BaseButtonBack             from "../Utilities/UtilitiesHome/ButtonBack.vue"
+import UserButtonBack from "../Utilities/UtilitiesUser/UserButtonBack.vue";
 
 const router = useRouter()
 
 const constructions = [
   { id: 1, code: '', name: '美保(5)格納庫等新設舗装工事', type: '道路', contractor: '小島' },
-  { id: 2, code: '', name: '鍵掛峠道路日南地区改良工事', type: '道路', contractor: '池岡、内田' },
+  { id: 2, code: '', name: '美保(5)格納庫等新設舗装工事', type: '道路', contractor: '池岡、内田' },
   { id: 3, code: '', name: '奥陰田3地区急傾斜地崩壊 対策工事その2', type: '砂防', contractor: '長谷川、岩田ひ' },
   { id: 4, code: '', name: '中山3期営農飲雑用水 (高田工区)工事', type: '管路工', contractor: '岩田こ' },
   { id: 5, code: '', name: '車尾五丁目ほか枝線工事', type: '枝線', contractor: '西中' },
@@ -35,16 +33,14 @@ const filtered = computed(() => {
 })
 
 function goToDetail(id) {
-  router.push(`/home/inspection/${id}`)
+  router.push(`/dashboard/inspection/${id}`)
 }
 </script>
 
 <template>
-  <BaseNavbarHome/>
-
   <div class="min-h-screen bg-gray-50">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <BaseButtonBack/>
+      <UserButtonBack/>
 
       <!-- Page header -->
       <div class="mt-6 mb-8 flex items-center gap-4">
@@ -112,8 +108,6 @@ function goToDetail(id) {
 
     </div>
   </div>
-
-  <BaseFooterHome/>
 </template>
 
 

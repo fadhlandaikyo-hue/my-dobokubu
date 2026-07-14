@@ -1,9 +1,8 @@
 ﻿<script setup>
-import { ref, onMounted, onUnmounted, watch } from 'vue'
+import {ref, onMounted, onUnmounted} from 'vue'
 
 const activeIndex = ref(0)
-const totalImages = 4
-const canvaLoaded = ref(false)
+const totalImages = 7
 let intervalId = null
 
 const next = () => {
@@ -22,12 +21,6 @@ const prev = () => {
   }
 }
 
-const stopAutoSlide = () => {
-  if (intervalId) {
-    clearInterval(intervalId)
-    intervalId = null
-  }
-}
 
 const startAutoSlide = () => {
   stopAutoSlide()
@@ -36,22 +29,12 @@ const startAutoSlide = () => {
   }, 5000)
 }
 
-const loadCanvaEmbed = () => {
-  if (!canvaLoaded.value) {
-    canvaLoaded.value = true
+const stopAutoSlide = () => {
+  if (intervalId) {
+    clearInterval(intervalId)
+    intervalId = null
   }
 }
-
-watch(activeIndex, (idx) => {
-  if (idx !== 3 || canvaLoaded.value) return
-
-  if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-    window.requestIdleCallback(loadCanvaEmbed, { timeout: 1200 })
-    return
-  }
-
-  setTimeout(loadCanvaEmbed, 800)
-})
 
 onMounted(() => {
   startAutoSlide()
@@ -64,107 +47,74 @@ onUnmounted(() => {
 
 <template>
   <div class="text-center mb-8 md:mb-10" style="opacity: 1; transform: none;">
-    <h2 class="text-[32px] uppercase font-semibold mb-4 pb-10 md:pb-0 " />
+    <h2 class="text-[32px] uppercase font-semibold mb-4 pb-10 md:pb-0 "/>
     <p class="text-gray-600 max-w-2xl mx-auto"></p>
   </div>
-  <div class="flex items-center justify-center min-h-[420px] bg-gray-100 p-4 md:min-h-[520px]">
-    <div class="relative w-full max-w-4xl group overflow-hidden rounded-2xl shadow-2xl" @mouseenter="stopAutoSlide" @mouseleave="startAutoSlide">
-      <div class="flex transition-transform duration-700 ease-in-out h-64 md:h-96" :style="{ transform: `translateX(-${activeIndex * 100}%)` }">
-        <div class="w-full flex-shrink-0 relative">
+  <div class="flex items-center justify-center min-h-105 bg-gray-100 p-4 md:min-h-130">
+
+    <div class="relative w-full max-w-4xl group overflow-hidden rounded-2xl shadow-2xl" @mouseenter="stopAutoSlide"
+         @mouseleave="startAutoSlide">
+      <div class="flex transition-transform duration-700 ease-in-out h-64 md:h-96"
+           :style="{ transform: `translateX(-${activeIndex * 100}%)` }">
+        <div class="w-full shrink-0 relative">
           <a href="https://www.daikyou-g.co.jp/index.php">
-            <img
-                src="/img/unnamed.avif"
-                class="w-full h-full object-cover"
-                alt="Slide 1"
-                width="1280"
-                height="720"
-                loading="eager"
-                fetchpriority="high"
-                decoding="async"
-            >
+            <img src="/img/unnamed.avif" class="w-full h-full object-cover" alt="Slide 1">
           </a>
+
         </div>
 
-        <div class="w-full flex-shrink-0 relative">
-          <a href="https://daikyou-g.dn-cloud.com/cgi-bin/dneo/dneo.cgi?cmd=login">
-            <img
-                src="/img/desknet-neo-login.avif"
-                class="w-full h-full object-cover"
-                alt="Slide 2"
-                width="1280"
-                height="720"
-                loading="lazy"
-                decoding="async"
-            >
-          </a>
+        <div class="w-full shrink-0 relative">
+          <img src="/construction_img/奥山/奥山.avif" class="w-full h-full object-cover" alt="Slide 2">
         </div>
 
-        <div class="w-full flex-shrink-0 relative">
-          <a href="https://auth.genbacloud.com/login/conne-space">
-            <img
-                src="/img/genba-cloud-login.avif"
-                class="w-full h-full object-cover"
-                alt="Slide 3"
-                width="1280"
-                height="720"
-                loading="lazy"
-                decoding="async"
-            >
-          </a>
+        <div class="w-full shrink-0 relative">
+          <img src="/construction_img/佐陀/佐陀.avif" class="w-full h-full object-cover" alt="Slide 2">
         </div>
 
-        <div class="w-full flex-shrink-0 relative">
-          <button
-              v-if="!canvaLoaded"
-              type="button"
-              class="absolute inset-0 flex flex-col items-center justify-center bg-slate-900 text-white"
-              @click="loadCanvaEmbed"
-          >
-            <span class="text-base font-semibold">Presentation Preview</span>
-            <span class="mt-2 text-sm text-slate-300">Click to load Canva embed</span>
-          </button>
-          <iframe
-              v-else
-              loading="lazy"
-              title="Canva embedded presentation"
-              style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
-              src="https://www.canva.com/design/DAG0nukdNuc/JXjc5a4vdGCHn7Cc0Fcr1A/view?embed"
-              allow="fullscreen"
-          ></iframe>
+        <div class="w-full shrink-0 relative">
+          <img src="/construction_img/奥陰/奥陰.avif" class="w-full h-full object-cover" alt="Slide 2">
         </div>
+
+        <div class="w-full shrink-0 relative">
+          <img src="/construction_img/宮ノ前/宮ノ前.avif" class="w-full h-full object-cover" alt="Slide 2">
+        </div>
+
+        <div class="w-full shrink-0 relative">
+          <img src="/construction_img/新屋/新屋.avif" class="w-full h-full object-cover" alt="Slide 2">
+        </div>
+
+        <div class="w-full shrink-0 relative">
+          <img src="/construction_img/日南/日南.avif" class="w-full h-full object-cover" alt="Slide 2">
+        </div>
+
       </div>
 
-      <button
-          @click="prev"
-          class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white p-2 rounded-full backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+      <button @click="prev"
+              class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white p-2 rounded-full backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+             class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
         </svg>
       </button>
 
-      <button
-          @click="next"
-          class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white p-2 rounded-full backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+      <button @click="next"
+              class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/60 text-white p-2 rounded-full backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+             class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
         </svg>
       </button>
 
       <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-        <button
-            v-for="idx in totalImages"
-            :key="idx"
-            @click="activeIndex = idx - 1"
-            class="h-2 rounded-full transition-all duration-300"
-            :class="activeIndex === idx - 1 ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'"
-        ></button>
+        <button v-for="idx in totalImages" :key="idx" @click="activeIndex = idx - 1"
+                class="h-2 rounded-full transition-all duration-300"
+                :class="activeIndex === idx - 1 ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'"></button>
       </div>
 
       <div class="absolute bottom-0 left-0 h-1 bg-white/30 w-full">
         <div :key="activeIndex" class="h-full bg-white animate-load"></div>
       </div>
+
     </div>
   </div>
 </template>
@@ -172,3 +122,5 @@ onUnmounted(() => {
 <style scoped>
 
 </style>
+
+
