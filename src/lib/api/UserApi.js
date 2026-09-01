@@ -4,7 +4,10 @@ const handleUnauthorized = (response, redirectOnUnauthorized = true) => {
     if (redirectOnUnauthorized && response.status === 401) {
         localStorage.removeItem("token")
 
-        if (window.location.pathname !== "/login") {
+        const isProtectedPage = window.location.pathname === "/dashboard"
+            || window.location.pathname.startsWith("/dashboard/")
+
+        if (isProtectedPage) {
             window.location.replace("/login")
         }
     }
@@ -47,14 +50,14 @@ export const userLogin = async ({username, password}) => {
     }, {redirectOnUnauthorized: false})
 }
 
-export const userDetailName = async (token) => {
+export const userDetailName = async (token, options = {}) => {
     return await apiFetch('/users/current', {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
             'Authorization': token
         },
-    })
+    }, options)
 }
 
 export const userDetailRole = async (token) => {
@@ -113,5 +116,5 @@ export const userLogout = async (token) => {
             'Accept': 'application/json',
             'Authorization': token
         }
-    })
+    }, {redirectOnUnauthorized: false})
 }

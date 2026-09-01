@@ -10,6 +10,7 @@ const userName = ref("")
 const isMobileMenuOpen = ref(false)
 const route = useRoute()
 let authCheckIntervalId = null
+let isUnmounted = false
 
 function closeMobileMenu() {
   isMobileMenuOpen.value = false;
@@ -22,14 +23,25 @@ function handleEscape(event) {
 }
 
 async function fetchUserName() {
-  const response = await userDetailName(token.value);
-  const responseBody = await response.json();
-  console.log(responseBody);
+  if (!token.value || isUnmounted) {
+    return
+  }
+
+  const response = await userDetailName(token.value, {
+    redirectOnUnauthorized: false
+  });
+  const responseBody = await response.json().catch(() => ({}));
+
+  if (isUnmounted) {
+    return
+  }
 
   if (response.status === 200) {
     userName.value = responseBody.data.username;
+  } else if (response.status === 401) {
+    token.value = ""
   } else {
-    await alertError(responseBody.errors)
+    await alertError(responseBody.errors || "ユーザー情報を取得できませんでした")
   }
 }
 
@@ -43,6 +55,13 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+  isUnmounted = true
+
+  if (authCheckIntervalId !== null) {
+    window.clearInterval(authCheckIntervalId)
+    authCheckIntervalId = null
+  }
+
   window.removeEventListener('keydown', handleEscape);
   document.body.style.overflow = ""
 })

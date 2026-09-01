@@ -40,3 +40,7 @@ Thumbs.db
 Desktop.ini
 tmp
 temp
+.env
+.env.local
+.env.*.local
+!.env.example
